@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+<!-- AOP : CCC 관점외 관심사 -->
+<!-- 개발을 하기위해서 중요하게 작성 하지 않는 부분에 대해서 자동으로 처리 하자 -->
+<!-- log, 예외, transaction -->
+	
+	<!-- aop를 만들기위해 필요한것들 두가지 (aspect, pointcut)-->
+	
+	<!-- 실질적으로 실행되는 메소드  logAop -->
+	<bean id="logAop" class="web.movie.com.aop.AopDaoLogger"/>
+	
+	<!--aspect, pointcut-->
+	<aop:config>
+		<aop:pointcut expression="execution(* web.movie.com.model.*Service*.*(..))" id="daoLogPoint"/>
+		<!-- 실행되는 Class의 Bean을 등록 -->
+		<aop:aspect id="logAop" ref="logAop">
+			<!-- DAO 실행 전에 -->
+			<aop:before method="before" pointcut-ref="daoLogPoint"/>
+			<!-- DAO가 성공적으로 실행하고 반환이 이루어 졌을때 -->
+			<aop:after-returning method="afterReturning" pointcut-ref="daoLogPoint"/>
+			<!-- DAO실행 하고 에러 발생했을때 -->
+			<aop:after-throwing method="afterThrowing" pointcut-ref="daoLogPoint"/>
+		</aop:aspect>
+	</aop:config>
+
+</beans>

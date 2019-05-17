@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<!-- Database의 접속정보를 가지고 있는 **.propertise 파일을 bean을 생성하여 등록 -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:properties/db.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 접속정보를 가지고 DataSource(접속, 트렌젝션 등)을 위한 객체를 Bean으로 생성 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${driver}"/>
+		<property name="url" value="${url}"/>
+		<property name="username" value="${user}"/>
+		<property name="password" value="${pw}"/>
+		<property name="defaultAutoCommit" value="true"/>
+	</bean>
+	
+	<!-- 1단계 : Mybatis 세팅 파일, 2단계 : spring bean으로 생성, 3단계 : 트렌젝션 -->
+	<!-- 1단계 : SqlSessionFactoryBean을 사용 하여 Spring 에서 사용할수 있는 Bean을 생성 -->
+	<!-- SqlDaoSupport객체 였음 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="/WEB-INF/spring/sqls/mybatis-Configurer.xml"/>
+	</bean>
+	
+	<!-- 2단계 MyBatis객체가 생선된  bean을 spring 셍성 할수 있도록 Bean에 다시 넣어줌 -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSession"/>
+	</bean>
+	<!-- 3단계 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+</beans>
+
+
+
+
+
+
+
+
+

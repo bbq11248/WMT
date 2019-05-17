@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="web.movie.com.movie_statment">
+
+
+	<!-- 마일리지 관리 -->
+	<!-- 마일리지 충전1 -->
+	<update id="useMileage" parameterType="mvDto">
+		UPDATE MILEAGEMANAGER SET MILEAGE = MILEAGE + #{price} WHERE ID = #{id}
+	</update>
+	<!-- 마일리지 충전2 -->
+	<insert id="insertUseMileage" parameterType="mvDto">
+		INSERT INTO PAYMENT
+		(PAYMENT_NO, ID, MILEAGE, PRICE, MILEAGE_TIME)
+			VALUES('CG'||PAYMENT_NO_SEQ.NEXTVAL, #{id}, 
+				(SELECT MILEAGE FROM MILEAGEMANAGER WHERE ID = #{id}), 
+					#{price}, SYSDATE)
+	</insert>
+	<!-- 마일리지 확인 -->
+	<select id="selectMileage" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		SELECT MILEAGE FROM MILEAGEMANAGER WHERE ID = #{id}
+	</select>
+	<!-- 결제 내역 확인 -->
+	<select id="selectPayList" parameterType="java.lang.String"
+		resultType="java.util.List">
+		SELECT PAYMENT_NO, TICKETING_NO, ID, MILEAGE, PRICE, MILEAGE_TIME 
+			FROM PAYMENT
+				WHERE ID = #{id}
+					ORDER BY MILEAGE_TIME DESC
+	</select>
+	<!-- 마일리지 관리 end -->
+
+	<!-- 예매 관리 -->
+	<!-- 예매 내역 보기 -->
+	<select id="selectTicket" parameterType="java.lang.String" resultType="java.util.List">
+		SELECT TICKETING_NO, MOVIE_PLAY_NO, THEATER_NAME, MOVIE_THEATER_NAME, MOVIE_NAME
+			FROM TICKETING JOIN MOVIE_PLAY
+				USING(MOVIE_PLAY_NO)
+					JOIN THEATER
+						USING(THEATER_NO)
+							JOIN MOVIE_THEATER
+								USING(MOVIE_THEATER_NO)
+									JOIN MOVIE
+										USING(MOVIE_NO)
+				WHERE ID = #{id}
+					ORDER BY TICKETING_TIME
+	</select>
+	<!-- 예매내역 상세 조회 -->
+	<select id="selectOneTicket" parameterType="java.util.Map" resultType="java.util.List">
+		SELECT TICKETING_NO, MOVIE_PLAY_NO, THEATER_NAME, MOVIE_THEATER_NAME, MOVIE_NAME, MOVIE_START_TIME, SEAT_NO
+			FROM TICKETING JOIN MOVIE_PLAY
+				USING(MOVIE_PLAY_NO)
+					JOIN THEATER
+						USING(THEATER_NO)
+							JOIN MOVIE_THEATER
+								USING(MOVIE_THEATER_NO)
+									JOIN MOVIE
+										USING(MOVIE_NO)
+				WHERE ID = #{id} AND TICKETING_NO = #{ticketing_no}
+	</select>
+	<!-- 예매1 -->
+	<insert id="insertUseTicket" parameterType="java.util.Map">
+		INSERT INTO TICKETING
+			(TICKETING_NO, MOVIE_PLAY_NO, ID, SEAT_NO, TICKETING_TIME)
+				VALUES('TN'||TICKETING_NO_SEQ.NEXTVAL, #{movie_play_no}, #{id}, #{seat_no}, SYSDATE)
+	</insert>
+	<!-- 예매2 -->
+	<update id="updateUseMileage" parameterType="mvDto">
+		UPDATE MILEAGEMANAGER SET MILEAGE = MILEAGE - #{price} WHERE ID = #{id}
+	</update>
+	<!-- 예매3 -->
+	<insert id="insertUsePay" parameterType="mvDto">
+		INSERT INTO PAYMENT
+			(PAYMENT_NO, ID, MILEAGE, PRICE, MILEAGE_TIME)
+				VALUES('PM'||PAYMENT_NO_SEQ.NEXTVAL, #{id}, (SELECT MILEAGE FROM MILEAGEMANAGER WHERE ID = #{id}), #{price}, SYSDATE)
+	</insert>
+	
+	<!-- 예매취소1 -->
+	<insert id="cancelTic" parameterType="mvDto">
+		UPDATE MILEAGEMANAGER SET MILEAGE = MILEAGE + #{price} WHERE ID = #{id}
+	</insert>
+	<!-- 예매취소2 -->
+	<insert id="cancelPay" parameterType="java.lang.String">
+	INSERT INTO PAYMENT
+		(PAYMENT_NO, ID, MILEAGE, PRICE, MILEAGE_TIME)
+			VALUES('TC'||PAYMENT_NO_SEQ.NEXTVAL, #{id} , (SELECT MILEAGE FROM MILEAGEMANAGER WHERE ID = #{id}), #{price}, SYSDATE)
+	</insert>
+	<!-- 예매취소3 -->
+	<update id="cancelUpPay" parameterType="java.lang.String">
+		UPDATE PAYMENT SET TICKETING_NO = NULL WHERE TICKETING_NO = #{ticketing_no}
+	</update>
+	<!-- 예매취소4 -->
+	<delete id="cancelDelete" parameterType="java.lang.String">
+		DELETE FROM TICKETING WHERE TICKETING_NO = #{ticketing_no}
+	</delete>
+	<!-- 예매 관리end -->
+	
+	<!-- 영화선택 -->
+	<!-- 상영중인 영화 보기 -->
+	<select id="selPlayMovie" resultType="java.util.List">
+		SELECT DISTINCT MOVIE_NAME
+			FROM MOVIE_PLAY 
+				JOIN MOVIE
+					USING(MOVIE_NO)
+	</select>
+	<!-- 영화관 보기 -->
+	<select id="selAllTheater" parameterType="java.lang.String" resultType="java.util.List">
+		SELECT DISTINCT THEATER_NAME
+			FROM THEATER JOIN MOVIE_PLAY
+				USING (THEATER_NO)
+					JOIN MOVIE
+						USING(MOVIE_NO)
+				WHERE MOVIE_NO = #{movie_no}
+	</select>
+	<!-- 상영관 보기 -->
+	<select id="selAllMTheater" parameterType="java.util.Map" resultType="java.util.List">
+		SELECT TH.THEATER_NAME||MOVIE_THEATER_NAME, MOVIE_START_TIME, MT.MOVIE_THEATER_NO
+			FROM MOVIE_PLAY MP        
+				JOIN MOVIE_THEATER MT
+					ON  MP.MOVIE_THEATER_NO = MT.MOVIE_THEATER_NO
+						JOIN THEATER TH
+							ON MT.THEATER_NO = TH.THEATER_NO
+				WHERE MOVIE_NO = #{movie_no} AND MP.THEATER_NO = #{theater_no}
+	</select>
+	<!-- 좌석 보기 -->
+	<select id="selAllSeat" parameterType="java.lang.String" resultType="java.util.List">
+		SELECT ROWSEAT||COLSEAT 좌석번호, SEAT_MONEY
+			FROM SEATMANAGER SM JOIN MOVIE_THEATER MT
+				ON SM.MOVIE_THEATER_NO = MT.MOVIE_THEATER_NO
+					JOIN MOVIE_PLAY MP
+						ON MT.MOVIE_THEATER_NO = MP.MOVIE_THEATER_NO
+				WHERE MP.MOVIE_PLAY_NO = #{movie_play_no}
+	</select>
+	<!-- 좌석 가격 -->
+	<select id="selSeatMoney" parameterType="java.util.Map" resultType="java.lang.Integer">
+		SELECT SEAT_MONEY FROM SEATMANAGER 
+			WHERE ROWSEAT||COLSEAT = '#{rowcol}' AND MOVIE_THEATER_NO = #{movie_theater_no}
+	</select>
+	<!-- 영화선택 end -->
+	
+	<!-- 영화 관리 -->
+	<!-- 상영관 -->
+	<!-- 등록 -->
+	<insert id="insertMovieT">
+		INSERT INTO MOVIE_THEATER
+			(MOVIE_THEATER_NO, THEATER_NO, MOVIE_THEATER_NAME)
+				VALUES('MTN'||MOVIE_THEATER_NO_SEQ.NEXTVAL, #{theater_no}, #{movie_theater_name})
+	</insert>
+	<!-- 수정 -->
+	<update id="updateMovieT">
+		UPDATE MOVIE_THEATER
+			SET MOVIE_THEATER_NAME = #{movie_theater_name}
+				WHERE MOVIE_THEATER_NO= #{movie_theater_no}
+	</update>
+	<!-- 전체보기 -->
+	<select id="selectMovieT">
+	SELECT DISTINCT MOVIE_THEATER_NO, THEATER_NAME||MOVIE_THEATER_NAME
+		FROM MOVIE_THEATER 
+			JOIN THEATER TH
+				USING(THEATER_NO)
+					ORDER BY THEATER_NAME||MOVIE_THEATER_NAME
+	</select>
+	<!-- 상세보기 -->
+	<select id="detailMovieT">
+		SELECT  DISTINCT THEATER_NAME, MOVIE_THEATER_NAME, SEAT
+			FROM MOVIE_THEATER JOIN THEATER
+				USING(THEATER_NO)
+					JOIN SEATMANAGER
+						USING(MOVIE_THEATER_NO)
+				WHERE MOVIE_THEATER_NO = 'MTN1'
+	</select>
+	<!-- 상영관 end-->
+	
+	<!-- 좌석 -->
+	<!-- 등록 -->
+	<insert id="insertSeat" parameterType="mvDto">
+		INSERT INTO SEATMANAGER
+			(SEAT_NO, MOVIE_THEATER_NO, SEAT_MONEY, ROWSEAT, COLSEAT, SEAT)
+				VALUES('SN'||SEAT_NO_SEQ.NEXTVAL, #{movie_theater_no}, #{seat_money}, #{rowseat}, #{colseat}, #{seat})
+	</insert>
+	<!-- 보기 -->
+	<select id="selSeat" parameterType="mvDto">
+		SELECT SEAT_NO, MOVIE_THEATER_NO, SEAT_MONEY, ROWSEAT||COLSEAT, SEAT FROM SEATMANAGER WHERE SEAT = #{seat}
+	</select>
+	<!-- 수정 -->
+	<update id="updateSeat" parameterType="mvDto">
+		UPDATE SEATMANAGER SET ROWSEAT = #{rowseat}, COLSEAT = #{colseat}, SEAT_MONEY = #{seat_money} WHERE SEAT_NO = #{seat_no}
+	</update>
+	<!-- 좌석 end-->
+	
+	<!-- 영화관 -->
+	<!-- 등록 -->
+	<insert id="insertTheater" parameterType="java.util.Map">
+		INSERT INTO THEATER
+			(THEATER_NO, THEATER_NAME, THEATER_LOCAL)
+				VALUES('TN'||THEATER_NO_SEQ.NEXTVAL, #{theater_name}, #{theater_local})
+	</insert>
+	<!-- 수정 -->
+	<update id="updateTheater" parameterType="java.util.Map">
+		UPDATE THEATER
+			SET THEATER_NAME=#{theater_name}, THEATER_LOCAL=#{theater_local}
+				WHERE THEATER_NO=#{theater_no}
+	</update>
+	<!-- 조회 -->
+	<select id="selectTheater">
+		SELECT THEATER_NO, THEATER_NAME, THEATER_LOCAL FROM THEATER
+	</select>
+	<!-- 상세보기 -->
+	<select id="SelectOneTheater" parameterType="java.lang.String">
+		SELECT THEATER_NO, THEATER_NAME, THEATER_LOCAL, MOVIE_THEATER_NO, MOVIE_THEATER_NAME
+			FROM THEATER JOIN MOVIE_THEATER
+				USING(THEATER_NO)
+				WHERE THEATER_NO = #{theater_no}
+	</select>
+	<!-- 영화관 end -->
+	
+	<!-- 영화 -->
+	<!-- 등록 -->
+	<insert id="insertMovie" parameterType="java.util.Map">
+		INSERT INTO MOVIE
+			(MOVIE_NO, MOVIE_NAME, MOVIE_FOREMAN, MOVIE_GENRE, MOVIE_OPENDAY, MOVIE_COUNTRY, MOVIE_TIME)
+				VALUES('MN'||MOVIE_NO_SEQ.NEXTVAL, #{movie_name}, #{movie_foreman}, #{movie_genre}, #{movie_openday}, #{movie_country}, #{movie_time})
+	</insert>
+	<!-- 수정 -->
+	<update id="updateMovie" parameterType="java.util.Map">
+		UPDATE MOVIE
+			SET MOVIE_NAME=#{movie_name}, MOVIE_FOREMAN=#{movie_foreman}, MOVIE_GENRE=#{movie_genre}, MOVIE_OPENDAY=#{movie_openday}, MOVIE_COUNTRY=#{movie_country}, MOVIE_TIME=#{movie_time}
+				WHERE MOVIE_NO=#{movie_no}
+	</update>
+	<!-- 조회 -->
+	<select id="selectMovie" resultType="java.util.List">
+		SELECT MOVIE_NAME
+			FROM MOVIE
+	</select>
+	<!-- 상세보기 -->
+	<select id="selOneMovie" parameterType="java.lang.String" resultType="java.util.List">
+		SELECT MOVIE_NO, MOVIE_NAME, MOVIE_FOREMAN, MOVIE_GENRE, MOVIE_OPENDAY, MOVIE_COUNTRY, MOVIE_TIME
+			FROM MOVIE
+				WHERE MOVIE_NO = #{movie_no}
+	</select>
+	<!-- 영화 end -->
+	
+	<!-- 영화 관리 end -->
+	
+	
+	
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<!-- Controller와 View 처리를 하기 위한 xml Bean의 집합 -->
+
+	<!-- 빈을 생성하기 위한 클래스를 연동 하는 context -->
+	<!-- 설정된 Top-packge에 있는 모든 @(annotaion)을 Bean으로 등록 -->
+	<context:component-scan
+		base-package="web.movie.com" />
+
+	<!-- Annotation을 사용하여 탐색을 진행 가능하도록 함 -->
+	<mvc:annotation-driven />
+
+	<!-- 추가 기능 : Resolver 설정 -->
+	<!-- DispatcherServlet의 의해 반환된 값을 화면 이동 처리를 해줌 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 반환된 문자열의 앞의 위치하는 주소 -->
+		<property name="prefix" value="/WEB-INF/view/" />
+		<!-- 반환된 문자열의 뒤에 위치하는 주소 -->
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- 추가 기능 : 인터셉터 -->
+	<!-- 가로채기 특정한 상황일때 페이지의 흐름을 변경 혹은 제어 -->
+	<!-- ex) 글쓰기 화면의 경우 주소에 직접(url/~~do) 입력을 해도 접근가능 따라서 HttpSession을 확인하여 흐름을 
+		제어 하는 클래스를 생성 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/interceptor.do" />
+			<bean class="web.movie.com.interceptor.Interceptor" />
+		</mvc:interceptor>
+
+		<!-- 브라우저의 back이동페이지의 작동을 하지 못하도록 브라부저의 캐쉬를 삭제해줌 -->
+		<bean id="webContentInterceptor"
+			class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+			<!-- 이동 화면의 요청후 몇 초동안 캐쉬를 유지한 후 삭제 시간 -->
+			<property name="cacheSeconds" value="0" />
+			<property name="useExpiresHeader" value="true" />
+			<property name="useCacheControlHeader" value="true" />
+			<property name="useCacheControlNoStore" value="true" />
+
+			<!-- 캐쉬 삭제와 별개로 캐쉬를 삭제하지 않고 유지시킴 ex) 이미지, 동영상 -->
+			<property name="cacheMappings">
+				<props>
+					<!-- 캐쉬를 제어할 webapp의 위치 , 시간 60초 60분 24시 86400 하루동안 유지 -->
+					<prop key="/image/**">86400</prop>
+				</props>
+			</property>
+		</bean>
+	</mvc:interceptors>
+
+	<!-- 이메일 전송을 위한 Mail 서버 설정 ex) google -->
+	<!-- 선택된 메일 서버에서 외부접근이 가능하도록 설정 -->
+	<!-- 선택된 메일의 서버 정보를 사용해야 함 transport protocol SMTP -->
+	<bean id="javaMailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="info.happy0612@gmail.com" />
+		<property name="password" value="happy@0612" />
+
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- Transaction처리 method별로 @annotation으로 해주는것이 아니라 -->
+	<!-- AOP에 의해서 pointcut으로 작성된 위치에 특정행위(Exception)가 발생 했을때 작동 -->
+	<tx:advice id="txAdvice"
+		transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED"
+				rollback-for="Exception" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- AOP로 Transaction을 처리 (pointcut=어느 시점에 시작 되는지) -->
+	<aop:config>
+		<aop:advisor advice-ref="txAdvice"
+			pointcut="execution(* web.movie.com.model.*Service*.*(..))" />
+	</aop:config>
+
+	<!-- 트렌젝션 처리 annotation-driven -->
+	<tx:annotation-driven
+		transaction-manager="transactionManager" />
+
+
+
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
