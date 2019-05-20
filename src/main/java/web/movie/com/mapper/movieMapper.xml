@@ -22,8 +22,7 @@
 		SELECT MILEAGE FROM MILEAGEMANAGER WHERE ID = #{id}
 	</select>
 	<!-- 결제 내역 확인 -->
-	<select id="selectPayList" parameterType="java.lang.String"
-		resultType="java.util.List">
+	<select id="selectPayList" parameterType="java.lang.String" resultType="mvDto">
 		SELECT PAYMENT_NO, TICKETING_NO, ID, MILEAGE, PRICE, MILEAGE_TIME 
 			FROM PAYMENT
 				WHERE ID = #{id}

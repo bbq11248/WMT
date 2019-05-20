@@ -267,6 +267,14 @@ public class MovieDto {
 		this.movie_theater_no = movie_theater_no;
 		this.movie_theater_name = movie_theater_name;
 	}
+
+	@Override
+	public String toString() {
+		return "MovieDto [ticketing_no=" + ticketing_no + ", id=" + id + ", mileage=" + mileage + ", payment_no="
+				+ payment_no + ", price=" + price + ", mileage_time=" + mileage_time + "]";
+	}
+
+
 	
 	
 
