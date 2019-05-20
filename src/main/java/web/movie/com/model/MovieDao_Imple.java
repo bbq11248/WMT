@@ -38,14 +38,15 @@ public class MovieDao_Imple implements IMovieDao {
 	@Override
 	public List<MovieDto> selectPayList(String id) {
 		logger.info("결제 목록");
-		List<MovieDto> lists = sqlSession.selectList(NS+"selectPayList", id); 
-		return lists;
+		List<MovieDto> map = sqlSession.selectList(NS+"selectPayList", id); 
+		return map;
 	}
 
 	@Override
 	public List<MovieDto> selectTicket(String id) {
 		logger.info("티켓 내역 보기");
 		List<MovieDto> lists = sqlSession.selectList(NS+"selectTicket", id);
+		System.out.println(lists);
 		return lists;
 	}
 
