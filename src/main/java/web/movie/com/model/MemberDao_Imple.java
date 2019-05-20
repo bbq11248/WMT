@@ -7,10 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Repository;
 
 import web.movie.com.dto.MemberDto;
 import web.movie.com.dto.MovieDto;
-
+@Repository
 public class MemberDao_Imple implements IMemberDao {
 
 	private Logger logger = LoggerFactory.getLogger(MemberDao_Imple.class);

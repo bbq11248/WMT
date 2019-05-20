@@ -11,7 +11,7 @@
 	<!-- a상세글 조회 -->
 	<!-- SELECT SEQ,ID,TITLE,CONTENT,REGDATE FROM BOARD WHERE SEQ = '6'; -->
 	<select id="selectOneList" parameterType="java.lang.String"
-		resultType="dDto">
+		resultType="bDto">
 		SELECT SEQ,ID,TITLE,CONTENT,REGDATE FROM BOARD WHERE SEQ = #{seq}
 	</select>
 
