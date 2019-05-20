@@ -267,11 +267,27 @@ public class MovieDto {
 		this.movie_theater_no = movie_theater_no;
 		this.movie_theater_name = movie_theater_name;
 	}
+	
+	
+
+	public MovieDto(String ticketing_no, String movie_play_no, String id, String seat_no, String movie_name,
+			String theater_name, String movie_theater_name, String movie_start_time) {
+		super();
+		this.ticketing_no = ticketing_no;
+		this.movie_play_no = movie_play_no;
+		this.id = id;
+		this.seat_no = seat_no;
+		this.movie_name = movie_name;
+		this.theater_name = theater_name;
+		this.movie_theater_name = movie_theater_name;
+		this.movie_start_time = movie_start_time;
+	}
 
 	@Override
 	public String toString() {
-		return "MovieDto [ticketing_no=" + ticketing_no + ", id=" + id + ", mileage=" + mileage + ", payment_no="
-				+ payment_no + ", price=" + price + ", mileage_time=" + mileage_time + "]";
+		return "MovieDto [ticketing_no=" + ticketing_no + ", movie_play_no=" + movie_play_no + ", id=" + id
+				+ ", seat_no=" + seat_no + ", movie_name=" + movie_name + ", theater_name=" + theater_name
+				+ ", movie_theater_name=" + movie_theater_name + ", movie_start_time=" + movie_start_time + "]";
 	}
 
 

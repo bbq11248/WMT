@@ -32,7 +32,7 @@
 
 	<!-- 예매 관리 -->
 	<!-- 예매 내역 보기 -->
-	<select id="selectTicket" parameterType="java.lang.String" resultType="java.util.List">
+	<select id="selectTicket" parameterType="java.lang.String" resultType="mvDto">
 		SELECT TICKETING_NO, MOVIE_PLAY_NO, THEATER_NAME, MOVIE_THEATER_NAME, MOVIE_NAME
 			FROM TICKETING JOIN MOVIE_PLAY
 				USING(MOVIE_PLAY_NO)
@@ -46,8 +46,8 @@
 					ORDER BY TICKETING_TIME
 	</select>
 	<!-- 예매내역 상세 조회 -->
-	<select id="selectOneTicket" parameterType="java.util.Map" resultType="java.util.List">
-		SELECT TICKETING_NO, MOVIE_PLAY_NO, THEATER_NAME, MOVIE_THEATER_NAME, MOVIE_NAME, MOVIE_START_TIME, SEAT_NO
+	<select id="selectOneTicket" parameterType="java.util.Map" resultType="mvDto">
+		SELECT TICKETING_NO, MOVIE_PLAY_NO, THEATER_NAME, MOVIE_THEATER_NAME, MOVIE_NAME, MOVIE_START_TIME, SEAT_NO, ID
 			FROM TICKETING JOIN MOVIE_PLAY
 				USING(MOVIE_PLAY_NO)
 					JOIN THEATER
@@ -80,7 +80,7 @@
 		UPDATE MILEAGEMANAGER SET MILEAGE = MILEAGE + #{price} WHERE ID = #{id}
 	</insert>
 	<!-- 예매취소2 -->
-	<insert id="cancelPay" parameterType="java.lang.String">
+	<insert id="cancelPay" parameterType="mvDto">
 	INSERT INTO PAYMENT
 		(PAYMENT_NO, ID, MILEAGE, PRICE, MILEAGE_TIME)
 			VALUES('TC'||PAYMENT_NO_SEQ.NEXTVAL, #{id} , (SELECT MILEAGE FROM MILEAGEMANAGER WHERE ID = #{id}), #{price}, SYSDATE)
@@ -246,35 +246,5 @@
 	
 
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

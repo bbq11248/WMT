@@ -26,19 +26,51 @@ public class LJHController {
 	}
 	
 	@RequestMapping(value="/mileage.do", method=RequestMethod.GET)
-	public int mileage(MovieDto mvDto) {
+	public String mileage(MovieDto mvDto) {
 		int mileageCg = movieService.mileage(mvDto);
 		System.out.println(mileageCg);
-		return 0;
+		return null;
 	}
 	
 	@RequestMapping(value="/payList.do", method=RequestMethod.GET)
-	public List<MovieDto> selectPayList(String id){
+	public String selectPayList(String id){
 		List<MovieDto> lists = movieService.selectPayList(id);
 		System.out.println(lists.get(0).getPayment_no()+"**********************************************");
 		return null;
 	}
 	
+	@RequestMapping(value="/ticketList.do", method=RequestMethod.GET)
+	public String selectTicket(String id){
+		List<MovieDto> lists = movieService.selectTicket(id);
+		System.out.println(lists);
+		return null;
+	}
+	
+	@RequestMapping(value="/detailTicket.do", method=RequestMethod.GET)
+	public String detailTicket(Map<String, String> map){
+		map.put("id", "JINSOOK");
+		map.put("ticketing_no", "TN21");
+		MovieDto mvDto = movieService.selectOneTicket(map);
+		System.out.println(mvDto);
+		return null;
+	}
+	
+	@RequestMapping(value="/ticketing.do", method=RequestMethod.GET)
+	public String ticketing(MovieDto mvDto, Map<String, String> map) {
+		map.put("movie_play_no", "MPN1");
+		map.put("id", "JINSOOK");
+		map.put("seat_no", "A1");
+		int n = movieService.ticketing(map, mvDto);
+		System.out.println(n);
+		return null;
+	}
+	
+	@RequestMapping(value="/cancel.do", method=RequestMethod.GET)
+	public String cancel(MovieDto mvDto, String ticketing_no) {
+		int n = movieService.cancel(mvDto, ticketing_no);
+		System.out.println(n);
+		return null;
+	}
 	
 	
 	

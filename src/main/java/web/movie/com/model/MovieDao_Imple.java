@@ -70,9 +70,9 @@ public class MovieDao_Imple implements IMovieDao {
 	public int cancel(MovieDto mvDto, String ticketing_no) {
 		logger.info("예매 취소");
 		int n = sqlSession.update(NS+"cancelTic", mvDto);
-		int i = sqlSession.insert(NS+"canclePay", mvDto);
+		int i = sqlSession.insert(NS+"cancelPay", mvDto);
 		int j = sqlSession.update(NS+"cancelUpPay", ticketing_no);
-		int k = sqlSession.delete(NS+"canclelDelete", ticketing_no);
+		int k = sqlSession.delete(NS+"cancelDelete", ticketing_no);
 		return n+i+j+k;
 	}
 
