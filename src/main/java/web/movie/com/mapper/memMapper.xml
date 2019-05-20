@@ -64,11 +64,11 @@
 	<!-- a비밀번호 재발송 sendPw IDao이름 -->
 	<!-- UPDATE MOVIEMEMBER SET PW = '' WHERE ID = 'JINSOOK'; -->
 	<!-- SELECT PW FROM MOVIEMEMBER WHERE ID = 'JINSOOK'; -->
-	<update id="updatePw" parameterType="mdDto">
+	<update id="updatePw" parameterType="mbDto">
 		UPDATE MOVIEMEMBER SET PW = #{pw} WHERE ID = #{id}
 	</update>
 	
-	<select id="selectPw" parameterType="mdDto">
+	<select id="selectPw" parameterType="mbDto">
 		SELECT PW FROM MOVIEMEMBER WHERE ID = #{id}
 	</select>
 
