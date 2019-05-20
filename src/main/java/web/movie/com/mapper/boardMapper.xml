@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="web.movie.com.board_statment">
+
+<!-- a전체글 조회 -->
+	<!-- SELECT SEQ,ID,TITLE,REGDATE FROM BOARD; -->
+	<select id="selectList" resultType="bDto">
+		SELECT SEQ,ID,TITLE,REGDATE FROM BOARD
+	</select>
+
+	<!-- a상세글 조회 -->
+	<!-- SELECT SEQ,ID,TITLE,CONTENT,REGDATE FROM BOARD WHERE SEQ = '6'; -->
+	<select id="selectOneList" parameterType="java.lang.String"
+		resultType="dDto">
+		SELECT SEQ,ID,TITLE,CONTENT,REGDATE FROM BOARD WHERE SEQ = #{seq}
+	</select>
+
+	<!-- a글 입력 -->
+	<!-- INSERT INTO BOARD -->
+	<!-- (SEQ,ID,TITLE,CONTENT,REGDATE) -->
+	<!-- VALUES(BOARD_SEQ.NEXTVAL, 'JOUNGHYU', -->
+	<!-- '정숙한 영화예매', '저희 싸이트에 오신걸 환영합니다! 첫 예매는 3000원 할인!', SYSDATE); -->
+	<insert id="insertBoard" parameterType="bDto">
+		INSERT INTO BOARD
+		(SEQ,ID,TITLE,CONTENT,REGDATE)
+		VALUES
+		(BOARD_SEQ.NEXTVAL, #{id},#{title},#{content}, SYSDATE)
+	</insert>
+
+	<!-- a글수정 -->
+	<!-- UPDATE BOARD SET TITLE = 'ANGKIMOTTI', -->
+	<!-- CONTENT= 'ANGANGKIMOTTING',REGDATE=SYSDATE -->
+	<!-- WHERE ID = 'JINSOOK' AND SEQ = ''; -->
+	<update id="updateBoard" parameterType="bDto">
+		UPDATE BOARD SET TITLE = #{title},CONTENT= #{content},
+		REGDATE=SYSDATE WHERE ID = #{id} AND SEQ = #{seq}
+	</update>
+
+
+	<!-- a글삭제 -->
+	<!-- DELETE FROM BOARD WHERE SEQ = '5'; -->
+	<delete id="deleteBoard" parameterType="java.lang.String">
+		DELETE FROM BOARD WHERE SEQ = #{seq}
+	</delete>
+	
+</mapper>

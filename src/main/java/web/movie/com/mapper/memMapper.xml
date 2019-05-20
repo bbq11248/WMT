@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="web.movie.com.mem_statment">
+
+
+	<!-- a회원가입 -->
+	<insert id="insertMem" parameterType="mbDto">
+		INSERT INTO MOVIEMEMBER
+		(SEQ,ID,PW,NAME,NICKNAME
+		,BIRTHDAY,PHONE,ADDRESS,EMAIL,AUTH,REGDATE)
+		VALUES(MOVIEMEMBER_SEQ.NEXTVAL,#{id}, #{pw}, #{name}, #{nickname},
+		#{birthday}, #{phone}, #{address}, #{email}, 'U' , SYSDATE)
+	</insert>
+	
+
+	<!-- a회원가입에 필요한 마일리지 -->
+	<insert id="insertMil" parameterType="mbDto">
+		INSERT INTO
+		MILEAGEMANAGER
+		(ID, MILEAGE)
+		VALUES(#{id}, 0)
+	</insert>
+
+
+	<!-- a정보수정 -->
+	<!-- UPDATE MOVIEMEMBER SET PW = 1234, NICKNAME = '진숙짱', PHONE = '01012341234', 
+		ADDRESS = '역삼역삼' -->
+	<!-- WHERE ID = 'JINSOOK' AND BIRTHDAY = '951230'; -->
+	<update id="updateMem" parameterType="mbDto">
+		UPDATE MOVIEMEMBER SET PW =
+		#{pw}, NICKNAME = #{nickname}, PHONE = #{phone}, ADDRESS = #{address}
+		WHERE ID = #{id} AND BIRTHDAY = #{birthday}
+	</update>
+
+
+	<!-- a관리자 권한 사용자 전체 보기 -->
+	<!-- ELECT SEQ,ID,PW,NAME,NICKNAME,BIRTHDAY,PHONE,ADDRESS,EMAIL,AUTH,REGDATE,LOGIN 
+		FROM MOVIEMEMBER; -->
+	<select id="selectMem" parameterType="mbDto" resultType="java.util.List">
+		SELECT
+		SEQ,ID,PW,NAME,NICKNAME,BIRTHDAY,PHONE,ADDRESS,EMAIL,AUTH,REGDATE,LOGIN
+		FROM MOVIEMEMBER ORDER BY SEQ
+	</select>
+
+
+	<!-- a아이디중복체크 -->
+	<!-- SELECT COUNT(ID) ID FROM MOVIEMEMBER WHERE ID = 'JINSOOK'; -->
+	<select id="checkMem" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		SELECT COUNT(ID) ID FROM MOVIEMEMBER WHERE ID = #{id}
+	</select>
+
+
+
+	<!-- a아이디 찾기 -->
+	<!-- SELECT ID FROM MOVIEMEMBER WHERE NAME = '양진숙' AND PHONE = '01080702906'; -->
+	<select id="selectId" parameterType="mbDto">
+		SELECT ID FROM MOVIEMEMBER WHERE NAME = #{name} AND PHONE
+		=#{phone}
+	</select>
+
+
+
+	<!-- a비밀번호 재발송 sendPw IDao이름 -->
+	<!-- UPDATE MOVIEMEMBER SET PW = '' WHERE ID = 'JINSOOK'; -->
+	<!-- SELECT PW FROM MOVIEMEMBER WHERE ID = 'JINSOOK'; -->
+	<update id="updatePw" parameterType="mdDto">
+		UPDATE MOVIEMEMBER SET PW = #{pw} WHERE ID = #{id}
+	</update>
+	
+	<select id="selectPw" parameterType="mdDto">
+		SELECT PW FROM MOVIEMEMBER WHERE ID = #{id}
+	</select>
+
+
+
+	<!-- a회원정보 상세보기 -->
+	<!-- SELECT SEQ,ID,NAME,NICKNAME,BIRTHDAY,PHONE,ADDRESS,EMAIL,AUTH,REGDATE -->
+	<!-- FROM MOVIEMEMBER WHERE ID = 'JINSOOK'; -->
+	<select id="selectMemOne" parameterType="java.lang.String" resultType="mbDto">
+		SELECT
+		SEQ,ID,NAME,NICKNAME,BIRTHDAY,PHONE,ADDRESS,EMAIL,AUTH,REGDATE
+		FROM
+		MOVIEMEMBER WHERE ID = #{id}
+	</select>
+
+</mapper>

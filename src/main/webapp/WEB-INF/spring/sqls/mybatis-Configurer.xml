@@ -4,11 +4,15 @@
 	<!-- DTO를 선언 하여 Alias를 통해 쉽게 사용 없어도됨 -->
 	<typeAliases>
 		<typeAlias type="web.movie.com.dto.MovieDto" alias="mvDto"/>
+		<typeAlias type="web.movie.com.dto.MemberDto" alias="mbDto"/>
+		<typeAlias type="web.movie.com.dto.BoardDto" alias="bDto"/>
 	</typeAliases>
 	<!-- 데이터 베이스 커넥션 환경 : SpringFramwork이 Bean으로 제공 -->
 
 	<!-- Statment(쿼리문장)있는 XML을 연결 -->
 	<mappers>
 		<mapper resource="web/movie/com/mapper/movieMapper.xml"/>
+		<mapper resource="web/movie/com/mapper/boardMapper.xml"/>
+		<mapper resource="web/movie/com/mapper/memMapper.xml"/>
 	</mappers>
 </configuration>
