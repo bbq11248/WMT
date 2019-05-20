@@ -33,16 +33,16 @@ public class BoardDao_Imple implements IBoardDao {
 	}
 
 	@Override
-	public boolean insertBoard(BoardDto dto) {
+	public boolean insertBoard(BoardDto bDto) {
 		logger.info("글입력");
-		int i = sqlSession.insert(NS+"insertBoard", dto);
+		int i = sqlSession.insert(NS+"insertBoard", bDto);
 		return i>0? true:false;
 	}
 
 	@Override
-	public boolean updateBoard(BoardDto dto) {
+	public boolean updateBoard(BoardDto bDto) {
 		logger.info("글수정");
-		int i = sqlSession.update(NS+"updateBoard", dto);
+		int i = sqlSession.update(NS+"updateBoard", bDto);
 		return i>0? true:false;
 	}
 

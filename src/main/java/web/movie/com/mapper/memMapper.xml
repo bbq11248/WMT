@@ -14,11 +14,11 @@
 	
 
 	<!-- a회원가입에 필요한 마일리지 -->
-	<insert id="insertMil" parameterType="mbDto">
+	<insert id="insertMil" parameterType="mvDto">
 		INSERT INTO
 		MILEAGEMANAGER
-		(ID, MILEAGE)
-		VALUES(#{id}, 0)
+		(MILEAGE_SEQ, ID, MILEAGE)
+		VALUES('MG'||MILEAGE_SEQ.NEXTVAL,#{id}, #{mileage})
 	</insert>
 
 

@@ -10,24 +10,24 @@ public interface IMemberDao {
 	
 	//a회원가입
 		//a회원가입시 등록될 마일리지
-		public int signupMember(MemberDao_Imple dto, MovieDto mdto);
+		public int signupMember(MemberDto mbDto, MovieDto mvDto);
 //		public int insertMem(MemberDto dto);
 //		public int insertMail(MovieDto dto);
 		
 		//a정보수정
-		public int updateMem(MemberDto dto);
+		public int updateMem(MemberDto mbDto);
 		
 		//a전체 회원 보기
-		public List<MemberDto> selectMem(MemberDto dto);
+		public List<MemberDto> selectMem(MemberDto mbDto);
 		
 		//a아이디 중복체크
 		public boolean checkMem(String id);
 		
 		//a아이디 찾기
-		public boolean selectId(MemberDto dto);
+		public boolean selectId(MemberDto mbDto);
 		
 		//a비밀번호 재발송 
-		public boolean sendPw(MemberDto dto);
+		public boolean sendPw(MemberDto mbDto);
 //		public boolean updatePw(MemberDto dto);
 //		public boolean selectPw(MemberDto dto);
 		

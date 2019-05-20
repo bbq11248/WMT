@@ -22,10 +22,11 @@ public class MemberDto {
 	}
 
 
-	public MemberDto(int seq, String id, String pw, String name, String nickname, int birthday, int phone,
-			String address, String email, String auth, String regdate) {
+
+
+	public MemberDto(String id, String pw, String name, String nickname, int birthday, int phone, String address,
+			String email) {
 		super();
-		this.seq = seq;
 		this.id = id;
 		this.pw = pw;
 		this.name = name;
@@ -34,9 +35,9 @@ public class MemberDto {
 		this.phone = phone;
 		this.address = address;
 		this.email = email;
-		this.auth = auth;
-		this.regdate = regdate;
 	}
+
+
 
 
 	public MemberDto(String id, String pw, String nickname, int birthday, int phone, String address) {
@@ -194,4 +195,14 @@ public class MemberDto {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
+
+
+	@Override
+	public String toString() {
+		return "MemberDto [seq=" + seq + ", id=" + id + ", pw=" + pw + ", name=" + name + ", nickname=" + nickname
+				+ ", birthday=" + birthday + ", phone=" + phone + ", address=" + address + ", email=" + email
+				+ ", auth=" + auth + ", regdate=" + regdate + "]";
+	}
+	
+	
 }
