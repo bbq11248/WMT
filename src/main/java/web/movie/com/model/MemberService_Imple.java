@@ -17,21 +17,21 @@ public class MemberService_Imple implements IMemberService {
 	private IMemberDao mbDao;
 
 	@Override
-	public int signupMember(MemberDao_Imple dto, MovieDto mdto) {
+	public int signupMember(MemberDto mbDto, MovieDto mvDto) {
 		logger.info("signupMember Service 실행");
-		return mbDao.signupMember(dto, mdto);
+		return mbDao.signupMember(mbDto, mvDto);
 	}
 
 	@Override
-	public int updateMem(MemberDto dto) {
+	public int updateMem(MemberDto mbDto) {
 		logger.info("updateMem 실행");
-		return mbDao.updateMem(dto);
+		return mbDao.updateMem(mbDto);
 	}
 
 	@Override
-	public List<MemberDto> selectMem(MemberDto dto) {
+	public List<MemberDto> selectMem(MemberDto mbDto) {
 		logger.info("selectMem 실행");
-		return mbDao.selectMem(dto);
+		return mbDao.selectMem(mbDto);
 	}
 
 	@Override
@@ -41,15 +41,15 @@ public class MemberService_Imple implements IMemberService {
 	}
 
 	@Override
-	public boolean selectId(MemberDto dto) {
+	public boolean selectId(MemberDto mbDto) {
 		logger.info("seletId 실행");
-		return mbDao.selectId(dto);
+		return mbDao.selectId(mbDto);
 	}
 
 	@Override
-	public boolean sendPw(MemberDto dto) {
+	public boolean sendPw(MemberDto mbDto) {
 		logger.info("sendPw 실행");
-		return mbDao.sendPw(dto);
+		return mbDao.sendPw(mbDto);
 	}
 
 	@Override

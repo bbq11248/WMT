@@ -24,30 +24,30 @@ public class MemberDao_Imple implements IMemberDao {
 //	@Autowired
 //	private PasswordEncoder passwordEncoder;
 	
-	
-	@Override
-	public int signupMember(MemberDao_Imple dto, MovieDto mdto) {
 //		비밀번호 암호화 처리를 위한.
 //		String encodePw = passwordEncoder.encode(dto.getPw());
 //		dto.setPw(encodePw);
-		
+	
+	
+	@Override
+	public int signupMember(MemberDto mbDto, MovieDto mvDto) {
 		logger.info("회원가입");
-		int i = sqlSession.insert(NS+"insertMem",dto);
-		int n = sqlSession.insert(NS+"insertMail",mdto);
+		int i = sqlSession.insert(NS+"insertMem",mbDto);
+		int n = sqlSession.insert(NS+"insertMil",mvDto);
 		return i+n;
 	}
 
 	@Override
-	public int updateMem(MemberDto dto) {
+	public int updateMem(MemberDto mbDto) {
 		logger.info("회원수정");
-		int i = sqlSession.update(NS+"updateMem", dto);
+		int i = sqlSession.update(NS+"updateMem", mbDto);
 		return i;
 	}
 
 	@Override
-	public List<MemberDto> selectMem(MemberDto dto) {
+	public List<MemberDto> selectMem(MemberDto mbDto) {
 		logger.info("회원전체보기");
-		List<MemberDto> list = sqlSession.selectList(NS+"selectMem", dto);
+		List<MemberDto> list = sqlSession.selectList(NS+"selectMem", mbDto);
 		return list;
 	}
 
@@ -59,26 +59,26 @@ public class MemberDao_Imple implements IMemberDao {
 	}
 
 	@Override
-	public boolean selectId(MemberDto dto) {
+	public boolean selectId(MemberDto mbDto) {
 		logger.info("아이디찾기");
-		int n = sqlSession.selectOne(NS+"selectId", dto);
+		int n = sqlSession.selectOne(NS+"selectId", mbDto);
 		return n>0? true:false;
 	}
 
 	@Override
-	public boolean sendPw(MemberDto dto) {
+	public boolean sendPw(MemberDto mbDto) {
 		logger.info("비밀번호 재발송");
-		int i = sqlSession.update(NS+"updatePw", dto);
-		int n = sqlSession.selectOne(NS+"seletPw", dto);
+		int i = sqlSession.update(NS+"updatePw", mbDto);
+		int n = sqlSession.selectOne(NS+"seletPw", mbDto);
 		return ((i+n)>0)?true:false;
 	}
 
 	@Override
 	public MemberDto selectMemOne(String id) {
 		logger.info("회원정보 확인");
-		MemberDto dto = null;
-		dto =sqlSession.selectOne(NS+"selectMemOne",id);
-		return dto;
+		MemberDto mbDto = null;
+		mbDto =sqlSession.selectOne(NS+"selectMemOne",id);
+		return mbDto;
 	}
 
 }

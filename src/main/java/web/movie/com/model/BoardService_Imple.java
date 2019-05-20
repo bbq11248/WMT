@@ -29,15 +29,15 @@ public class BoardService_Imple implements IBoardService {
 	}
 
 	@Override
-	public boolean insertBoard(BoardDto dto) {
+	public boolean insertBoard(BoardDto bDto) {
 		logger.info("insertBoard 실행");
-		return bDao.insertBoard(dto);
+		return bDao.insertBoard(bDto);
 	}
 
 	@Override
-	public boolean updateBoard(BoardDto dto) {
+	public boolean updateBoard(BoardDto bDto) {
 		logger.info("updateBoard 실행");
-		return bDao.updateBoard(dto);
+		return bDao.updateBoard(bDto);
 	}
 
 	@Override

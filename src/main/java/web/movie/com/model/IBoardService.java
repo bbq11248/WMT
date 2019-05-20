@@ -13,10 +13,10 @@ public interface IBoardService {
 	public BoardDto selectOneList(String seq);
 	
 	//a글 입력insertBoard
-	public boolean insertBoard(BoardDto dto);
+	public boolean insertBoard(BoardDto bDto);
 	
 	//a글 수정updateBoard
-	public boolean updateBoard(BoardDto dto);
+	public boolean updateBoard(BoardDto bDto);
 	
 	//a글 삭제deleteBoard
 	public boolean deleteBoard(String seq);
