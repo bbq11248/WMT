@@ -69,7 +69,7 @@ public interface IMovieDao {
 	// 등록
 	public int insertSeat(MovieDto mvDto);
 	// 조회
-	public List<MovieDto> selSeat(String Seat);
+	public List<MovieDto> selSeat(String seat);
 	// 수정
 	public int updateSeat(MovieDto mvDto);
 
@@ -83,7 +83,7 @@ public interface IMovieDao {
 	// 전체 보기
 	public List<MovieDto> selectTheater();
 	// 상세 보기
-	public MovieDto selectOneTheater(String theater_no);
+	public List<MovieDto> selectOneTheater(String theater_no);
 
 	
 	
@@ -95,7 +95,7 @@ public interface IMovieDao {
 	// 전체보기
 	public List<MovieDto> selectMovie();
 	// 상세 보기
-	public MovieDto selOneMovie(String movie_no);
+	public List<MovieDto> selOneMovie(String movie_no);
 	
 	
 

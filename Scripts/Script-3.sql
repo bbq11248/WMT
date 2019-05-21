@@ -125,19 +125,19 @@ SELECT THEATER_NO, THEATER_NAME
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 --상영관 시간 
-SELECT MP.MOVIE_PLAY_NO, TH.THEATER_NAME||MOVIE_THEATER_NAME, MOVIE_START_TIME, MT.MOVIE_THEATER_NO
+SELECT MP.MOVIE_PLAY_NO, TH.THEATER_NAME||MOVIE_THEATER_NAME, MOVIE_START_TIME, MT.MOVIE_THEATER_NO, MP.MOVIE_PLAY_NO
         FROM MOVIE_PLAY MP        
 			JOIN MOVIE_THEATER MT
                 ON  MP.MOVIE_THEATER_NO = MT.MOVIE_THEATER_NO
                                 JOIN THEATER TH
                                         ON MT.THEATER_NO = TH.THEATER_NO
-                WHERE MOVIE_NO = 'MN2' AND MP.THEATER_NO = 'TN1';
-SELECT MOVIE_PLAY_NO, TH.THEATER_NAME||MOVIE_THEATER_NAME, MOVIE_START_TIME, MT.MOVIE_THEATER_NO
+                WHERE MOVIE_NO = 'MN7' AND MP.THEATER_NO = 'TN5';
+SELECT MOVIE_PLAY_NO, TH.THEATER_NAME||MOVIE_THEATER_NAME, MOVIE_START_TIME, MT.MOVIE_THEATER_NO, MP.MOVIE_PLAY_NO
 	FROM MOVIE_PLAY MP	JOIN MOVIE_THEATER MT
 		ON  MP.MOVIE_THEATER_NO = MT.MOVIE_THEATER_NO
 				JOIN THEATER TH
 					ON MT.THEATER_NO = TH.THEATER_NO
-		WHERE MOVIE_NO = 'MN2' AND MP.THEATER_NO = 'TN1' AND MT.MOVIE_THEATER_NO = 'MTN1';
+		WHERE MOVIE_NO = 'MN7' AND MP.THEATER_NO = 'TN5' AND MT.MOVIE_PLAY_NO = 'MPN20';
 
 --좌석 선택
 SELECT ROWSEAT||COLSEAT 좌석번호, SEAT_MONEY
@@ -145,10 +145,10 @@ SELECT ROWSEAT||COLSEAT 좌석번호, SEAT_MONEY
 		ON SM.MOVIE_THEATER_NO = MT.MOVIE_THEATER_NO
 			JOIN MOVIE_PLAY MP
 				ON MT.MOVIE_THEATER_NO = MP.MOVIE_THEATER_NO
-		WHERE MP.MOVIE_PLAY_NO = 'MPN1';
+		WHERE MP.MOVIE_PLAY_NO = 'MPN20';
 
 SELECT SEAT_MONEY FROM SEATMANAGER 
-	WHERE ROWSEAT||COLSEAT = 'A1' AND MOVIE_THEATER_NO = 'MTN1';
+	WHERE ROWSEAT||COLSEAT = 'A1' AND MOVIE_THEATER_NO = 'MTN4';
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -------상영관-------상영관-------상영관-------상영관-------상영관-------상영관-------상영관-------상영관-------상영관-------상영관
@@ -180,7 +180,7 @@ SELECT  DISTINCT THEATER_NAME, MOVIE_THEATER_NAME, SEAT
 		USING(THEATER_NO)
 			JOIN SEATMANAGER
 				USING(MOVIE_THEATER_NO)
-		WHERE MOVIE_THEATER_NO = 'MTN1';
+		WHERE MOVIE_THEATER_NO = 'MTN4';
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	

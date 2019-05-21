@@ -120,9 +120,9 @@ public class MovieService_Imple implements IMovieService {
 	}
 
 	@Override
-	public List<MovieDto> selSeat(String Seat) {
+	public List<MovieDto> selSeat(String seat) {
 		logger.info("selSeat Service 실행");
-		return mvDao.selSeat(Seat);
+		return mvDao.selSeat(seat);
 	}
 
 	@Override
@@ -150,7 +150,7 @@ public class MovieService_Imple implements IMovieService {
 	}
 
 	@Override
-	public MovieDto selectOneTheater(String theater_no) {
+	public List<MovieDto> selectOneTheater(String theater_no) {
 		logger.info("selectOneTheater Service 실행");
 		return mvDao.selectOneTheater(theater_no);
 	}
@@ -174,7 +174,7 @@ public class MovieService_Imple implements IMovieService {
 	}
 
 	@Override
-	public MovieDto selOneMovie(String movie_no) {
+	public List<MovieDto> selOneMovie(String movie_no) {
 		logger.info("selOneMovie Service 실행");
 		return mvDao.selOneMovie(movie_no);
 	}

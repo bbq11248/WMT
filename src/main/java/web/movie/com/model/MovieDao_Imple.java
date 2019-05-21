@@ -115,7 +115,7 @@ public class MovieDao_Imple implements IMovieDao {
 	@Override
 	public int insertMovieT(Map<String, String> map) {
 		logger.info("상영관 등록");
-		int n = sqlSession.insert(NS+"insertMovieT");
+		int n = sqlSession.insert(NS+"insertMovieT", map);
 		return n;
 	}
 
@@ -148,9 +148,9 @@ public class MovieDao_Imple implements IMovieDao {
 	}
 
 	@Override
-	public List<MovieDto> selSeat(String Seat) {
+	public List<MovieDto> selSeat(String seat) {
 		logger.info("좌석 보기");
-		List<MovieDto> lists = sqlSession.selectList(NS+"selSeat", Seat);
+		List<MovieDto> lists = sqlSession.selectList(NS+"selSeat", seat);
 		return lists;
 	}
 
@@ -183,10 +183,10 @@ public class MovieDao_Imple implements IMovieDao {
 	}
 
 	@Override
-	public MovieDto selectOneTheater(String theater_no) {
+	public List<MovieDto> selectOneTheater(String theater_no) {
 		logger.info("영화관 상세 보기");
-		MovieDto mvDto = sqlSession.selectOne(NS+"selectOneTheater", theater_no); 
-		return mvDto;
+		List<MovieDto> lists = sqlSession.selectList(NS+"selectOneTheater", theater_no); 
+		return lists;
 	}
 
 	@Override
@@ -211,10 +211,10 @@ public class MovieDao_Imple implements IMovieDao {
 	}
 
 	@Override
-	public MovieDto selOneMovie(String movie_no) {
+	public List<MovieDto> selOneMovie(String movie_no) {
 		logger.info("영화 상세 보기");
-		MovieDto mvDto = sqlSession.selectOne(NS+"selOneMovie", movie_no);
-		return mvDto;
+		List<MovieDto> lists = sqlSession.selectList(NS+"selOneMovie", movie_no);
+		return lists;
 	}
 
 
