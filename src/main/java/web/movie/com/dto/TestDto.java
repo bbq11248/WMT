@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class TestDto implements Serializable {
 	
+	private static final long serialVersionUID = 6723088002856278008L;
 	private String job_id;
 	private String job_title;
 	private int min_salary;

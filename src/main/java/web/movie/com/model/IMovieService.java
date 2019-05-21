@@ -3,8 +3,6 @@ package web.movie.com.model;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.stereotype.Service;
-
 import web.movie.com.dto.MovieDto;
 public interface IMovieService {
 
