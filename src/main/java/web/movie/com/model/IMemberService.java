@@ -23,12 +23,12 @@ public interface IMemberService {
 	public boolean checkMem(String id);
 	
 	//a아이디 찾기
-	public boolean selectId(MemberDto mbDto);
+	public String selectId(MemberDto mbDto);
 	
 	//a비밀번호 재발송 다오에서 리턴에 updatePw가 성공한다면 새로운걸 보내주고..selectPw로 확인
-	public boolean sendPw(MemberDto mbDto);
-//	public boolean updatePw(MemberDto dto);
-//	public boolean selectPw(MemberDto dto);
+	public String sendPw(MemberDto mbDto);
+//	public boolean updatePw(MemberDto mbDdto);
+//	public boolean selectPw(MemberDto mbDdto);
 	
 	//a회원정보 확인
 	public MemberDto selectMemOne(String id);

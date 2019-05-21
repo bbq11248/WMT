@@ -41,13 +41,13 @@ public class MemberService_Imple implements IMemberService {
 	}
 
 	@Override
-	public boolean selectId(MemberDto mbDto) {
+	public String selectId(MemberDto mbDto) {
 		logger.info("seletId 실행");
 		return mbDao.selectId(mbDto);
 	}
 
 	@Override
-	public boolean sendPw(MemberDto mbDto) {
+	public String sendPw(MemberDto mbDto) {
 		logger.info("sendPw 실행");
 		return mbDao.sendPw(mbDto);
 	}

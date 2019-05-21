@@ -1,11 +1,15 @@
 --회원가입
 INSERT INTO MOVIEMEMBER
 (SEQ, ID, PW, NAME, NICKNAME, BIRTHDAY, PHONE, ADDRESS, EMAIL, AUTH, REGDATE)
-VALUES(MOVIEMEMBER_SEQ.NEXTVAL, 'JINSOOK', 'C', '양진숙', '규동이엄마', 951230, 01012341234, '수지구', 'WLSTNR7833@NAVER.COM', 'A', SYSDATE);
+VALUES(MOVIEMEMBER_SEQ.NEXTVAL, 'wlstnr7833', '1234', '양진숙', '관리자', 951230, 01080702906, '수지구 풍덕천2동', 'wlstnr7833@naver.com', 'A', SYSDATE);
+
 
 INSERT INTO MILEAGEMANAGER
 (MILEAGE_SEQ, ID, MILEAGE)
-VALUES('MG'||MILEAGE_SEQ.NEXTVAL, 'JINSOOK', 0);
+VALUES('MG'||MILEAGE_SEQ.NEXTVAL, 'wlstnr7833', 0);
+
+/*DELETE FROM MOVIEMEMBER WHERE ID = 'JN';
+DELETE FROM MILEAGEMANAGER WHERE ID = 'JN';*/
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 --정보 수정 
@@ -49,7 +53,7 @@ SELECT SEQ, ID, TITLE, CONTENT, REGDATE FROM BOARD WHERE SEQ='';
 
 --글입력
 INSERT INTO BOARD (SEQ, ID, TITLE, CONTENT, REGDATE)
-	VALUES ('BS'||BOARD_SEQ.NEXTVAL, 'JINSOOK', '사이트 방문 감사 안내', '저희 싸이트에 오신걸 환열 합니다. 감사에 의미로 첫 예매는 3000원 할인 !', SYSDATE);
+	VALUES ('BS'||BOARD_SEQ.NEXTVAL, 'wlstnr7833', '구로CGV안내', '2019년 6월30일 어벤져스 스타라이브톡 이벤트 진행', SYSDATE);
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 --글수정

@@ -36,9 +36,9 @@
 	<!-- a관리자 권한 사용자 전체 보기 -->
 	<!-- ELECT SEQ,ID,PW,NAME,NICKNAME,BIRTHDAY,PHONE,ADDRESS,EMAIL,AUTH,REGDATE,LOGIN 
 		FROM MOVIEMEMBER; -->
-	<select id="selectMem" parameterType="mbDto" resultType="java.util.List">
+	<select id="selectMem" parameterType="mbDto" resultType="mbDto">
 		SELECT
-		SEQ,ID,PW,NAME,NICKNAME,BIRTHDAY,PHONE,ADDRESS,EMAIL,AUTH,REGDATE,LOGIN
+		SEQ,ID,PW,NAME,NICKNAME,BIRTHDAY,PHONE,ADDRESS,EMAIL,AUTH,REGDATE
 		FROM MOVIEMEMBER ORDER BY SEQ
 	</select>
 
@@ -54,9 +54,8 @@
 
 	<!-- a아이디 찾기 -->
 	<!-- SELECT ID FROM MOVIEMEMBER WHERE NAME = '양진숙' AND PHONE = '01080702906'; -->
-	<select id="selectId" parameterType="mbDto">
-		SELECT ID FROM MOVIEMEMBER WHERE NAME = #{name} AND PHONE
-		=#{phone}
+	<select id="selectId" parameterType="mbDto" resultType="java.lang.String">
+		SELECT ID FROM MOVIEMEMBER WHERE NAME = #{name} AND BIRTHDAY = #{birthday}
 	</select>
 
 
@@ -64,11 +63,12 @@
 	<!-- a비밀번호 재발송 sendPw IDao이름 -->
 	<!-- UPDATE MOVIEMEMBER SET PW = '' WHERE ID = 'JINSOOK'; -->
 	<!-- SELECT PW FROM MOVIEMEMBER WHERE ID = 'JINSOOK'; -->
+	
 	<update id="updatePw" parameterType="mbDto">
 		UPDATE MOVIEMEMBER SET PW = #{pw} WHERE ID = #{id}
 	</update>
 	
-	<select id="selectPw" parameterType="mbDto">
+	<select id="selectPw" parameterType="java.lang.String" resultType="java.lang.String">
 		SELECT PW FROM MOVIEMEMBER WHERE ID = #{id}
 	</select>
 
