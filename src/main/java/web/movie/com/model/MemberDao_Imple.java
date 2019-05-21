@@ -58,18 +58,18 @@ public class MemberDao_Imple implements IMemberDao {
 	}
 
 	@Override
-	public boolean selectId(MemberDto mbDto) {
+	public String selectId(MemberDto mbDto) {
 		logger.info("아이디찾기");
-		int n = sqlSession.selectOne(NS+"selectId", mbDto);
-		return n>0? true:false;
+		String n = sqlSession.selectOne(NS+"selectId", mbDto);
+		return n;
 	}
 
 	@Override
-	public boolean sendPw(MemberDto mbDto) {
+	public String sendPw(MemberDto mbDto) {
 		logger.info("비밀번호 재발송");
 		int i = sqlSession.update(NS+"updatePw", mbDto);
-		int n = sqlSession.selectOne(NS+"seletPw", mbDto);
-		return ((i+n)>0)?true:false;
+		String n = sqlSession.selectOne(NS+"selectPw", mbDto);
+		return (i>0)?n:"실패";
 	}
 
 	@Override

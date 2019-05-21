@@ -67,10 +67,10 @@ public class MemberDto {
 	}
 
 
-	public MemberDto(String name, int phone) {
+	public MemberDto(String name, int birthday) {
 		super();
 		this.name = name;
-		this.phone = phone;
+		this.birthday = birthday;
 	}
 
 

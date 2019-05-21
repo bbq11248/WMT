@@ -3,7 +3,7 @@ package web.movie.com.dto;
 public class BoardDto {
 
 	
-	private int seq;
+	private String seq;
 	private String id;
 	private String title;
 	private String content;
@@ -16,7 +16,7 @@ public class BoardDto {
 	}
 
 
-	public BoardDto(int seq, String id, String title, String content, String regdate) {
+	public BoardDto(String seq, String id, String title, String content, String regdate) {
 		super();
 		this.seq = seq;
 		this.id = id;
@@ -27,7 +27,7 @@ public class BoardDto {
 	
 	
 
-	public BoardDto(int seq, String id, String title, String content) {
+	public BoardDto(String seq, String id, String title, String content) {
 		super();
 		this.seq = seq;
 		this.id = id;
@@ -43,12 +43,12 @@ public class BoardDto {
 	}
 
 
-	public int getSeq() {
+	public String getSeq() {
 		return seq;
 	}
 
 
-	public void setSeq(int seq) {
+	public void setSeq(String seq) {
 		this.seq = seq;
 	}
 

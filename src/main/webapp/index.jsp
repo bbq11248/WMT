@@ -20,6 +20,9 @@
 <br>
 <a href="./ticketList.do?id=JINSOOK">예매내역 보기</a>
 <a href="./detailTicket.do">예매내역 상세 보기</a>
+<a href="./ticketing.do?id=JINSOOK&price=1000">예매</a>
+<a href="./cancel.do?id=JINSOOK&price=1000&ticketing_no=TN21">예매 취소</a>
+
 <a href="./ticketing.do?id=JINSOOK=&price=1000">예매</a>
 <a href="./cancel.do?id=JINSOOK=&price=1000=&ticketing_no=TN42">예매 취소</a>
 <br>
