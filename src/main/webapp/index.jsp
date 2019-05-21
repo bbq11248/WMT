@@ -20,11 +20,9 @@
 <br>
 <a href="./ticketList.do?id=JINSOOK">예매내역 보기</a>
 <a href="./detailTicket.do">예매내역 상세 보기</a>
-<<<<<<< HEAD
 <a href="./ticketing.do?id=JINSOOK&price=1000">예매</a>
 <a href="./cancel.do?id=JINSOOK&price=1000&ticketing_no=TN21">예매 취소</a>
 
-=======
 <a href="./ticketing.do?id=JINSOOK=&price=1000">예매</a>
 <a href="./cancel.do?id=JINSOOK=&price=1000=&ticketing_no=TN42">예매 취소</a>
 <br>
@@ -62,7 +60,6 @@
 <a href="./updateM.do?movie_name=어린의뢰인&movie_foreman=장규성&movie_genre=드라마,스릴러&movie_openday=20190522&movie_country=KOR&movie_time=01:54&movie_no=MN21">영화 수정</a>
 <a href="./listM.do">영화 조회</a>
 <a href="./oneM.do?movie_no=MN21">영화 상세 조회</a>
->>>>>>> branch 'master' of https://github.com/bbq11248/WMT.git
 </html>
 
 
