@@ -97,15 +97,15 @@
 	
 	<!-- 영화선택 -->
 	<!-- 상영중인 영화 보기 -->
-	<select id="selPlayMovie" resultType="java.util.List">
-		SELECT DISTINCT MOVIE_NAME
+	<select id="selPlayMovie" resultType="mvDto">
+		SELECT DISTINCT MOVIE_NAME, MOVIE_NO
 			FROM MOVIE_PLAY 
 				JOIN MOVIE
 					USING(MOVIE_NO)
 	</select>
 	<!-- 영화관 보기 -->
-	<select id="selAllTheater" parameterType="java.lang.String" resultType="java.util.List">
-		SELECT DISTINCT THEATER_NAME
+	<select id="selAllTheater" parameterType="java.lang.String" resultType="mvDto">
+		SELECT DISTINCT THEATER_NAME, THEATER_NO
 			FROM THEATER JOIN MOVIE_PLAY
 				USING (THEATER_NO)
 					JOIN MOVIE
@@ -113,8 +113,8 @@
 				WHERE MOVIE_NO = #{movie_no}
 	</select>
 	<!-- 상영관 보기 -->
-	<select id="selAllMTheater" parameterType="java.util.Map" resultType="java.util.List">
-		SELECT TH.THEATER_NAME||MOVIE_THEATER_NAME, MOVIE_START_TIME, MT.MOVIE_THEATER_NO
+	<select id="selAllMTheater" parameterType="java.util.Map" resultType="mvDto">
+		SELECT TH.THEATER_NAME||MOVIE_THEATER_NAME, MOVIE_START_TIME, MT.MOVIE_THEATER_NO, MOVIE_PLAY_NO
 			FROM MOVIE_PLAY MP        
 				JOIN MOVIE_THEATER MT
 					ON  MP.MOVIE_THEATER_NO = MT.MOVIE_THEATER_NO
@@ -123,7 +123,7 @@
 				WHERE MOVIE_NO = #{movie_no} AND MP.THEATER_NO = #{theater_no}
 	</select>
 	<!-- 좌석 보기 -->
-	<select id="selAllSeat" parameterType="java.lang.String" resultType="java.util.List">
+	<select id="selAllSeat" parameterType="java.lang.String" resultType="mvDto">
 		SELECT ROWSEAT||COLSEAT 좌석번호, SEAT_MONEY
 			FROM SEATMANAGER SM JOIN MOVIE_THEATER MT
 				ON SM.MOVIE_THEATER_NO = MT.MOVIE_THEATER_NO
@@ -134,26 +134,26 @@
 	<!-- 좌석 가격 -->
 	<select id="selSeatMoney" parameterType="java.util.Map" resultType="java.lang.Integer">
 		SELECT SEAT_MONEY FROM SEATMANAGER 
-			WHERE ROWSEAT||COLSEAT = '#{rowcol}' AND MOVIE_THEATER_NO = #{movie_theater_no}
+			WHERE ROWSEAT||COLSEAT = #{rowcol} AND MOVIE_THEATER_NO = #{movie_theater_no}
 	</select>
 	<!-- 영화선택 end -->
 	
 	<!-- 영화 관리 -->
 	<!-- 상영관 -->
 	<!-- 등록 -->
-	<insert id="insertMovieT">
+	<insert id="insertMovieT" parameterType="java.util.Map">
 		INSERT INTO MOVIE_THEATER
 			(MOVIE_THEATER_NO, THEATER_NO, MOVIE_THEATER_NAME)
 				VALUES('MTN'||MOVIE_THEATER_NO_SEQ.NEXTVAL, #{theater_no}, #{movie_theater_name})
 	</insert>
 	<!-- 수정 -->
-	<update id="updateMovieT">
+	<update id="updateMovieT" parameterType="java.util.Map">
 		UPDATE MOVIE_THEATER
 			SET MOVIE_THEATER_NAME = #{movie_theater_name}
 				WHERE MOVIE_THEATER_NO= #{movie_theater_no}
 	</update>
 	<!-- 전체보기 -->
-	<select id="selectMovieT">
+	<select id="selectMovieT" resultType="mvDto">
 	SELECT DISTINCT MOVIE_THEATER_NO, THEATER_NAME||MOVIE_THEATER_NAME
 		FROM MOVIE_THEATER 
 			JOIN THEATER TH
@@ -161,13 +161,13 @@
 					ORDER BY THEATER_NAME||MOVIE_THEATER_NAME
 	</select>
 	<!-- 상세보기 -->
-	<select id="detailMovieT">
+	<select id="detailMovieT" parameterType="java.lang.String" resultType="mvDto">
 		SELECT  DISTINCT THEATER_NAME, MOVIE_THEATER_NAME, SEAT
 			FROM MOVIE_THEATER JOIN THEATER
 				USING(THEATER_NO)
 					JOIN SEATMANAGER
 						USING(MOVIE_THEATER_NO)
-				WHERE MOVIE_THEATER_NO = 'MTN1'
+				WHERE MOVIE_THEATER_NO = #{movie_theater_no}
 	</select>
 	<!-- 상영관 end-->
 	
@@ -179,7 +179,7 @@
 				VALUES('SN'||SEAT_NO_SEQ.NEXTVAL, #{movie_theater_no}, #{seat_money}, #{rowseat}, #{colseat}, #{seat})
 	</insert>
 	<!-- 보기 -->
-	<select id="selSeat" parameterType="mvDto">
+	<select id="selSeat" parameterType="mvDto" resultType="mvDto">
 		SELECT SEAT_NO, MOVIE_THEATER_NO, SEAT_MONEY, ROWSEAT||COLSEAT, SEAT FROM SEATMANAGER WHERE SEAT = #{seat}
 	</select>
 	<!-- 수정 -->
@@ -202,11 +202,11 @@
 				WHERE THEATER_NO=#{theater_no}
 	</update>
 	<!-- 조회 -->
-	<select id="selectTheater">
+	<select id="selectTheater" resultType="mvDto">
 		SELECT THEATER_NO, THEATER_NAME, THEATER_LOCAL FROM THEATER
 	</select>
 	<!-- 상세보기 -->
-	<select id="SelectOneTheater" parameterType="java.lang.String">
+	<select id="selectOneTheater" parameterType="java.lang.String" resultType="mvDto">
 		SELECT THEATER_NO, THEATER_NAME, THEATER_LOCAL, MOVIE_THEATER_NO, MOVIE_THEATER_NAME
 			FROM THEATER JOIN MOVIE_THEATER
 				USING(THEATER_NO)
@@ -228,12 +228,12 @@
 				WHERE MOVIE_NO=#{movie_no}
 	</update>
 	<!-- 조회 -->
-	<select id="selectMovie" resultType="java.util.List">
-		SELECT MOVIE_NAME
+	<select id="selectMovie" resultType="mvDto">
+		SELECT MOVIE_NAME, MOVIE_NO
 			FROM MOVIE
 	</select>
 	<!-- 상세보기 -->
-	<select id="selOneMovie" parameterType="java.lang.String" resultType="java.util.List">
+	<select id="selOneMovie" parameterType="java.lang.String" resultType="mvDto">
 		SELECT MOVIE_NO, MOVIE_NAME, MOVIE_FOREMAN, MOVIE_GENRE, MOVIE_OPENDAY, MOVIE_COUNTRY, MOVIE_TIME
 			FROM MOVIE
 				WHERE MOVIE_NO = #{movie_no}
