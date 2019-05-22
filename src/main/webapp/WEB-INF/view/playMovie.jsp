@@ -20,7 +20,7 @@
 			success: function(result){				
 				for(var i = 0; i < result.result.length; i++)
 					{				
-					document.getElementById("result").innerHTML += result.result[i].theater_name;
+						document.getElementById("result").innerHTML += result.result[i].theater_name;
 					}
 				//alert(result.result[1].theater_name);
 			},
