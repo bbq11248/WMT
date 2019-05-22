@@ -1,12 +1,20 @@
 package web.movie.com.ctrl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.spi.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import web.movie.com.dto.MovieDto;
 import web.movie.com.model.IMovieService;
@@ -14,44 +22,65 @@ import web.movie.com.model.IMovieService;
 @Controller
 public class LJHController {
 	
+	private Logger logger = org.slf4j.LoggerFactory.getLogger(LJHController.class);
+	
 	@Autowired
 	IMovieService movieService;
 	
 	@RequestMapping(value="/mileageChk.do", method=RequestMethod.GET)
-	public String selectMileage(String id) {
+	public String selectMileage(String id, Model model) {
+		logger.info("LJHController selectMileage 실행");
 		int mileage = movieService.selectMileage(id);
 		System.out.println(mileage);
-		return null;
+		model.addAttribute("mileage", mileage);
+		return "mileage";
 	}
 	
+	@RequestMapping(value="/mileageForm.do", method=RequestMethod.GET)
+	public String pa() {
+		return "milagerCG";
+	}
+	
+	
 	@RequestMapping(value="/mileage.do", method=RequestMethod.GET)
-	public String mileage(MovieDto mvDto) {
+	public String mileage(MovieDto mvDto, HttpServletRequest request, HttpServletResponse response, String milageCG) {
+		mvDto.setId("wlstnr7833");
+		mvDto.setPrice(Integer.parseInt(milageCG));
 		int mileageCg = movieService.mileage(mvDto);
 		System.out.println(mileageCg);
-		return null;
+		String text = milageCG;
+		System.out.println(text);
+		return "main";
 	}
 	
 	@RequestMapping(value="/payList.do", method=RequestMethod.GET)
-	public String selectPayList(String id){
-		List<MovieDto> lists = movieService.selectPayList(id);
+	public String selectPayList(String id, Model model){
+		MovieDto mvDto = new MovieDto();
+		mvDto.setId("wlstnr7833");
+		List<MovieDto> lists = movieService.selectPayList(mvDto.getId());
 		System.out.println(lists.get(0).getPayment_no()+"**********************************************");
-		return null;
+		model.addAttribute("lists", lists);
+		return "payList";
 	}
 	
 	@RequestMapping(value="/ticketList.do", method=RequestMethod.GET)
-	public String selectTicket(String id){
-		List<MovieDto> lists = movieService.selectTicket(id);
+	public String selectTicket(String id, Model model){
+		MovieDto mvDto = new MovieDto();
+		mvDto.setId("JINSOOK");
+		List<MovieDto> lists = movieService.selectTicket(mvDto.getId());
+		model.addAttribute("lists", lists);
 		System.out.println(lists);
-		return null;
+		return "ticketList";
 	}
 	
 	@RequestMapping(value="/detailTicket.do", method=RequestMethod.GET)
-	public String detailTicket(Map<String, String> map){
+	public String detailTicket(Map<String, String> map, Model model){
 		map.put("id", "JINSOOK");
-		map.put("ticketing_no", "TN21");
+		map.put("ticketing_no", "TN22");
 		MovieDto mvDto = movieService.selectOneTicket(map);
+		model.addAttribute("mvDto", mvDto);
 		System.out.println(mvDto);
-		return null;
+		return "detailTicket";
 	}
 	
 	@RequestMapping(value="/ticketing.do", method=RequestMethod.GET)
@@ -72,42 +101,48 @@ public class LJHController {
 	}
 	
 	@RequestMapping(value="/playMovie.do", method=RequestMethod.GET)
-	public String selPlayMovie () {
+	public String selPlayMovie (Model model) {
 		List<MovieDto> lists = movieService.selPlayMovie();
+		model.addAttribute("movielist", lists);
 		System.out.println(lists);
-		return null;
+		return "playMovie";
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="/theaterChk.do", method=RequestMethod.GET)
-	public String selAllTheater(String movie_no) {
+	public Map<String,List<MovieDto>> selAllTheater(String movie_no, Model model) {
+		logger.info("selAllTheater {}" + movie_no);
 		List<MovieDto> lists = movieService.selAllTheater(movie_no);
+//		model.addAttribute("theaterList", lists);
+		Map<String,List<MovieDto>> result = new HashMap<String,List<MovieDto>>();
 		System.out.println(lists);
-		return null;
+		result.put("result", lists);
+		return result;
 	}
 	
 	@RequestMapping(value="/movieTheaterChk.do", method=RequestMethod.GET)
-	public String selAllMTheater(Map<String, String> map) {
+	public String selAllMTheater(Map<String, String> map, Model model) {
 		map.put("movie_no", "MN7");
 		map.put("theater_no", "TN5");
 		List<MovieDto> lists = movieService.selAllMTheater(map);
 		System.out.println(lists);
-		return null;
+		return "playMovie";
 	}
 	
 	@RequestMapping(value="/seatChk.do", method=RequestMethod.GET)
-	public String selAllSeat(String movie_play_no) {
+	public String selAllSeat(String movie_play_no, Model model) {
 		List<MovieDto> lists = movieService.selAllSeat(movie_play_no);
 		System.out.println(lists);
-		return null;
+		return "playMovie";
 	}
 	
 	@RequestMapping(value="/seatMoneyChk.do", method=RequestMethod.GET)
-	public String selSeatMoney(Map<String, String> map) {
+	public String selSeatMoney(Map<String, String> map, Model model) {
 		map.put("rowcol", "A1");
 		map.put("movie_theater_no", "MTN4");
 		int price = movieService.selSeatMoney(map);
 		System.out.println(price);
-		return null;
+		return "playMovie";
 	}
 
 	
@@ -227,6 +262,11 @@ public class LJHController {
 		List<MovieDto> lists = movieService.selOneMovie(movie_no);
 		System.out.println(lists);
 		return null;
+	}
+	
+	@RequestMapping(value="/main.do", method=RequestMethod.GET)
+	public String main() {
+		return "main";
 	}
 	
 	
