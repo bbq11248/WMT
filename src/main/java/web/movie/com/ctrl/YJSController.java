@@ -2,6 +2,8 @@ package web.movie.com.ctrl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,11 +29,28 @@ public class YJSController {
 //	회원
 	
 	@RequestMapping(value="/regist.do", method=RequestMethod.GET)
-	public String signupMember(MemberDto dto, MovieDto mdto) {
-		int signup = memberService.signupMember(dto, mdto);
+	public String signupMember(MemberDto mbDto, MovieDto mvDto) {
+		int signup = memberService.signupMember(mbDto, mvDto);
 		System.out.println(signup);
 		return null;
 	}
+	
+	
+	
+	@RequestMapping(value="/login.do", method=RequestMethod.GET)
+	public String memLogin(MemberDto mbDto, HttpSession session) {
+		MemberDto memberlogin = memberService.memLogin(mbDto);
+		System.out.println(memberlogin);
+		session.setAttribute("mbDto", mbDto);
+		System.out.println(mbDto);
+		return null;
+	}
+	
+	@RequestMapping(value="/loginForm.do", method=RequestMethod.GET)
+	public String loginForm() {
+		return "loginForm";
+	}
+	
 	
 	@RequestMapping(value="/memupdate.do", method=RequestMethod.GET)
 	public String updateMem(MemberDto mbDto) {
@@ -40,12 +59,16 @@ public class YJSController {
 		return null;
 	}
 	
+	
+	
 	@RequestMapping(value="/memberList.do", method=RequestMethod.GET)
 	public String selectMem(MemberDto mbDto) {
 		List<MemberDto> lists = memberService.selectMem(mbDto);
 		System.out.println(lists);
 		return null;
 	}
+	
+	
 	
 	@RequestMapping(value="/memberInfo.do", method=RequestMethod.GET)
 	public String checkMem(String id) {
@@ -54,12 +77,16 @@ public class YJSController {
 		return null;
 	}
 	
+	
+	
 	@RequestMapping(value="/memberId.do", method=RequestMethod.GET)
 	public String selectId(MemberDto mbDto) {
 		String findId = memberService.selectId(mbDto);
 		System.out.println(findId);
 		return null;
 	}
+	
+	
 	
 	@RequestMapping(value="/password.do", method=RequestMethod.GET)
 	public String sendPw(MemberDto mbDto) {
@@ -69,12 +96,33 @@ public class YJSController {
 		
 	}
 	
+	
+	
 	@RequestMapping(value="/info.do", method=RequestMethod.GET)
 	public String selectMemOne(String id) {
 		MemberDto selectOne = memberService.selectMemOne(id);
 		System.out.println(selectOne);
 		return null;
 	}
+	
+	
+	
+//	==================================================================
+//	==================================================================
+	
+//	@REQUESTMAPPING(VALUE="/LOGINFORM.DO", METHOD=REQUESTMETHOD.GET)
+//	PUBLIC STRING LOGIN(MEMBERDTO MBDTO) {
+//		RETURN "LOGINFORM";
+//	}
+	
+	
+	
+	@RequestMapping(value="/TopMeun.do", method=RequestMethod.GET)
+	public String header() {
+		return "TopMenu";
+	}
+	
+	
 	
 	
 	

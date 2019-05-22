@@ -13,6 +13,9 @@ public interface IMemberService {
 //	public int insertMem(MemberDto dto);
 //	public int insertMail(MovieDto dto);
 	
+//	로그인
+	public MemberDto memLogin(MemberDto mbDto);
+	
 	//a정보수정
 	public int updateMem(MemberDto mbDto);
 	

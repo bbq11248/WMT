@@ -35,7 +35,15 @@ public class MemberDao_Imple implements IMemberDao {
 		int n = sqlSession.insert(NS+"insertMil",mvDto);
 		return i+n;
 	}
-
+	
+	@Override
+	public MemberDto memLogin(MemberDto mbDto) {
+		logger.info("로그인");
+		MemberDto mbd = sqlSession.selectOne(NS+"memLogin", mbDto);
+		return mbd;
+	}
+	
+	
 	@Override
 	public int updateMem(MemberDto mbDto) {
 		logger.info("회원수정");

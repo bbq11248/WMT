@@ -23,10 +23,17 @@ public class MemberService_Imple implements IMemberService {
 	}
 
 	@Override
+	public MemberDto memLogin(MemberDto mbDto) {
+		logger.info("memLogin Service 실행");
+		return mbDao.memLogin(mbDto);
+	}
+
+	@Override
 	public int updateMem(MemberDto mbDto) {
 		logger.info("updateMem 실행");
 		return mbDao.updateMem(mbDto);
 	}
+	
 
 	@Override
 	public List<MemberDto> selectMem(MemberDto mbDto) {

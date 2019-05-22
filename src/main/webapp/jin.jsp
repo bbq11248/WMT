@@ -10,11 +10,13 @@
 <title>♥♡jin sook page♡♥</title>
 </head>
 <body>
-<header id="header"></header>
 
-<a href="./regist.do?id=양규동&pw=1234&name=양규동&address=진숙구 진숙동&
-nickname=야옹&birthday=190701&phone=01035352906&
-email=nang@naver.com&mileage=0">회원가입</a>
+<a href="./TopMeun.do">탑메뉴</a>
+<br><br>
+
+<a href="./regist.do?">회원가입</a>
+
+<a href="./login.do?id=wlstnr7833&pw=1234">로그인</a>
 
 <a href="./memupdate.do?id=JN&pw=1234&nickname=앙앙&phone=01098745612&address=기모찌기모찌&birthday=123456">회원정보수정</a>
 
@@ -27,9 +29,13 @@ email=nang@naver.com&mileage=0">회원가입</a>
 <a href="./password.do?id=양규동&pw=9876">비밀번호발송</a>
 
 <a href="./info.do?id=wlstnr7833">회원상세보기</a>
+<br><br>
 
 
-<br>
+
+
+
+<br><br><br><br><br><br>
 
 <a href="./board.do">전체글조회</a>
 

@@ -21,6 +21,11 @@
 		VALUES('MG'||MILEAGE_SEQ.NEXTVAL,#{id}, #{mileage})
 	</insert>
 
+	<!-- 로그인 -->
+	<select id="memLogin" parameterType="mbDto" resultType="mbDto">
+	SELECT ID,PW,NICKNAME,PHONE,ADDRESS,BIRTHDAY FROM MOVIEMEMBER WHERE ID = #{id} AND PW = #{pw}
+	</select>
+
 
 	<!-- a정보수정 -->
 	<!-- UPDATE MOVIEMEMBER SET PW = 1234, NICKNAME = '진숙짱', PHONE = '01012341234', 
