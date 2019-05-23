@@ -7,8 +7,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.spi.LoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +22,7 @@ import web.movie.com.model.IMovieService;
 @Controller
 public class LJHController {
 	
-	private Logger logger = org.slf4j.LoggerFactory.getLogger(LJHController.class);
+	private Logger logger = LoggerFactory.getLogger(LJHController.class);
 	
 	@Autowired
 	IMovieService movieService;
@@ -113,27 +113,36 @@ public class LJHController {
 	public Map<String,List<MovieDto>> selAllTheater(String movie_no, Model model) {
 		logger.info("selAllTheater {}" + movie_no);
 		List<MovieDto> lists = movieService.selAllTheater(movie_no);
-//		model.addAttribute("theaterList", lists);
-		Map<String,List<MovieDto>> result = new HashMap<String,List<MovieDto>>();
+		for(int i= 0 ; i < lists.size() ;i++) 
+			lists.get(i).setMovie_no(movie_no);
+//		model.addAttribute("theaterList", lists);		
+		Map<String,List<MovieDto>> theater = new HashMap<String,List<MovieDto>>();
 		System.out.println(lists);
-		result.put("result", lists);
-		return result;
+		theater.put("theater", lists);
+		return theater;
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="/movieTheaterChk.do", method=RequestMethod.GET)
-	public String selAllMTheater(Map<String, String> map, Model model) {
-		map.put("movie_no", "MN7");
-		map.put("theater_no", "TN5");
+	public Map<String,List<MovieDto>> selAllMTheater(String theater_no,String movie_no, Model model) {
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("movie_no", movie_no);
+		map.put("theater_no", theater_no);
 		List<MovieDto> lists = movieService.selAllMTheater(map);
+//		model.addAttribute("movieTheaterList", lists);
+		Map<String,List<MovieDto>> movieTheater = new HashMap<String,List<MovieDto>>();
 		System.out.println(lists);
-		return "playMovie";
+		movieTheater.put("movieTheater", lists);
+		return movieTheater;
 	}
 	
 	@RequestMapping(value="/seatChk.do", method=RequestMethod.GET)
-	public String selAllSeat(String movie_play_no, Model model) {
+	public Map<String,List<MovieDto>> selAllSeat(String movie_play_no, Model model) {
 		List<MovieDto> lists = movieService.selAllSeat(movie_play_no);
+		Map<String,List<MovieDto>> seat = new HashMap<String,List<MovieDto>>();
 		System.out.println(lists);
-		return "playMovie";
+		seat.put("seat", lists);
+		return seat;
 	}
 	
 	@RequestMapping(value="/seatMoneyChk.do", method=RequestMethod.GET)
