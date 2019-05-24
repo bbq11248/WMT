@@ -30,12 +30,21 @@ public class MovieDto {
 	private String payment_no;
 	private int price;
 	private String mileage_time;
+	private String rowcol;
 	
 	public MovieDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
+	public String getRowcol() {
+		return rowcol;
+	}
+
+	public void setRowcol(String rowcol) {
+		this.rowcol = rowcol;
+	}
+
 	public String getTicketing_no() {
 		return ticketing_no;
 	}
@@ -294,10 +303,10 @@ public class MovieDto {
 				+ ", movie_start_time=" + movie_start_time + ", times=" + times + ", seat_money=" + seat_money
 				+ ", rowseat=" + rowseat + ", colseat=" + colseat + ", seat=" + seat + ", mileage_seq=" + mileage_seq
 				+ ", mileage=" + mileage + ", payment_no=" + payment_no + ", price=" + price + ", mileage_time="
-				+ mileage_time + ", getTicketing_no()=" + getTicketing_no() + ", getMovie_play_no()="
-				+ getMovie_play_no() + ", getId()=" + getId() + ", getSeat_no()=" + getSeat_no()
-				+ ", getTicketing_time()=" + getTicketing_time() + ", getMovie_no()=" + getMovie_no()
-				+ ", getMovie_name()=" + getMovie_name() + ", getMovie_foreman()=" + getMovie_foreman()
+				+ mileage_time + ", rowcol=" + rowcol + ", getRowcol()=" + getRowcol() + ", getTicketing_no()="
+				+ getTicketing_no() + ", getMovie_play_no()=" + getMovie_play_no() + ", getId()=" + getId()
+				+ ", getSeat_no()=" + getSeat_no() + ", getTicketing_time()=" + getTicketing_time() + ", getMovie_no()="
+				+ getMovie_no() + ", getMovie_name()=" + getMovie_name() + ", getMovie_foreman()=" + getMovie_foreman()
 				+ ", getMovie_genre()=" + getMovie_genre() + ", getMovie_openday()=" + getMovie_openday()
 				+ ", getMovie_country()=" + getMovie_country() + ", getMovie_time()=" + getMovie_time()
 				+ ", getTheater_no()=" + getTheater_no() + ", getTheater_name()=" + getTheater_name()
@@ -310,6 +319,8 @@ public class MovieDto {
 				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
 				+ "]";
 	}
+
+
 
 
 	

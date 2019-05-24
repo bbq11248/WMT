@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,15 +84,6 @@ public class LJHController {
 		return "detailTicket";
 	}
 	
-	@RequestMapping(value="/ticketing.do", method=RequestMethod.GET)
-	public String ticketing(MovieDto mvDto, Map<String, String> map) {
-		map.put("movie_play_no", "MPN1");
-		map.put("id", "JINSOOK");
-		map.put("seat_no", "A1");
-		int n = movieService.ticketing(map, mvDto);
-		System.out.println(n);
-		return null;
-	}
 	
 	@RequestMapping(value="/cancel.do", method=RequestMethod.GET)
 	public String cancel(MovieDto mvDto, String ticketing_no) {
@@ -110,7 +102,7 @@ public class LJHController {
 	
 	@ResponseBody
 	@RequestMapping(value="/theaterChk.do", method=RequestMethod.GET)
-	public Map<String,List<MovieDto>> selAllTheater(String movie_no, Model model) {
+	public Map<String,List<MovieDto>> selAllTheater(String movie_no, Model model, HttpSession session) {
 		logger.info("selAllTheater {}" + movie_no);
 		List<MovieDto> lists = movieService.selAllTheater(movie_no);
 		for(int i= 0 ; i < lists.size() ;i++) 
@@ -118,13 +110,14 @@ public class LJHController {
 //		model.addAttribute("theaterList", lists);		
 		Map<String,List<MovieDto>> theater = new HashMap<String,List<MovieDto>>();
 		System.out.println(lists);
+		session.setAttribute("movie_no", movie_no);
 		theater.put("theater", lists);
 		return theater;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/movieTheaterChk.do", method=RequestMethod.GET)
-	public Map<String,List<MovieDto>> selAllMTheater(String theater_no,String movie_no, Model model) {
+	public Map<String,List<MovieDto>> selAllMTheater(String theater_no,String movie_no, Model model, HttpSession session) {
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("movie_no", movie_no);
 		map.put("theater_no", theater_no);
@@ -132,26 +125,46 @@ public class LJHController {
 //		model.addAttribute("movieTheaterList", lists);
 		Map<String,List<MovieDto>> movieTheater = new HashMap<String,List<MovieDto>>();
 		System.out.println(lists);
+		session.setAttribute("theater_no", theater_no);
 		movieTheater.put("movieTheater", lists);
 		return movieTheater;
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="/seatChk.do", method=RequestMethod.GET)
-	public Map<String,List<MovieDto>> selAllSeat(String movie_play_no, Model model) {
+	public Map<String,List<MovieDto>> selAllSeat(String movie_play_no, Model model, HttpSession session) {
 		List<MovieDto> lists = movieService.selAllSeat(movie_play_no);
 		Map<String,List<MovieDto>> seat = new HashMap<String,List<MovieDto>>();
 		System.out.println(lists);
+		session.setAttribute("movie_play_no", movie_play_no);
 		seat.put("seat", lists);
 		return seat;
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="/seatMoneyChk.do", method=RequestMethod.GET)
-	public String selSeatMoney(Map<String, String> map, Model model) {
-		map.put("rowcol", "A1");
-		map.put("movie_theater_no", "MTN4");
+	public Map<String, Integer> selSeatMoney(String rowcol, String movie_theater_no, Model model, HttpSession session) {
+		Map<String,	String> map = new HashMap<String, String>();
+		map.put("rowcol", rowcol);
+		map.put("movie_theater_no", movie_theater_no);
 		int price = movieService.selSeatMoney(map);
+		Map<String, Integer> seatMoney = new HashMap<String, Integer>();
 		System.out.println(price);
-		return "playMovie";
+		session.setAttribute("rowcol", rowcol);
+		session.setAttribute("movie_theater_no", movie_theater_no);
+		seatMoney.put("seatMoney", price);
+		return seatMoney;
+	}
+	
+	@RequestMapping(value="/ticketing.do", method=RequestMethod.GET)
+	public String ticketing(MovieDto mvDto, String movie_play_no, String id, String rowcol) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("movie_play_no", movie_play_no);
+		map.put("id", id);
+		map.put("seat_no", rowcol);
+		int n = movieService.ticketing(map, mvDto);
+		System.out.println(n);
+		return "ticketList";
 	}
 
 	

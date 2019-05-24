@@ -124,7 +124,7 @@
 	</select>
 	<!-- 좌석 보기 -->
 	<select id="selAllSeat" parameterType="java.lang.String" resultType="mvDto">
-		SELECT ROWSEAT||COLSEAT 좌석번호, SEAT_MONEY
+		SELECT ROWSEAT||COLSEAT ROWCOL, SEAT_MONEY, SM.MOVIE_THEATER_NO
 			FROM SEATMANAGER SM JOIN MOVIE_THEATER MT
 				ON SM.MOVIE_THEATER_NO = MT.MOVIE_THEATER_NO
 					JOIN MOVIE_PLAY MP
@@ -133,7 +133,7 @@
 	</select>
 	<!-- 좌석 가격 -->
 	<select id="selSeatMoney" parameterType="java.util.Map" resultType="java.lang.Integer">
-		SELECT SEAT_MONEY FROM SEATMANAGER 
+		SELECT SEAT_MONEY FROM SEATMANAGER
 			WHERE ROWSEAT||COLSEAT = #{rowcol} AND MOVIE_THEATER_NO = #{movie_theater_no}
 	</select>
 	<!-- 영화선택 end -->

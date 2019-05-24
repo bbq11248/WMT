@@ -11,7 +11,7 @@
 <a href="jin.jsp">진숙 테스트</a>
 <br>
 <br>
-<a href="main.do">메인</a>
+<a href="./main.do">메인</a>
 <br>
 <a href="./mileageChk.do?id=JINSOOK">mileage확인</a>
 <a href="./mileage.do?id=JINSOOK=&price=10000">마일리지 충전</a>
