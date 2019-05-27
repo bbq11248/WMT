@@ -19,13 +19,16 @@
 			dataType : "json",
 			success: function(theater){
 				document.getElementById("theaterButton").innerHTML = "";
+				document.getElementById("sessionInfo1").innerHTML = "";
 				$.each(theater,function(key, value){
 					var htmlInput = "";
 // 					if(key == "theater"){
 // 						htmlInput += "<div><input type='button' onclick='movieTheater('')'></div>";
 // 					}
+						document.getElementById("sessionInfo1").innerHTML += "<input type='hidden' value='"+movie_no+"' name='movie_no'>";
 					for(var i = 0; i < value.length ;i++){
 						document.getElementById("theaterButton").innerHTML += "<input type='button' value='"+value[i].theater_name+"' onclick='movieTheater(\""+value[i].theater_no+"\",\""+value[i].movie_no+"\")'> ";
+						
 // 						onclick='movieTheater('value.theater_name')
 					}
 				});
@@ -46,17 +49,21 @@
 			success: function(theater){
 				alert("성공");
 					document.getElementById("movieTheaterButton").innerHTML = "";
+					document.getElementById("sessionInfo2").innerHTML = "";
+					alert(document.getElementsByName("movie_play_no").length);
 					if(theater.movieTheater.length > 1){
+						document.getElementById("sessionInfo2").innerHTML += "<input type='hidden' value='"+theater_no+"' name='theater_no'>";
 					for(var i = 0; i < theater.movieTheater.length; i++){ // 0 1 < 1 = 0 
-							if (theater.movieTheater[i].movie_theater_name == theater.movieTheater[i+1].movie_theater_name && i+1 < theater.movieTheater.length) {
+							if (i+1 < theater.movieTheater.length && theater.movieTheater[i].movie_theater_name == theater.movieTheater[i+1].movie_theater_name) {
 								document.getElementById("movieTheaterButton").innerHTML += "<div>"+theater.movieTheater[i].movie_theater_name+"</div>"
 												+ "<input type='button' onclick='seatChk(\""+theater.movieTheater[i].movie_play_no+"\")' value='"+theater.movieTheater[i].movie_start_time+"'>"
 												+ "<input type='button' onclick='seatChk(\""+theater.movieTheater[i+1].movie_play_no+"\")' value='"+theater.movieTheater[i+1].movie_start_time+"'>";
 						}
 						}
 					}else if (theater.movieTheater.length == 1){
+						document.getElementById("sessionInfo2").innerHTML += "<input type='hidden' value='"+theater_no+"' name='theater_no'>";
 						document.getElementById("movieTheaterButton").innerHTML += "<div>"+theater.movieTheater[0].movie_theater_name+"</div>"
-																				+ "<input type='button' onclick='seatChk(\""+theater.movieTheater[0].movie_play_no+"\")' value='"+theater.movieTheater[0].movie_start_time+"'>";
+							+ "<input type='button' onclick='seatChk(\""+theater.movieTheater[0].movie_play_no+"\")' value='"+theater.movieTheater[0].movie_start_time+"'>";
 				}
 			},
 			error : function() {
@@ -74,9 +81,11 @@
 			success: function(theater){
 				alert("성공");
 				document.getElementById("seatList").innerHTML = "";
+				document.getElementById("sessionInfo3").innerHTML = "";
 				alert(theater.seat.length);
+				document.getElementById("sessionInfo3").innerHTML += "<input id='movie_play_no' type='hidden' value='"+movie_play_no+"' name='movie_play_no'>";
 				for(var i = 0; i < theater.seat.length; i++){
-					document.getElementById("seatList").innerHTML += "<input type='button' onclick='seatprice(\""+theater.seat[i].rowcol+"\",\""+theater.seat[i].movie_theater_no+"\")' value='"+theater.seat[i].rowcol+"'>"
+					document.getElementById("seatList").innerHTML += "<input type='button' onclick='seatprice(\""+theater.seat[i].rowcol+"\",\""+theater.seat[i].movie_theater_no+"\",\""+movie_play_no+"\")' value='"+theater.seat[i].rowcol+"'>"
 				}
 				
 			},
@@ -94,9 +103,14 @@
 			success: function(theater){
 				alert("성공");
 				document.getElementById("seatMoney").innerHTML = "";
+				document.getElementById("sessionInfo4").innerHTML = "";
+				document.getElementById("sessionInfo5").innerHTML = "";
+				var movie_play_no = document.getElementById("movie_play_no").value;
 				alert(theater.seatMoney);
+					document.getElementById("sessionInfo4").innerHTML += "<input type='hidden' value='"+movie_theater_no+"' name='movie_theater_no'>";
+					document.getElementById("sessionInfo5").innerHTML += "<input type='hidden' value='"+rowcol+"' name='rowcol'>";
 					document.getElementById("seatMoney").innerHTML += theater.seatMoney + "원"
-																	+ "<input type='button'onclick='ticketpay()' value='예매'>";
+																	+ "<input type='button'onclick='ticketpay(\""+rowcol+"\",\""+movie_play_no+"\")' value='예매'>";
 			},
 			error : function() {
 				alert("에러");
@@ -104,10 +118,10 @@
 		});
 		
 	}
-	function ticketpay() {
-		var movie_theater_no = document.getElementsByName("movie_theater_no").value;
-		var rowcol = document.getElementsByName("rowcol").value;
-		location.href="./ticketing.do?movie_play_no="+movie_theater_no+"&id=wlstnr7833&rowcol="+rowcol;
+	function ticketpay(rowcol, movie_play_no) {
+// 		var movie_theater_no = document.getElementsByName("movie_theater_no").value;
+// 		var rowcol = document.getElementsByName("rowcol").value;
+		location.href="./ticketing.do?movie_play_no="+movie_play_no+"&id=wlstnr7833&rowcol="+rowcol;
 	}
 	
 	
@@ -126,12 +140,15 @@ ${rowcol}
 	</c:forEach>
 	<!--  -->
 	<br>
+	<div id="sessionInfo1"></div>
 	
-	<input type="hidden" value="${movie_no}" name="movie_no">
-	<input type="hidden" value="${theater_no}" name="theater_no">
-	<input type="hidden" value="${movie_theater_no}" name="movie_theater_no">
-	<input type="hidden" value="${movie_play_no}" name="movie_play_no">
-	<input type="hidden" value="${rowcol}" name="rowcol">
+	<div id="sessionInfo2"></div>
+	
+	<div id="sessionInfo3"></div>
+	
+	<div id="sessionInfo4"></div>
+	
+	<div id="sessionInfo5"></div>
 	
 	<div id="theaterButton"></div>
 	

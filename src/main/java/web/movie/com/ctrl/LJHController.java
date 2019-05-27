@@ -157,12 +157,14 @@ public class LJHController {
 	}
 	
 	@RequestMapping(value="/ticketing.do", method=RequestMethod.GET)
-	public String ticketing(MovieDto mvDto, String movie_play_no, String id, String rowcol) {
+	public String ticketing(MovieDto mvDto, String movie_play_no, String id, String rowcol, Model model) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("movie_play_no", movie_play_no);
 		map.put("id", id);
 		map.put("seat_no", rowcol);
 		int n = movieService.ticketing(map, mvDto);
+		List<MovieDto> lists = movieService.selectTicket(mvDto.getId());
+		model.addAttribute("lists", lists);
 		System.out.println(n);
 		return "ticketList";
 	}
