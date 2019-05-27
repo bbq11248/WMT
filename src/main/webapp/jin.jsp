@@ -17,6 +17,7 @@
 <a href="./regist.do?">회원가입</a>
 
 <a href="./login.do?id=wlstnr7833&pw=1234">로그인</a>
+<a href="./loginForm.do">로그인 폼</a>
 
 <a href="./memupdate.do?id=JN&pw=1234&nickname=앙앙&phone=01098745612&address=기모찌기모찌&birthday=123456">회원정보수정</a>
 

@@ -15,18 +15,44 @@
 	function loginCheck() {
 		var id = document.getElementById("id").value;
 		var pw = document.getElementById("pw").value;
-		alert(id+":"+pw);
+		var frm = document.getElementById("frm");
+		frm.action="./login.do";
+		if(id==null||id==""){
+			alert("아이디를 확인해주세요");
+		} else if(pw==null||pw==""){
+			alert("비밀번호를 확인해주세요");
+		} else {
+			jQuery.ajax({
+				url : "./loginCheck.do",
+				type : "post",
+				data : "id="+id+"&pw="+pw,
+				success : function(msg){
+					if(msg == "성공"){
+						frm.submit();
+					} else {
+						alert("아이디나 비밀번호를 다시 확인해주세요");
+					}
+				}
+			});
+		}
 	}
 	
+	function idSearch(){
+		alert("구현해주세요.");
+	}
+	
+	function pwSearch(){
+		alert("구현해주세요.");
+	} 
 	
 </script>
 
 <body>
 	<div id="title">게시판 로그인</div>
-	<div id="id">아이디</div>
+	<div id="idBox">아이디</div>
 	<form method="post" id="frm">
-		<input type="text" name="inputId" id="id" placeholder="아이디" required="required">
-		<div id="pw">비밀번호</div>
+		<input type="text" name="inputId" id="id" placeholder="아이디" required="required" >
+		<div id="pwBox">비밀번호</div>
 		<input type="password" name="inputPw" id="pw" placeholder="비밀번호" required="required">
 		<br>
 		<input type="button" id="login" name="login" value="로그인" onclick="loginCheck()">

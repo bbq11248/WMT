@@ -6,8 +6,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import web.movie.com.dto.BoardDto;
 import web.movie.com.dto.MemberDto;
@@ -35,15 +37,24 @@ public class YJSController {
 		return null;
 	}
 	
+	@RequestMapping(value="/loginCheck.do", method=RequestMethod.POST, produces="application/text;charset=UTF-8")
+	@ResponseBody
+	public String loginCheck(MemberDto mbDto, HttpSession session) {
+		MemberDto memberLogin = memberService.memLogin(mbDto);
+		String chk = (memberLogin == null) ? "실패":"성공"; 
+		if(chk=="성공") {
+			session.setAttribute("memberLogin", memberLogin);
+			return "성공";
+		} else {
+			return "실패";
+		}
+	}
 	
-	
-	@RequestMapping(value="/login.do", method=RequestMethod.GET)
-	public String memLogin(MemberDto mbDto, HttpSession session) {
-		MemberDto memberlogin = memberService.memLogin(mbDto);
-		System.out.println(memberlogin);
-		session.setAttribute("mbDto", mbDto);
-		System.out.println(mbDto);
-		return null;
+	@RequestMapping(value="/login.do", method=RequestMethod.POST)
+	public String memLogin(HttpSession session, Model model) {
+		MemberDto memberLogin = (MemberDto)session.getAttribute("memberLogin");
+		model.addAttribute("memberlogin",memberLogin);
+		return "loginMain";
 	}
 	
 	@RequestMapping(value="/loginForm.do", method=RequestMethod.GET)
