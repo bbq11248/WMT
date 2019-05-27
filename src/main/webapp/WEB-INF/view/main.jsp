@@ -30,6 +30,32 @@ function playMovieList() {
 	location.href="./playMovie.do"
 }
 
+
+
+function theaterManager() {
+	location.href="./theater_manager.do"
+}
+
+function movieTheaterManager() {
+	location.href="./playMovie.do"
+}
+
+function seatManager() {
+	location.href="./playMovie.do"
+}
+
+function movieManager() {
+	location.href="./playMovie.do"
+}
+
+function moviePlayManager() {
+	location.href="./playMovie.do"
+}
+
+
+
+
+
 </script>
 </head>
 <body>
@@ -45,10 +71,13 @@ function playMovieList() {
 
 
 <input type="button" value="상영중인 영화 보기" onclick="playMovieList()">
-<input type="button" value="영화관 보기" onclick="playTheaterList()">
-<input type="button" value="상영관 보기" onclick="playMovieTheaterList()">
-<input type="button" value="좌석 보기" onclick="playSeatList()">
-<input type="button" value="좌석 가격 보기" onclick="playSeatPrice()">
+
+
+<input type="button" value="영화관 관리" onclick="theaterManager()">
+<input type="button" value="상영관 관리" onclick="movieTheaterManager()">
+<input type="button" value="좌석 관리" onclick="seatManager()">
+<input type="button" value="영화 관리" onclick="movieManager()">
+<input type="button" value="상영중이 영화 관리" onclick="moviePlayManager()">
 
 </body>
 </html>
