@@ -10,7 +10,19 @@
 <title>로그인 후 메인페이지</title>
 </head>
 <body>
-안녕하세요.
 ${memberLogin}
+
+	<div>
+		<form>
+					
+		
+		</form>
+	</div>
+
+
+
+
+
+
 </body>
 </html>

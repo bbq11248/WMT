@@ -29,10 +29,10 @@ public class MemberDao_Imple implements IMemberDao {
 	
 	
 	@Override
-	public int signupMember(MemberDto mbDto, MovieDto mvDto) {
+	public int signupMember(MemberDto mbDto, String id) {
 		logger.info("회원가입");
 		int i = sqlSession.insert(NS+"insertMem",mbDto);
-		int n = sqlSession.insert(NS+"insertMil",mvDto);
+		int n = sqlSession.insert(NS+"insertMil",id);
 		return i+n;
 	}
 	

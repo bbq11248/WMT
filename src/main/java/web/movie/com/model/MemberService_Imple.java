@@ -17,9 +17,9 @@ public class MemberService_Imple implements IMemberService {
 	private IMemberDao mbDao;
 
 	@Override
-	public int signupMember(MemberDto mbDto, MovieDto mvDto) {
+	public int signupMember(MemberDto mbDto, String id) {
 		logger.info("signupMember Service 실행");
-		return mbDao.signupMember(mbDto, mvDto);
+		return mbDao.signupMember(mbDto, id);
 	}
 
 	@Override

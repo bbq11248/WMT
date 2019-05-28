@@ -9,7 +9,7 @@ public interface IMemberService {
 	
 	//a회원가입
 	//a회원가입시 등록될 마일리지
-	public int signupMember(MemberDto mbDto, MovieDto mvDto);
+	public int signupMember(MemberDto mbDto, String id);
 //	public int insertMem(MemberDto dto);
 //	public int insertMail(MovieDto dto);
 	

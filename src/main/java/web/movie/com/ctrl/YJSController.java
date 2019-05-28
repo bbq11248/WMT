@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,8 @@ import web.movie.com.model.IMemberService;
 public class YJSController {
 	
 	
+	Logger logger = LoggerFactory.getLogger(YJSController.class);
+	
 	@Autowired
 	IMemberService memberService;
 	
@@ -30,12 +34,42 @@ public class YJSController {
 //	=================================================================
 //	회원
 	
-	@RequestMapping(value="/regist.do", method=RequestMethod.GET)
-	public String signupMember(MemberDto mbDto, MovieDto mvDto) {
-		int signup = memberService.signupMember(mbDto, mvDto);
-		System.out.println(signup);
-		return null;
+	@RequestMapping(value="/signupForm.do", method=RequestMethod.GET)
+	public String signupForm() {
+		return "signUp";
 	}
+	
+	@RequestMapping(value="/regist.do", method=RequestMethod.GET)
+	public String signupMember(String id, String pw, String name, String nickname, int birthday, int phone, String address, String email) {
+		/*	MemberDto mbDto, MovieDto mvDto
+		 * int signup = memberService.signupMember(mbDto, mvDto);
+			System.out.println(signup);*/
+		MemberDto mbDto = new MemberDto();
+		mbDto.setId(id);
+		mbDto.setPw(pw);
+		mbDto.setName(name);
+		mbDto.setNickname(nickname);
+		mbDto.setBirthday(birthday);
+		mbDto.setPhone(phone);
+		mbDto.setAddress(address);
+		mbDto.setEmail(email);
+		
+//		moviedto mvdto = new moviedto();
+//		int mileage;
+//		mvdto.setmileage(mileage);
+		
+		int sign = memberService.signupMember(mbDto, id);
+		logger.info("signupMember");
+			return "loginForm";
+		}
+	
+	
+//	@requestmapping(value = "/signup.do", method = requestmethod.post)
+//	public string signup(member_dto dto) {
+//		boolean isc = imember.signupmember(dto);
+//		logger.info("controller signup{} // {}", isc, new date());
+//		return isc ? "redirect:/loginform.do" : "redirect/signupform.do";
+//	}
 	
 	@RequestMapping(value="/loginCheck.do", method=RequestMethod.POST, produces="application/text;charset=UTF-8")
 	@ResponseBody

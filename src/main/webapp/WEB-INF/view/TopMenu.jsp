@@ -15,6 +15,10 @@
 function login() {
 	location.href = "./loginForm.do"
 }
+function signup() {
+	location.href = "./signupForm.do"
+	
+}
 
 </script>
 
