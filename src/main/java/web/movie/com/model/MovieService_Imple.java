@@ -108,7 +108,7 @@ public class MovieService_Imple implements IMovieService {
 	}
 
 	@Override
-	public MovieDto detailMovieT(String movie_theater_no) {
+	public List<MovieDto> detailMovieT(String movie_theater_no) {
 		logger.info("detailMovieT Service 실행");
 		return mvDao.detailMovieT(movie_theater_no);
 	}

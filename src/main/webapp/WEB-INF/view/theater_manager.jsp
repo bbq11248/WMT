@@ -21,7 +21,6 @@
 <h1>영화관 관리</h1>
 
 <input type="button" value="영화관 보기" onclick="selTheaterList()">
-<input type="button" value="영화관 수정" onclick="insertTheater()">
 <input type="button" value="영화관 등록" onclick="insertTheater()">
 </body>
 </html>

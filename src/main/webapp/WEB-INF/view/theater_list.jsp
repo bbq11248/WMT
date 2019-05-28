@@ -8,19 +8,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-	a{
-		text-decoration: none;
-	}
-</style>
 </head>
-<body>
+<script src="https://code.jquery.com/jquery-3.4.0.js"></script>
 <script type="text/javascript">
 	function detail(theater_no) {
-		location.href="./selOneT.do?theater_no="+theater_no;
+// 		alert(theater_no);
+		location.href = "./selOneT.do?theater_no="+theater_no;
 	}
 </script>
-<table>
+<body>
+<table border="1">
 <tr>
 	<td>영화관 번호</td>
 	<td>영화관 이름</td>
@@ -30,7 +27,7 @@
 			<tr>
 				<td>${theater.theater_no}</td>
 				<td>
-					<a href="#" onclick="detail(${theater.theater_no})">${theater.theater_name}</a>
+					<input type="button" value="${theater.theater_name}" onclick="detail('${theater.theater_no}')">
 				</td>
 				<td>${theater.theater_local}</td>
 			</tr>

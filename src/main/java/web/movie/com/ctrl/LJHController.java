@@ -169,15 +169,89 @@ public class LJHController {
 		return "ticketList";
 	}
 
-	
-//상영관 관리
-	@RequestMapping(value="/insertMT.do", method=RequestMethod.GET)
-	public String insertMovieT(Map<String, String> map) {
-		map.put("theater_no", "TN21");
-		map.put("movie_theater_name", "1관");
-		int n = movieService.insertMovieT(map);
+	//영화관
+	//영화관 관리 페이지
+	@RequestMapping(value="/theater_manager.do", method= RequestMethod.GET)
+	public String theater_manager() {
+		return "theater_manager";
+	}
+	//영화관 등록 폼
+	@RequestMapping(value="/insertTForm.do", method= RequestMethod.GET)
+	public String insertTheaterForm() {
+		return "insertTheaterForm";
+	}
+	//영화관 등록
+	@RequestMapping(value="/insertT.do", method=RequestMethod.GET)
+	public String insertTheater(String theater_name, String theater_local) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("theater_name", theater_name);
+		map.put("theater_local", theater_local);
+		int n = movieService.insertTheater(map);
 		System.out.println(n);
 		return null;
+	}
+	//영화관 수정 폼
+	@RequestMapping(value="/updateTForm.do", method=RequestMethod.GET)
+	public String updateTheaterForm(String theater_no, String theater_name, String theater_local, HttpSession session) {
+		session.setAttribute("theater_no", theater_no);
+		session.setAttribute("theater_name", theater_name);
+		session.setAttribute("theater_local", theater_local);
+		return "theater_update_form";
+	}
+	//영화관 수정
+	@RequestMapping(value="/updateT.do", method=RequestMethod.GET)
+	public String updateTheater(String theater_no, String theater_name, String theater_local, Model model) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("theater_no", theater_no);
+		map.put("theater_name", theater_name);
+		map.put("theater_local", theater_local);
+		int n = movieService.updateTheater(map);
+		System.out.println(n);
+		List<MovieDto> lists = movieService.selectOneTheater(theater_no);
+		model.addAttribute("lists", lists);
+		return "theater_detail";
+	}
+	//영화관 목록 보기
+	@RequestMapping(value="/selT.do", method=RequestMethod.GET)
+	public String selectTheater(Model model) {
+		List<MovieDto> lists = movieService.selectTheater();
+		model.addAttribute("lists", lists);
+		System.out.println(lists);
+		return "theater_list";
+	}
+	//영화관 상세 보기
+	@RequestMapping(value="/selOneT.do", method=RequestMethod.GET)
+	public String selectOneTheater(String theater_no, Model model) {
+		List<MovieDto> lists = movieService.selectOneTheater(theater_no);
+		System.out.println(lists);
+		model.addAttribute("lists", lists);
+		return "theater_detail";
+	}
+	
+//상영관 관리
+	@RequestMapping(value="/insertMTForm.do")
+	public String insertMovieTForm(String theater_no, Model model) {
+		model.addAttribute("theater_no", theater_no);
+		return "insertMovieTheaterForm";
+	}
+	
+	@RequestMapping(value="/insertMT.do", method=RequestMethod.GET)
+	public String insertMovieT(String theater_no, String movie_theater_name, Model model) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("theater_no", theater_no);
+		map.put("movie_theater_name", movie_theater_name);
+		int n = movieService.insertMovieT(map);
+		System.out.println(n);
+		List<MovieDto> lists = movieService.selectOneTheater(theater_no);
+		model.addAttribute("lists", lists);
+		return "theater_detail";
+	}
+	
+	@RequestMapping(value="/updateMTForm.do", method=RequestMethod.GET)
+	public String updateMovieTForm(String movie_theater_no, String movie_theater_name, Model model) {
+		model.addAttribute("movie_theater_no", movie_theater_no);
+		model.addAttribute("movie_theater_name", movie_theater_name);
+		return "movie_theater_update";
 	}
 	
 	@RequestMapping(value="/updateMT.do", method=RequestMethod.GET)
@@ -197,10 +271,11 @@ public class LJHController {
 	}
 	
 	@RequestMapping(value="/detailMT.do", method=RequestMethod.GET)
-	public String detailMovieT(String movie_theater_no) {
-		MovieDto mvDto = movieService.detailMovieT(movie_theater_no);
-		System.out.println(mvDto);
-		return null;
+	public String detailMovieT(String movie_theater_no, Model model) {
+		List<MovieDto> lists = movieService.detailMovieT(movie_theater_no);
+		System.out.println(lists);
+		model.addAttribute("lists", lists);
+		return "movie_theater_detail";
 	}
 	
 	//좌석
@@ -225,51 +300,6 @@ public class LJHController {
 		return null;
 	}
 	
-	//영화관
-	@RequestMapping(value="/theater_manager.do", method= RequestMethod.GET)
-	public String theater_manager() {
-		return "theater_manager";
-	}
-	
-	@RequestMapping(value="/insertTForm.do", method= RequestMethod.GET)
-	public String insertTheaterForm() {
-		return "insertTheaterForm";
-	}
-	@RequestMapping(value="/insertT.do", method=RequestMethod.GET)
-	public String insertTheater(String theater_name, String theater_local) {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("theater_name", theater_name);
-		map.put("theater_local", theater_local);
-		int n = movieService.insertTheater(map);
-		System.out.println(n);
-		return null;
-	}
-	
-	@RequestMapping(value="/updateT.do", method=RequestMethod.GET)
-	public String updateTheater(String theater_no, String theater_name, String theater_local) {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("theater_no", theater_no);
-		map.put("theater_name", theater_name);
-		map.put("theater_local", theater_local);
-		int n = movieService.updateTheater(map);
-		System.out.println(n);
-		return null;
-	}
-
-	@RequestMapping(value="/selT.do", method=RequestMethod.GET)
-	public String selectTheater(Model model) {
-		List<MovieDto> lists = movieService.selectTheater();
-		model.addAttribute("lists", lists);
-		System.out.println(lists);
-		return "theater_list";
-	}
-	
-	@RequestMapping(value="/selOneT.do", method=RequestMethod.GET)
-	public String selectOneTheater(String theater_no) {
-		List<MovieDto> lists = movieService.selectOneTheater(theater_no);
-		System.out.println(lists);
-		return null;
-	}
 	
 	//영화
 	@RequestMapping(value="/insertM.do", method=RequestMethod.GET)

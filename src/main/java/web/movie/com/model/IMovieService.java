@@ -60,7 +60,7 @@ public interface IMovieService {
 	// 전체 보기
 	public List<MovieDto> selectMovieT();
 	// 상세 보기
-	public MovieDto detailMovieT(String movie_theater_no);
+	public List<MovieDto> detailMovieT(String movie_theater_no);
 
 	
 	

@@ -134,10 +134,10 @@ public class MovieDao_Imple implements IMovieDao {
 	}
 
 	@Override
-	public MovieDto detailMovieT(String movie_theater_no) {
+	public List<MovieDto> detailMovieT(String movie_theater_no) {
 		logger.info("상영관 상세 보기");
-		MovieDto mvDto = sqlSession.selectOne(NS+"detailMovieT", movie_theater_no);
-		return mvDto;
+		List<MovieDto> lists = sqlSession.selectList(NS+"detailMovieT", movie_theater_no);
+		return lists;
 	}
 
 	@Override
