@@ -11,12 +11,18 @@
 </head>
 <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
 <script type="text/javascript">
-	function update_movie_theater(movie_theater_no, movie_theater_name) {
-		location.href="./updateMTForm.do?movie_theater_no="+movie_theater_no+"movie_theater_name="+movie_theater_name;
+	function update_movie_theater(movie_theater_no, movie_theater_name, theater_name, theater_no) {
+		location.href="./updateMTForm.do?movie_theater_no="+movie_theater_no+"&movie_theater_name="+movie_theater_name+"&theater_name="+theater_name+"&theater_no="+theater_no;
+	}
+	function seatsel(seat) {
+		location.href = "./selSeat.do?seat="+seat;
+	}
+	function insertSeat(movie_theater_no) {
+		location.href = "./insertSeatForm.do?movie_theater_no="+movie_theater_no;
 	}
 </script>
 <body>
-	<input type="button" value="수정" onclick="update_movie_theater('${lists.movie_theater_no}','${lists.movie_theater_name}')">
+	<input type="button" value="좌석 등록" onclick="insertSeat('${movie_theater_no}')">
 	<table border="1">
 		<tr>
 			<td>영화관 이름</td>
@@ -36,7 +42,12 @@
 					${lists.movie_theater_name}
 				</td>
 				<td>
-					${lists.seat}
+					<input type="button" value="${lists.seat}" onclick="seatsel('${lists.seat}')">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<input type="button" value="수정" onclick="update_movie_theater('${lists.movie_theater_no}','${lists.movie_theater_name}','${lists.theater_name}','${lists.theater_no}')">
 				</td>
 			</tr>
 		</c:forEach>

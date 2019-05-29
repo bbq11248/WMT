@@ -21,6 +21,7 @@
 	}
 	
 	function MTDetail(movie_theater_no) {
+// 		alert(movie_theater_no);
 		location.href = "./detailMT.do?movie_theater_no="+movie_theater_no;
 	}
 </script>

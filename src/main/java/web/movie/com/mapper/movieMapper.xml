@@ -162,7 +162,7 @@
 	</select>
 	<!-- 상세보기 -->
 	<select id="detailMovieT" parameterType="java.lang.String" resultType="mvDto">
-		SELECT  DISTINCT MOVIE_THEATER_NO, THEATER_NAME, MOVIE_THEATER_NAME, SEAT
+		SELECT  DISTINCT THEATER_NO, MOVIE_THEATER_NO, THEATER_NAME, MOVIE_THEATER_NAME, SEAT
 			FROM MOVIE_THEATER JOIN THEATER
 				USING(THEATER_NO)
 					JOIN SEATMANAGER
@@ -180,7 +180,7 @@
 	</insert>
 	<!-- 보기 -->
 	<select id="selSeat" parameterType="mvDto" resultType="mvDto">
-		SELECT SEAT_NO, MOVIE_THEATER_NO, SEAT_MONEY, ROWSEAT||COLSEAT, SEAT FROM SEATMANAGER WHERE SEAT = #{seat}
+		SELECT SEAT_NO, MOVIE_THEATER_NO, SEAT_MONEY, ROWSEAT, COLSEAT, SEAT FROM SEATMANAGER WHERE SEAT = #{seat}
 	</select>
 	<!-- 수정 -->
 	<update id="updateSeat" parameterType="mvDto">
@@ -207,7 +207,7 @@
 	</select>
 	<!-- 상세보기 -->
 	<select id="selectOneTheater" parameterType="java.lang.String" resultType="mvDto">
-		SELECT THEATER_NO, THEATER_NAME, THEATER_LOCAL, MOVIE_THEATER_NO, MOVIE_THEATER_NAME
+		SELECT THEATER_NO, THEATER_NAME, THEATER_LOCAL, MOVIE_THEATER_NO, MOVIE_THEATER_NAME, MOVIE_THEATER_NO
 			FROM THEATER JOIN MOVIE_THEATER
 				USING(THEATER_NO)
 				WHERE THEATER_NO = #{theater_no}
