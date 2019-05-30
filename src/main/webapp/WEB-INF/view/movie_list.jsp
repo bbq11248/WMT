@@ -10,26 +10,27 @@
 <title>Insert title here</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+<script type="text/javascript">
+	function selOneMovie(movie_no) {
+		location.href = "./oneM.do?movie_no="+movie_no;
+	}
+</script>
 <body>
-	<table>
-		<tr>
-			<td>결제 번호</td>
-			<td>티켓 번호</td>
-			<td>ID</td>
-			<td>마일리지</td>
-			<td>금액</td>
-			<td>시간</td>
-		</tr>
-		<c:forEach items="${lists}" var="lists">
+	<form action="">
+		<table>
 			<tr>
-				<td>${lists.payment_no}</td>
-				<td>${lists.ticketing_no}</td>
-				<td>${lists.id}</td>
-				<td>${lists.mileage}</td>
-				<td>${lists.price}</td>
-				<td>${lists.mileage_time}</td>
+				<td>영화 번호</td>
+				<td>영화 이름</td>
 			</tr>
-		</c:forEach>
-	</table>
+			<c:forEach items="${lists}" var="lists">
+				<tr>
+					<td>${lists.movie_no}</td>
+					<td>
+						<input type="button" value="${lists.movie_name}" onclick="selOneMovie('${lists.movie_no}')">
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</form>
 </body>
 </html>

@@ -37,15 +37,11 @@ function theaterManager() {
 }
 
 function movieTheaterManager() {
-	location.href="./playMovie.do"
-}
-
-function seatManager() {
-	location.href="./playMovie.do"
+	location.href="./movie_theater_manager.do"
 }
 
 function movieManager() {
-	location.href="./playMovie.do"
+	location.href="./movieManager.do"
 }
 
 function moviePlayManager() {
@@ -75,7 +71,6 @@ function moviePlayManager() {
 
 <input type="button" value="영화관 관리" onclick="theaterManager()">
 <input type="button" value="상영관 관리" onclick="movieTheaterManager()">
-<input type="button" value="좌석 관리" onclick="seatManager()">
 <input type="button" value="영화 관리" onclick="movieManager()">
 <input type="button" value="상영중이 영화 관리" onclick="moviePlayManager()">
 

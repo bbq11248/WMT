@@ -83,7 +83,7 @@ SELECT MILEAGE FROM MILEAGEMANAGER WHERE ID = 'JINSOOK';
 
 --결제 내역
 SELECT PAYMENT_NO, TICKETING_NO, ID, MILEAGE, PRICE, MILEAGE_TIME FROM PAYMENT
-WHERE ID = 'JINSOOK'
+WHERE ID = 'wlstnr7833'
 ORDER BY MILEAGE_TIME DESC;
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------영화 예매------영화 예매------영화 예매------영화 예매------영화 예매------영화 예매------영화 예매------영화 예매------영화 예매------영화 예매

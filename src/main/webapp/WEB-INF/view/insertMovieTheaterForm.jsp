@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>영화관 등록 폼</h1>
+<h1>상영관 등록 폼</h1>
 <form action="./insertMT.do">
 	<input type="hidden">
 	<div>

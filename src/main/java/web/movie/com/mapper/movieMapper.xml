@@ -154,11 +154,11 @@
 	</update>
 	<!-- 전체보기 -->
 	<select id="selectMovieT" resultType="mvDto">
-	SELECT DISTINCT MOVIE_THEATER_NO, THEATER_NAME||MOVIE_THEATER_NAME
+	SELECT DISTINCT MOVIE_THEATER_NO, THEATER_NAME||MOVIE_THEATER_NAME AS MOVIE_THEATER_NAME
 		FROM MOVIE_THEATER 
 			JOIN THEATER TH
 				USING(THEATER_NO)
-					ORDER BY THEATER_NAME||MOVIE_THEATER_NAME
+					ORDER BY MOVIE_THEATER_NAME
 	</select>
 	<!-- 상세보기 -->
 	<select id="detailMovieT" parameterType="java.lang.String" resultType="mvDto">
@@ -168,6 +168,7 @@
 					JOIN SEATMANAGER
 						USING(MOVIE_THEATER_NO)
 				WHERE MOVIE_THEATER_NO = #{movie_theater_no}
+					ORDER BY SEAT DESC
 	</select>
 	<!-- 상영관 end-->
 	
