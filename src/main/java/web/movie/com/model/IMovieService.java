@@ -24,7 +24,7 @@ public interface IMovieService {
 	// 예매 상세 조회
 	public MovieDto selectOneTicket(Map<String, String> map);
 	// 예매
-	public int ticketing(Map<String, String> map, MovieDto mvDto);
+	public int ticketing(Map<String, Object> map, MovieDto mvDto);
 //	public int insertUseTicket(Map<String, String> map);
 //	public int updateUseMileage(MovieDto mvDto);
 //	public int insertUsePay(MovieDto mvDto);
@@ -95,6 +95,15 @@ public interface IMovieService {
 	public List<MovieDto> selectMovie();
 	// 상세 보기
 	public List<MovieDto> selOneMovie(String movie_no);
-		
+	
+	//상영관 
+	//등록
+	public int insertMoviePlay(Map<String, String> map);
+	//수정
+	public int updateMoviePlay(Map<String, String> map);
+	//보기
+	public List<MovieDto> selectMoviePlay();
+	//삭제
+	public int deleteMoviePlay(String movie_play_no);
 
 }

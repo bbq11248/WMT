@@ -45,7 +45,7 @@ function movieManager() {
 }
 
 function moviePlayManager() {
-	location.href="./playMovie.do"
+	location.href="./moviePlayManager.do"
 }
 
 

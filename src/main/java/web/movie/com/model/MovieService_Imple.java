@@ -48,7 +48,7 @@ public class MovieService_Imple implements IMovieService {
 	}
 
 	@Override
-	public int ticketing(Map<String, String> map, MovieDto mvDto) {
+	public int ticketing(Map<String, Object> map, MovieDto mvDto) {
 		logger.info("ticketing Service 실행");
 		return mvDao.ticketing(map, mvDto);
 	}
@@ -177,6 +177,30 @@ public class MovieService_Imple implements IMovieService {
 	public List<MovieDto> selOneMovie(String movie_no) {
 		logger.info("selOneMovie Service 실행");
 		return mvDao.selOneMovie(movie_no);
+	}
+
+	@Override
+	public int insertMoviePlay(Map<String, String> map) {
+		logger.info("insertMoviePlay Service 실행");
+		return mvDao.insertMoviePlay(map);
+	}
+
+	@Override
+	public int updateMoviePlay(Map<String, String> map) {
+		logger.info("updateMoviePlay Service 실행");
+		return mvDao.updateMoviePlay(map);
+	}
+
+	@Override
+	public List<MovieDto> selectMoviePlay() {
+		logger.info("selectMoviePlay Service 실행");
+		return mvDao.selectMoviePlay();
+	}
+
+	@Override
+	public int deleteMoviePlay(String movie_play_no) {
+		logger.info("deleteMoviePlay Service 실행");
+		return mvDao.deleteMoviePlay(movie_play_no);
 	}
 
 

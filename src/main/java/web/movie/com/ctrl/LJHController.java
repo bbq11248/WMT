@@ -29,7 +29,7 @@ public class LJHController {
 	
 	@Autowired
 	IMovieService movieService;
-	
+	//마일리지 확인
 	@RequestMapping(value = "/mileageChk.do", method = RequestMethod.GET)
 	public String selectMileage(String id, Model model) {
 		logger.info("LJHController selectMileage 실행");
@@ -38,15 +38,17 @@ public class LJHController {
 		model.addAttribute("mileage", mileage);
 		return "mileage";
 	}
-	
+	//마일리지 충전 화면 이동
 	@RequestMapping(value = "/mileageForm.do", method = RequestMethod.GET)
-	public String pa() {
+	public String chargeMileageForm() {
 		return "milagerCG";
 	}
-	
+	//마일리지 충전
 	@RequestMapping(value = "/mileage.do", method = RequestMethod.GET)
-	public String mileage(MovieDto mvDto, HttpServletRequest request, HttpServletResponse response, String milageCG) {
-		mvDto.setId("wlstnr7833");
+	public String mileageCG(MovieDto mvDto, HttpSession session, String milageCG) {
+		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
+		String id = mbDto.getId();
+		mvDto.setId(id);
 		mvDto.setPrice(Integer.parseInt(milageCG));
 		int mileageCg = movieService.mileage(mvDto);
 		System.out.println(mileageCg);
@@ -54,17 +56,17 @@ public class LJHController {
 		System.out.println(text);
 		return "main";
 	}
-	
+	//결제 내역 보기
 	@RequestMapping(value = "/payList.do", method = RequestMethod.GET)
-	public String selectPayList(String id, Model model) {
-		MovieDto mvDto = new MovieDto();
-		mvDto.setId(id);
-		List<MovieDto> lists = movieService.selectPayList(mvDto.getId());
+	public String selectPayList(String id, Model model, HttpSession session) {
+		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
+		id = mbDto.getId();
+		List<MovieDto> lists = movieService.selectPayList(id);
 		System.out.println(lists.get(0).getPayment_no() + "**********************************************");
 		model.addAttribute("lists", lists);
 		return "payList";
 	}
-	
+	//예매 내역 보기
 	@RequestMapping(value = "/ticketList.do", method = RequestMethod.GET)
 	public String selectTicket(String id, Model model, HttpSession session) {
 		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
@@ -74,7 +76,7 @@ public class LJHController {
 		System.out.println(lists);
 		return "ticketList";
 	}
-	
+	//예매 내역 상세 보기
 	@RequestMapping(value = "/detailTicket.do", method = RequestMethod.GET)
 	public String detailTicket(String id, String ticketing_no, Model model, HttpSession session) {
 		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
@@ -87,14 +89,22 @@ public class LJHController {
 		System.out.println(mvDto);
 		return "detailTicket";
 	}
-	
+	//티켓 취소
 	@RequestMapping(value = "/cancel.do", method = RequestMethod.GET)
-	public String cancel(MovieDto mvDto, String ticketing_no) {
+	public String cancel(String id, String price, String ticketing_no, HttpSession session, Model model) {
+		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
+		id = mbDto.getId();
+		MovieDto mvDto = new MovieDto();
+		mvDto.setId(id);
+		mvDto.setPrice(Integer.parseInt(price));
 		int n = movieService.cancel(mvDto, ticketing_no);
 		System.out.println(n);
-		return null;
+		model.addAttribute("mvDto", mvDto);
+		List<MovieDto> lists = movieService.selectTicket(id);
+		model.addAttribute("lists", lists);
+		return "ticketList";
 	}
-	
+	//상영중인 영화 선택
 	@RequestMapping(value = "/playMovie.do", method = RequestMethod.GET)
 	public String selPlayMovie(Model model) {
 		List<MovieDto> lists = movieService.selPlayMovie();
@@ -102,7 +112,7 @@ public class LJHController {
 		System.out.println(lists);
 		return "playMovie";
 	}
-	
+	//선택영화가 상영하는 영화관선택
 	@ResponseBody
 	@RequestMapping(value = "/theaterChk.do", method = RequestMethod.GET)
 	public Map<String, List<MovieDto>> selAllTheater(String movie_no, Model model, HttpSession session) {
@@ -117,7 +127,7 @@ public class LJHController {
 		theater.put("theater", lists);
 		return theater;
 	}
-
+	//영화관 에 선택한 영화가 있는 상영관 선택
 	@ResponseBody
 	@RequestMapping(value = "/movieTheaterChk.do", method = RequestMethod.GET)
 	public Map<String, List<MovieDto>> selAllMTheater(String theater_no, String movie_no, Model model,
@@ -133,7 +143,7 @@ public class LJHController {
 		movieTheater.put("movieTheater", lists);
 		return movieTheater;
 	}
-
+	//선택한 상영관의 좌석 선택
 	@ResponseBody
 	@RequestMapping(value = "/seatChk.do", method = RequestMethod.GET)
 	public Map<String, List<MovieDto>> selAllSeat(String movie_play_no, Model model, HttpSession session) {
@@ -144,7 +154,7 @@ public class LJHController {
 		seat.put("seat", lists);
 		return seat;
 	}
-
+	//선택한 좌석의 가격 확인 및 예매 
 	@ResponseBody
 	@RequestMapping(value = "/seatMoneyChk.do", method = RequestMethod.GET)
 	public Map<String, Integer> selSeatMoney(String rowcol, String movie_theater_no, Model model, HttpSession session) {
@@ -159,15 +169,20 @@ public class LJHController {
 		seatMoney.put("seatMoney", price);
 		return seatMoney;
 	}
-
+	//티켓 예매 및 결제
 	@RequestMapping(value = "/ticketing.do", method = RequestMethod.GET)
-	public String ticketing(MovieDto mvDto, String movie_play_no, String id, String rowcol, Model model) {
-		Map<String, String> map = new HashMap<String, String>();
+	public String ticketing(MovieDto mvDto, String movie_play_no, String id, String rowcol, String price, Model model,  HttpSession session) {
+		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
+		id = mbDto.getId();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("movie_play_no", movie_play_no);
 		map.put("id", id);
 		map.put("seat_no", rowcol);
+		map.put("price", Integer.parseInt(price));
+		mvDto.setId(id);
+		mvDto.setPrice(Integer.parseInt(price));
 		int n = movieService.ticketing(map, mvDto);
-		List<MovieDto> lists = movieService.selectTicket(mvDto.getId());
+		List<MovieDto> lists = movieService.selectTicket(id);
 		model.addAttribute("lists", lists);
 		System.out.println(n);
 		return "ticketList";
@@ -481,6 +496,71 @@ public class LJHController {
 		System.out.println(lists);
 		model.addAttribute("lists", lists);
 		return "movie_detail";
+	}
+	
+	//상영중인 영화 
+	//상영중인 영화 관리 화면
+	@RequestMapping(value="/moviePlayManager.do", method=RequestMethod.GET)
+	public String moviePlayManager() {
+		return "movie_play_manager";
+	}
+	@RequestMapping(value="/insertMPForm.do", method=RequestMethod.GET)
+	public String insertMPForm() {
+		return "insertMPForm";
+	}
+	@RequestMapping(value="/insertMP.do", method=RequestMethod.GET)
+	public String insertMP(String movie_name, String theater_name, String movie_theater_name, String movie_start_time, String times, Model model) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("movie_name", movie_name);
+		map.put("theater_name", theater_name);
+		map.put("movie_theater_name", movie_theater_name);
+		map.put("movie_start_time", movie_start_time);
+		map.put("times", times);
+		int n = movieService.insertMoviePlay(map);
+		System.out.println(n);
+		List<MovieDto> lists = movieService.selectMoviePlay();
+		model.addAttribute("lists", lists);
+		return "selectMP";
+	}
+	@RequestMapping(value="/updateMPForm.do", method=RequestMethod.GET)
+	public String updateMPForm(String movie_name, String theater_name, String movie_theater_name, String movie_start_time, String times, String movie_play_no, Model model) {
+		model.addAttribute("movie_name", movie_name);
+		model.addAttribute("theater_name", theater_name);
+		model.addAttribute("movie_theater_name", movie_theater_name);
+		model.addAttribute("movie_start_time", movie_start_time);
+		model.addAttribute("times", times);
+		model.addAttribute("movie_play_no", movie_play_no);
+		return "updateMPForm";
+	}
+	@RequestMapping(value="/updateMP", method=RequestMethod.GET)
+	public String updateMP(String movie_name, String theater_name, String movie_theater_name, String movie_start_time, String times, String movie_play_no, Model model) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("movie_name", movie_name);
+		map.put("theater_name", theater_name);
+		map.put("movie_theater_name", movie_theater_name);
+		map.put("movie_start_time", movie_start_time);
+		map.put("times", times);
+		map.put("movie_play_no", movie_play_no);
+		int n = movieService.updateMoviePlay(map);
+		System.out.println(n);
+		List<MovieDto> lists = movieService.selectMoviePlay();
+		model.addAttribute("lists", lists);
+		return "selectMP";
+	}
+	@RequestMapping(value="/selectMP.do", method=RequestMethod.GET)
+	public String selectMP(Model model) {
+		List<MovieDto> lists = movieService.selectMoviePlay();
+		model.addAttribute("lists", lists);
+		System.out.println(lists);
+		return "selectMP";
+	}
+	@RequestMapping(value="/deleteMP.do", method=RequestMethod.GET)
+	public String deleteMP(String movie_play_no, Model model) {
+		int n = movieService.deleteMoviePlay(movie_play_no);
+		System.out.println(n);
+		List<MovieDto> lists = movieService.selectMoviePlay();
+		model.addAttribute("lists", lists);
+		return "selectMP";
 	}
 
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)

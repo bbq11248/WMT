@@ -47,7 +47,7 @@
 	</select>
 	<!-- 예매내역 상세 조회 -->
 	<select id="selectOneTicket" parameterType="java.util.Map" resultType="mvDto">
-		SELECT TICKETING_NO, MOVIE_PLAY_NO, THEATER_NAME, MOVIE_THEATER_NAME, MOVIE_NAME, MOVIE_START_TIME, SEAT_NO, ID
+		SELECT TICKETING_NO, MOVIE_PLAY_NO, THEATER_NAME, MOVIE_THEATER_NAME, MOVIE_NAME, MOVIE_START_TIME, SEAT_NO, PRICE, ID
 			FROM TICKETING JOIN MOVIE_PLAY
 				USING(MOVIE_PLAY_NO)
 					JOIN THEATER
@@ -61,8 +61,8 @@
 	<!-- 예매1 -->
 	<insert id="insertUseTicket" parameterType="java.util.Map">
 		INSERT INTO TICKETING
-			(TICKETING_NO, MOVIE_PLAY_NO, ID, SEAT_NO, TICKETING_TIME)
-				VALUES('TN'||TICKETING_NO_SEQ.NEXTVAL, #{movie_play_no}, #{id}, #{seat_no}, SYSDATE)
+			(TICKETING_NO, MOVIE_PLAY_NO, ID, SEAT_NO, PRICE, TICKETING_TIME)
+				VALUES('TN'||TICKETING_NO_SEQ.NEXTVAL, #{movie_play_no}, #{id}, #{seat_no}, ${price}, SYSDATE)
 	</insert>
 	<!-- 예매2 -->
 	<update id="updateUseMileage" parameterType="mvDto">
@@ -241,7 +241,31 @@
 	</select>
 	<!-- 영화 end -->
 	
+	<!-- 상영중인 영화 -->
+	<!--등록 -->
+	<insert id="insertMoviePlay" parameterType="java.util.Map">
+		INSERT INTO MOVIE_PLAY
+			(MOVIE_PLAY_NO, MOVIE_NO, THEATER_NO, MOVIE_THEATER_NO, MOVIE_START_TIME, TIMES)
+				VALUES('MPN'||MOVIE_PLAY_NO_SEQ.NEXTVAL, (SELECT MOVIE_NO FROM MOVIE WHERE MOVIE_NAME = '${movie_name}), (SELECT THEATER_NO FROM MOVIE WHERE THEATER_NAME = ${theater_name}), (SELECT MOVIE_THEATER_NO FROM MOVIE_THEATER WHERE MOVIE_THEATER_NAME = ${movie_theater_name}), '${movie_start_time}' ,${times})
+	</insert>
+	<!-- 수정 -->
+	<update id="updateMoviePlay" parameterType="java.util.Map">
+		UPDATE MOVIE.MOVIE_PLAY
+			SET MOVIE_NO = (SELECT MOVIE_NO FROM MOVIE WHERE MOVIE_NAME = '${movie_name}), THEATER_NO=(SELECT THEATER_NO FROM MOVIE WHERE THEATER_NAME = ${theater_name}), MOVIE_THEATER_NO=(SELECT MOVIE_THEATER_NO FROM MOVIE_THEATER WHERE MOVIE_THEATER_NAME = ${movie_theater_name}), MOVIE_START_TIME=${movie_start_time}, TIMES=${times}
+				WHERE MOVIE_PLAY_NO=${movie_play_no}
+	</update>
+	<!-- 보기 -->
+	<select id="selectMoviePlay" resultType="mvDto">
+		SELECT MOVIE_PLAY_NO, MOVIE_NO, THEATER_NO, MOVIE_THEATER_NO, MOVIE_START_TIME, TIMES
+			FROM MOVIE_PLAY
+	</select>
+	<!-- 삭제 -->
+	<delete id="deleteMoviePlay" parameterType="java.lang.String">
+		DELETE FROM MOVIE.MOVIE_PLAY
+			WHERE MOVIE_PLAY_NO=${movie_play_no}
+	</delete>
 	<!-- 영화 관리 end -->
+	
 	
 	
 	
