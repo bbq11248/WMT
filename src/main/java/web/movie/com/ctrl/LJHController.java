@@ -532,7 +532,7 @@ public class LJHController {
 		model.addAttribute("movie_play_no", movie_play_no);
 		return "updateMPForm";
 	}
-	@RequestMapping(value="/updateMP", method=RequestMethod.GET)
+	@RequestMapping(value="/updateMP.do", method=RequestMethod.GET)
 	public String updateMP(String movie_name, String theater_name, String movie_theater_name, String movie_start_time, String times, String movie_play_no, Model model) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("movie_name", movie_name);
@@ -555,12 +555,21 @@ public class LJHController {
 		return "selectMP";
 	}
 	@RequestMapping(value="/deleteMP.do", method=RequestMethod.GET)
-	public String deleteMP(String movie_play_no, Model model) {
-		int n = movieService.deleteMoviePlay(movie_play_no);
+	public String deleteMP(String[] movie_play_no, Model model) {
+		Map<String, String[]> map = new HashMap<String, String[]>();
+		map.put("seq", movie_play_no);
+		int n = movieService.deleteMoviePlay(map);
 		System.out.println(n);
-		List<MovieDto> lists = movieService.selectMoviePlay();
-		model.addAttribute("lists", lists);
-		return "selectMP";
+		if(n >= 1) {
+			List<MovieDto> lists = movieService.selectMoviePlay();
+			model.addAttribute("lists", lists);
+			return "selectMP";
+		}else {
+			//errMsg, url
+			model.addAttribute("errMsg", "잘못된 접근입니다. \n 관리자에게 문의 하세요");
+			model.addAttribute("url", "/loginForm.do");
+			return "error_req";
+		}
 	}
 
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)

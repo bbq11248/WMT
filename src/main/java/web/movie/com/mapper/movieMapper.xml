@@ -62,7 +62,7 @@
 	<insert id="insertUseTicket" parameterType="java.util.Map">
 		INSERT INTO TICKETING
 			(TICKETING_NO, MOVIE_PLAY_NO, ID, SEAT_NO, PRICE, TICKETING_TIME)
-				VALUES('TN'||TICKETING_NO_SEQ.NEXTVAL, #{movie_play_no}, #{id}, #{seat_no}, ${price}, SYSDATE)
+				VALUES('TN'||TICKETING_NO_SEQ.NEXTVAL, #{movie_play_no}, #{id}, #{seat_no}, #{price}, SYSDATE)
 	</insert>
 	<!-- 예매2 -->
 	<update id="updateUseMileage" parameterType="mvDto">
@@ -246,23 +246,37 @@
 	<insert id="insertMoviePlay" parameterType="java.util.Map">
 		INSERT INTO MOVIE_PLAY
 			(MOVIE_PLAY_NO, MOVIE_NO, THEATER_NO, MOVIE_THEATER_NO, MOVIE_START_TIME, TIMES)
-				VALUES('MPN'||MOVIE_PLAY_NO_SEQ.NEXTVAL, (SELECT MOVIE_NO FROM MOVIE WHERE MOVIE_NAME = '${movie_name}), (SELECT THEATER_NO FROM MOVIE WHERE THEATER_NAME = ${theater_name}), (SELECT MOVIE_THEATER_NO FROM MOVIE_THEATER WHERE MOVIE_THEATER_NAME = ${movie_theater_name}), '${movie_start_time}' ,${times})
+				VALUES('MPN'||MOVIE_PLAY_NO_SEQ.NEXTVAL, (SELECT MOVIE_NO FROM MOVIE WHERE MOVIE_NAME = #{movie_name}), (SELECT THEATER_NO FROM MOVIE WHERE THEATER_NAME = #{theater_name}), (SELECT MOVIE_THEATER_NO FROM MOVIE_THEATER WHERE MOVIE_THEATER_NAME = #{movie_theater_name}), #{movie_start_time} ,#{times})
 	</insert>
 	<!-- 수정 -->
 	<update id="updateMoviePlay" parameterType="java.util.Map">
 		UPDATE MOVIE.MOVIE_PLAY
-			SET MOVIE_NO = (SELECT MOVIE_NO FROM MOVIE WHERE MOVIE_NAME = '${movie_name}), THEATER_NO=(SELECT THEATER_NO FROM MOVIE WHERE THEATER_NAME = ${theater_name}), MOVIE_THEATER_NO=(SELECT MOVIE_THEATER_NO FROM MOVIE_THEATER WHERE MOVIE_THEATER_NAME = ${movie_theater_name}), MOVIE_START_TIME=${movie_start_time}, TIMES=${times}
-				WHERE MOVIE_PLAY_NO=${movie_play_no}
+			SET MOVIE_NO = (SELECT MOVIE_NO FROM MOVIE WHERE MOVIE_NAME = #{movie_name}), 
+				THEATER_NO=(SELECT THEATER_NO FROM THEATER WHERE THEATER_NAME = #{theater_name}), 
+				MOVIE_THEATER_NO=(SELECT MOVIE_THEATER_NO FROM MOVIE_THEATER WHERE MOVIE_THEATER_NAME = #{movie_theater_name} 
+							AND THEATER_NO = (SELECT THEATER_NO FROM THEATER WHERE THEATER_NAME = #{theater_name})), 
+							MOVIE_START_TIME=#{movie_start_time}, TIMES=#{times}
+				WHERE MOVIE_PLAY_NO=#{movie_play_no}
 	</update>
 	<!-- 보기 -->
 	<select id="selectMoviePlay" resultType="mvDto">
-		SELECT MOVIE_PLAY_NO, MOVIE_NO, THEATER_NO, MOVIE_THEATER_NO, MOVIE_START_TIME, TIMES
-			FROM MOVIE_PLAY
+		SELECT MP.MOVIE_PLAY_NO AS MOVIE_PLAY_NO, M.MOVIE_NAME AS MOVIE_NAME, T.THEATER_NAME AS THEATER_NAME, MT.MOVIE_THEATER_NAME AS MOVIE_THEATER_NAME, MOVIE_START_TIME, TIMES
+			FROM MOVIE_PLAY MP
+				JOIN MOVIE M
+					ON M.MOVIE_NO = MP.MOVIE_NO
+						JOIN MOVIE_THEATER MT
+							ON MT.MOVIE_THEATER_NO = MP.MOVIE_THEATER_NO
+								JOIN THEATER T
+									ON T.THEATER_NO = MP.THEATER_NO
 	</select>
 	<!-- 삭제 -->
-	<delete id="deleteMoviePlay" parameterType="java.lang.String">
+	<delete id="deleteMoviePlay" parameterType="java.util.Map">
 		DELETE FROM MOVIE.MOVIE_PLAY
-			WHERE MOVIE_PLAY_NO=${movie_play_no}
+			WHERE MOVIE_PLAY_NO IN
+			<foreach collection="seq" item="movie_play_no" open="(" close=")"
+			separator=",">
+			#{movie_play_no}
+			</foreach>
 	</delete>
 	<!-- 영화 관리 end -->
 	

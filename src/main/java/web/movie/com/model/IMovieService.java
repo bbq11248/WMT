@@ -104,6 +104,6 @@ public interface IMovieService {
 	//보기
 	public List<MovieDto> selectMoviePlay();
 	//삭제
-	public int deleteMoviePlay(String movie_play_no);
+	public int deleteMoviePlay(Map<String, String[]> map);
 
 }

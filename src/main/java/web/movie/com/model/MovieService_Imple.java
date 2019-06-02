@@ -198,9 +198,9 @@ public class MovieService_Imple implements IMovieService {
 	}
 
 	@Override
-	public int deleteMoviePlay(String movie_play_no) {
+	public int deleteMoviePlay(Map<String, String[]> map) {
 		logger.info("deleteMoviePlay Service 실행");
-		return mvDao.deleteMoviePlay(movie_play_no);
+		return mvDao.deleteMoviePlay(map);
 	}
 
 
