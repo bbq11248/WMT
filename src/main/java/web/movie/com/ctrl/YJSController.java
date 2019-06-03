@@ -107,8 +107,8 @@ public class YJSController {
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
 	public String memLogin(HttpSession session, Model model) {
 		MemberDto memberLogin = (MemberDto)session.getAttribute("memberLogin");
-		model.addAttribute("memberlogin",memberLogin);
-		return "loginMain";
+		model.addAttribute("memberlogin", memberLogin);
+		return "main";
 	}
 	
 	@RequestMapping(value="/loginForm.do", method=RequestMethod.GET)

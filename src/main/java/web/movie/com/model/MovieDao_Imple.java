@@ -4,6 +4,7 @@ import java.util.List;
 
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,7 +59,7 @@ public class MovieDao_Imple implements IMovieDao {
 	}
 
 	@Override
-	public int ticketing(Map<String, String> map, MovieDto mvDto) {
+	public int ticketing(Map<String, Object> map, MovieDto mvDto) {
 		logger.info("예매");
 		int n = sqlSession.insert(NS+"insertUseTicket", map);
 		int i = sqlSession.update(NS+"updateUseMileage", mvDto);
@@ -215,6 +216,34 @@ public class MovieDao_Imple implements IMovieDao {
 		logger.info("영화 상세 보기");
 		List<MovieDto> lists = sqlSession.selectList(NS+"selOneMovie", movie_no);
 		return lists;
+	}
+
+	@Override
+	public int insertMoviePlay(Map<String, String> map) {
+		logger.info("상영중인 영화 등록");
+		int n = sqlSession.insert(NS+"insertMoviePlay", map);
+		return n;
+	}
+
+	@Override
+	public int updateMoviePlay(Map<String, String> map) {
+		logger.info("상영중인 영화 수정");
+		int n = sqlSession.update(NS+"updateMoviePlay", map);
+		return n;
+	}
+
+	@Override
+	public List<MovieDto> selectMoviePlay() {
+		logger.info("상영중인 영화 보기");
+		List<MovieDto> lists = sqlSession.selectList(NS+"selectMoviePlay");
+		return lists;
+	}
+
+	@Override
+	public int deleteMoviePlay(Map<String, String[]> map) {
+		logger.info("상영중인 영화 삭제");
+		int n = sqlSession.delete(NS+"deleteMoviePlay", map);
+		return n;
 	}
 
 

@@ -110,7 +110,7 @@
 					document.getElementById("sessionInfo4").innerHTML += "<input type='hidden' value='"+movie_theater_no+"' name='movie_theater_no'>";
 					document.getElementById("sessionInfo5").innerHTML += "<input type='hidden' value='"+rowcol+"' name='rowcol'>";
 					document.getElementById("seatMoney").innerHTML += theater.seatMoney + "원"
-																	+ "<input type='button'onclick='ticketpay(\""+rowcol+"\",\""+movie_play_no+"\")' value='예매'>";
+																	+ "<input type='button'onclick='ticketpay(\""+rowcol+"\",\""+movie_play_no+"\",\""+theater.seatMoney+"\")' value='예매'>";
 			},
 			error : function() {
 				alert("에러");
@@ -118,10 +118,10 @@
 		});
 		
 	}
-	function ticketpay(rowcol, movie_play_no) {
+	function ticketpay(rowcol, movie_play_no, price) {
 // 		var movie_theater_no = document.getElementsByName("movie_theater_no").value;
 // 		var rowcol = document.getElementsByName("rowcol").value;
-		location.href="./ticketing.do?movie_play_no="+movie_play_no+"&id=wlstnr7833&rowcol="+rowcol;
+		location.href="./ticketing.do?movie_play_no="+movie_play_no+"&id=wlstnr7833&rowcol="+rowcol+"&price="+price;
 	}
 	
 	

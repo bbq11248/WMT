@@ -21,12 +21,13 @@
 	}
 	
 	function MTDetail(movie_theater_no) {
+// 		alert(movie_theater_no);
 		location.href = "./detailMT.do?movie_theater_no="+movie_theater_no;
 	}
 </script>
 <body>
 <input type="button" value="영화관 수정" onclick="updateTheater('${lists[0].theater_no}','${lists[0].theater_name}','${lists[0].theater_local}')">
-<input type="button" value="상영관 등록" onclick="insertMovieTheater('${lists[0].theater_no}')">
+<input type="button" value="상영관 등록" onclick="insertMovieTheater('${theater_no}')">
 	<table border="1">
 		<tr>
 			<td>영화관 번호</td>
