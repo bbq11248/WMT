@@ -1,5 +1,6 @@
 package web.movie.com.ctrl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import web.movie.com.dto.BoardDto;
 import web.movie.com.dto.MemberDto;
-import web.movie.com.dto.MovieDto;
 import web.movie.com.model.IBoardService;
 import web.movie.com.model.IMemberService;
 @Controller
@@ -25,10 +25,10 @@ public class YJSController {
 	Logger logger = LoggerFactory.getLogger(YJSController.class);
 	
 	@Autowired
-	IMemberService memberService;
+	private IMemberService memberService;
 	
 	@Autowired
-	IBoardService boardService;
+	private IBoardService boardService;
 	
 //	=================================================================
 //	=================================================================
@@ -39,12 +39,30 @@ public class YJSController {
 		return "signUp";
 	}
 	
-	@RequestMapping(value="/regist.do", method=RequestMethod.GET)
-	public String signupMember(String id, String pw, String name, String nickname, int birthday, int phone, String address, String email) {
+
+	
+	@RequestMapping(value ="/idCheck.do", method = RequestMethod.POST,  produces = "application/text; charset=UTF-8")
+	@ResponseBody
+	public String idCheck(String id) {
+		String regex = "^[a-zA-Z0-9]*$";
+		// matches ~> id중복 확인을 위한 정규화표현식
+		boolean isc = id.matches(regex);
+		
+		// 중복이면 true나옴
+		boolean isc2 = memberService.checkMem(id);
+		System.out.println(isc2);
+		logger.info("controller idCheck{} // {}", isc2, new Date());
+		return (isc2 == false) ? "사용가능한 아이디입니다." : "중복된 아이디 입니다.";
+	}
+	
+	@RequestMapping(value="/regist.do", method=RequestMethod.POST)
+	public String signupMember(String id, String pw, String passOK, String name, String nickname, int birthday, int phone, String address, String email) {
+		
 		/*	MemberDto mbDto, MovieDto mvDto
 		 * int signup = memberService.signupMember(mbDto, mvDto);
 			System.out.println(signup);*/
 		MemberDto mbDto = new MemberDto();
+		
 		mbDto.setId(id);
 		mbDto.setPw(pw);
 		mbDto.setName(name);
@@ -60,6 +78,8 @@ public class YJSController {
 		
 		int sign = memberService.signupMember(mbDto, id);
 		logger.info("signupMember");
+		
+			//return "redirect:/loginForm.do";
 			return "loginForm";
 		}
 	
@@ -175,44 +195,8 @@ public class YJSController {
 //	=================================================================
 //	=================================================================
 //	게시판	
-	
-	@RequestMapping(value="/board.do", method=RequestMethod.GET)
-	public String selectList() {
-		List<BoardDto> lists = boardService.selectList();
-		System.out.println(lists);
-		return null;
-	}
-	
-	@RequestMapping(value="/oneBoard.do", method=RequestMethod.GET)
-	public String selectOneList(String seq) {
-		BoardDto oneBoard = boardService.selectOneList(seq);
-		System.out.println(oneBoard);
-		return null;
-	}
-	
-	@RequestMapping(value="/insertBoard.do", method = RequestMethod.GET)
-	public String insertBoard(BoardDto bDto) {
-		boolean insertOne = boardService.insertBoard(bDto);
-		System.out.println(insertOne);
-		return null;
-	}
-	
-	@RequestMapping(value="/updateBoard.do", method = RequestMethod.GET)
-	public String updateBoard(BoardDto bDto) {
-		boolean updateOne = boardService.updateBoard(bDto);
-		System.out.println(updateOne);
-		return null;
-	}
-	
-	@RequestMapping(value="/deleteBoard.do", method = RequestMethod.GET)
-	public String deleteBoard(String seq) {
-		boolean deleteBoard = boardService.deleteBoard(seq);
-		System.out.println(deleteBoard);
-		return null;
-	}
-	
-}
 
+}
 
 
 

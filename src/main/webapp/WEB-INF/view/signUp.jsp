@@ -15,25 +15,77 @@
 
 </head>
 <script type="text/javascript">
-	function check() {
-		//비밀번호확인, 아이디중복체크
-		var pw = document.getElementById("pw").value;
-		var passOK = document.getElementById("passOK").value;
-		alert(pw+"::"+passOK);
-		
-		var frm = document.form[0];
-		
-		var chk = document.getElementById("chaVal").value;
-		alert(chk);
-		
-		
-		//유효값 검사
-		if(pw != passOK){
-		 alert("비밀번호를 확인해주세요.");
-		 return false;
-		}
-		
+function check() {
+	//pw확인, id중복
+	var pw = document.getElementById("password").value;
+	var passOK = document.getElementById("passwordcheck").value;
+	
+	var frm = document.forms[0];
+	
+	var chk = document.getElementById("chaVal").value;
+	
+	if(pw != passOK){
+		alert("※회원가입 실패※ 비밀번호를 확인해 주세요.");
+		return false;
+		//location.href(~~~//signupForm.do); //비밀번호 틀리면 새로고침 or signupForm.do 주소로 이동
+	}else if(chk == "0"){
+		alert("※회원가입 실패※ 아이디 중복 체크를 해주세요!");
+		return false;
+	}else{
+		return true;
 	}
+	
+}
+
+	// 아이디 중복, 요효값 검사
+	$(document).ready(function() {
+		$("#id").keyup(function() {
+			
+			//아이디 길이확인
+			var inputLength = $(this).val().length;
+// 			alert(inputLength);
+
+			var id = $(this).val();
+			
+			//아이디 공백 검사(있는지 없는지)
+			if(id.indexOf(" ") != -1){
+				alert("공백");
+				$("#result").css("color","red");
+				$("#result").html("공백이 포함된 아이디는 사용이 불가능합니다.");
+				$("#chaVal").val("0");
+			}else if(inputLength >5){
+// 				alert("실행!");
+				jQuery.ajax({
+					url:"./idCheck.do",
+					type: "post",
+					data: "id="+$(this).val(),
+					async: true,
+					success: function(msg) {
+// 						alert(msg);
+						$("#result").html(msg);
+						var temp = msg;
+						temp = temp.substring(0,temp.indexOf("디")+1);
+						if(temp == "사용가능한 아이디입니다."){
+							$("#chaVal").val(1);
+							$("#result").css("color","blue");
+						}else{
+							$("#chaVal").val(0);
+							$("#result").css("color","red");
+				
+						}
+					}
+				});
+				
+			}else{
+				$("#result").css("color","red");
+				$("#result").html("6자리 이상만 사용 가능합니다.");
+				$("#chaVal").val("0");
+			}
+		});
+	});
+	
+	
+	
 </script>
 
 <body>
@@ -44,7 +96,7 @@
 	
 	<input type="hidden" value="0" id="chaVal">
 	
-	<form action="./regist.do" method="get" id="frm" onsubmit="return check()">
+	<form action="./regist.do" method="post" id="frm" onsubmit="return check()">
 		<div id="info">
 		
 		
@@ -56,9 +108,11 @@
 			<br>
 			
 			<span id="result"></span>
+			<br>
+			
 			<input type="text" id="password" name="pw" placeholder="비밀번호" required="required">
 			<br>
-			<input type="text" id="password" name="passOK" placeholder="비밀번호 확인" required="required">
+			<input type="text" id="passwordcheck" name="passOK" placeholder="비밀번호 확인" required="required">
 			<br>
 			<input type="text" id="name" name="name" placeholder="이름" required="required">
 			<br>
@@ -92,7 +146,7 @@
 		<br>
 		
 		<div id="buttom">
-			<input type="submit" value="동의하고  회원가입">
+			<input type="submit" value="동의하고  회원가입" >
 			<input type="button" value="뒤로가기">
 		</div>
 		
