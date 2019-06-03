@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import web.movie.com.dto.BoardDto;
 import web.movie.com.dto.MemberDto;
+import web.movie.com.dto.MovieDto;
 import web.movie.com.model.IBoardService;
 import web.movie.com.model.IMemberService;
 @Controller
@@ -38,10 +39,9 @@ public class YJSController {
 	public String signupForm() {
 		return "signUp";
 	}
-	
 
 	
-	@RequestMapping(value ="/idCheck.do", method = RequestMethod.POST,  produces = "application/text; charset=UTF-8")
+	@RequestMapping(value="/idCheck.do", method = RequestMethod.POST,  produces = "application/text; charset=UTF-8")
 	@ResponseBody
 	public String idCheck(String id) {
 		String regex = "^[a-zA-Z0-9]*$";
@@ -58,11 +58,8 @@ public class YJSController {
 	@RequestMapping(value="/regist.do", method=RequestMethod.POST)
 	public String signupMember(String id, String pw, String passOK, String name, String nickname, int birthday, int phone, String address, String email) {
 		
-		/*	MemberDto mbDto, MovieDto mvDto
-		 * int signup = memberService.signupMember(mbDto, mvDto);
-			System.out.println(signup);*/
+//		MemberDto mbDto, MovieDto mvDto
 		MemberDto mbDto = new MemberDto();
-		
 		mbDto.setId(id);
 		mbDto.setPw(pw);
 		mbDto.setName(name);
@@ -71,25 +68,32 @@ public class YJSController {
 		mbDto.setPhone(phone);
 		mbDto.setAddress(address);
 		mbDto.setEmail(email);
+		System.out.println("signupMember : "+mbDto);
 		
-//		moviedto mvdto = new moviedto();
-//		int mileage;
-//		mvdto.setmileage(mileage);
+		int signup = memberService.signupMember(mbDto, id);
+		System.out.println("signupMember : "+ signup);
 		
-		int sign = memberService.signupMember(mbDto, id);
-		logger.info("signupMember");
+		
+		MovieDto mvdto = new MovieDto();
+		int mileage = 0;
+		mvdto.setMileage(mileage);
 		
 			//return "redirect:/loginForm.do";
-			return "loginForm";
+			return "redirect:/loginForm.do";
 		}
 	
 	
 //	@requestmapping(value = "/signup.do", method = requestmethod.post)
-//	public string signup(member_dto dto) {
+//	public string signup(member_dto dto) {zd
 //		boolean isc = imember.signupmember(dto);
 //		logger.info("controller signup{} // {}", isc, new date());
 //		return isc ? "redirect:/loginform.do" : "redirect/signupform.do";
 //	}
+	
+	@RequestMapping(value="/loginForm.do", method=RequestMethod.GET)
+	public String loginForm() {
+		return "loginForm";
+	}
 	
 	@RequestMapping(value="/loginCheck.do", method=RequestMethod.POST, produces="application/text;charset=UTF-8")
 	@ResponseBody
@@ -111,10 +115,11 @@ public class YJSController {
 		return "main";
 	}
 	
-	@RequestMapping(value="/loginForm.do", method=RequestMethod.GET)
-	public String loginForm() {
-		return "loginForm";
+	@RequestMapping(value="/idSearch.do", method=RequestMethod.POST)
+	public String idSearch() {
+		return "idSearch";
 	}
+	
 	
 	
 	@RequestMapping(value="/memupdate.do", method=RequestMethod.GET)
