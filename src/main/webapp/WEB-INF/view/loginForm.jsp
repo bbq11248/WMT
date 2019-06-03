@@ -30,7 +30,7 @@
 					if(msg == "성공"){
 						frm.submit();
 					} else {
-						alert("아이디나 비밀번호를 다시 확인해주세요");
+						alert("아이디 혹은 비밀번호를 다시 확인해주세요");
 					}
 				}
 			});
@@ -38,11 +38,11 @@
 	}
 	
 	function idSearch(){
-		alert("구현해주세요.");
+// 		location.href = "./idSearch.do"
 	}
 	
 	function pwSearch(){
-		alert("구현해주세요.");
+// 		location.href = "./pwSearch.do"
 	} 
 	
 </script>

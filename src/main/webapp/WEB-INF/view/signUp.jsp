@@ -23,6 +23,7 @@ function check() {
 	var frm = document.forms[0];
 	
 	var chk = document.getElementById("chaVal").value;
+	alert(chk);
 	
 	if(pw != passOK){
 		alert("※회원가입 실패※ 비밀번호를 확인해 주세요.");
@@ -32,6 +33,7 @@ function check() {
 		alert("※회원가입 실패※ 아이디 중복 체크를 해주세요!");
 		return false;
 	}else{
+		alert("성공 이동");
 		return true;
 	}
 	
@@ -52,7 +54,7 @@ function check() {
 				alert("공백");
 				$("#result").css("color","red");
 				$("#result").html("공백이 포함된 아이디는 사용이 불가능합니다.");
-				$("#chaVal").val("0");
+				$("#chaVal").val("1");
 			}else if(inputLength >5){
 // 				alert("실행!");
 				jQuery.ajax({
@@ -65,7 +67,7 @@ function check() {
 						$("#result").html(msg);
 						var temp = msg;
 						temp = temp.substring(0,temp.indexOf("디")+1);
-						if(temp == "사용가능한 아이디입니다."){
+						if(temp == "사용가능한 아이디"){
 							$("#chaVal").val(1);
 							$("#result").css("color","blue");
 						}else{
@@ -103,7 +105,6 @@ function check() {
 		<div id="leftInfo">정보입력</div>
 		
 		<div id="conterInfo">
-			
 			<input type="text" id="id" name="id" placeholder="아이디" required="required">
 			<br>
 			
@@ -147,13 +148,10 @@ function check() {
 		
 		<div id="buttom">
 			<input type="submit" value="동의하고  회원가입" >
-			<input type="button" value="뒤로가기">
+			<input type="button" value="뒤로가기" onclick="javascript:history.back(-1)">
 		</div>
-		
-		
 		</div>
 	</form>
-	
 </div>
 
 
