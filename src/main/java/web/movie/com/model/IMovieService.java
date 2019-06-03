@@ -48,6 +48,8 @@ public interface IMovieService {
 	public List<MovieDto> selAllSeat(String movie_play_no);
 	// 상영중인 영화 -> 영화관 -> 상영관 -> 좌석 -> 가격
 	public int selSeatMoney(Map<String, String> map);
+	//예매좌석
+	public List<MovieDto> beforSeat(String movie_start_time);
 
 	
 	

@@ -246,6 +246,13 @@ public class MovieDao_Imple implements IMovieDao {
 		return n;
 	}
 
+	@Override
+	public List<MovieDto> beforSeat(String movie_start_time) {
+		logger.info("예매된 좌석");
+		List<MovieDto> lists = sqlSession.selectList(NS+"beforSeat", movie_start_time);
+		return lists;
+	}
+
 
 
 

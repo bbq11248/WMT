@@ -48,6 +48,20 @@ function moviePlayManager() {
 	location.href="./moviePlayManager.do"
 }
 
+function boardList() {
+	location.href = "./board.do";
+}
+
+function name() {
+	location.href = "./oneBoard.do?seq=BS24";
+}
+
+function name() {
+	location.href = "./deleteBoard.do?seq=BS24";
+}
+
+
+
 </script>
 </body>
 <a href="./loginForm.do">로그인</a>
@@ -69,8 +83,18 @@ function moviePlayManager() {
 <input type="button" value="상영관 관리" onclick="movieTheaterManager()">
 <input type="button" value="영화 관리" onclick="movieManager()">
 <input type="button" value="상영중인 영화 관리" onclick="moviePlayManager()">
-<br>
-<a href="./main.do">메인</a>
+
+<input type="button" value="전체글조회" onclick="boardList()">
+
+<a href="./oneBoard.do?seq=BS24">상세 글조회</a>
+
+<a href="./insertBoard.do?id=wlstnr7833&title=안녕하세요?&content=사이트에 오셔서 감사합니다.">글입력</a>
+
+<a href="./updateBoard.do?seq=BS24&id=wlstnr7833&pw=1234&title=수정합니다.&content=게시글수정완료.">글수정</a>
+
+<a href="./deleteBoard.do?seq=BS24">글삭제</a>
+
+<a href="./beforSeat.do?">예매 좌석 확인</a>
 </html>
 
 

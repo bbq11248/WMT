@@ -203,6 +203,12 @@ public class MovieService_Imple implements IMovieService {
 		return mvDao.deleteMoviePlay(map);
 	}
 
+	@Override
+	public List<MovieDto> beforSeat(String movie_start_time) {
+		logger.info("beforSeat Service 실행");
+		return mvDao.beforSeat(movie_start_time);
+	}
+
 
 	
 

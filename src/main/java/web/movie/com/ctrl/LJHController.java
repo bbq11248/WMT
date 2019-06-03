@@ -1,5 +1,6 @@
 package web.movie.com.ctrl;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import oracle.net.aso.o;
+import web.movie.com.dto.BoardDto;
 import web.movie.com.dto.MemberDto;
 import web.movie.com.dto.MovieDto;
+import web.movie.com.model.IBoardService;
 import web.movie.com.model.IMovieService;
 
 @Controller
@@ -29,6 +32,10 @@ public class LJHController {
 	
 	@Autowired
 	IMovieService movieService;
+	
+	@Autowired
+	IBoardService boardService;
+	
 	//마일리지 확인
 	@RequestMapping(value = "/mileageChk.do", method = RequestMethod.GET)
 	public String selectMileage(String id, Model model) {
@@ -146,12 +153,15 @@ public class LJHController {
 	//선택한 상영관의 좌석 선택
 	@ResponseBody
 	@RequestMapping(value = "/seatChk.do", method = RequestMethod.GET)
-	public Map<String, List<MovieDto>> selAllSeat(String movie_play_no, Model model, HttpSession session) {
+	public Map<String, Object> selAllSeat(String movie_play_no, String movie_start_time, Model model, HttpSession session) {
 		List<MovieDto> lists = movieService.selAllSeat(movie_play_no);
-		Map<String, List<MovieDto>> seat = new HashMap<String, List<MovieDto>>();
+		List<MovieDto> beforSeat = movieService.beforSeat(movie_start_time);
+//		DTO dto = movieService.selBeforeSeat(movie_play_no); //Dto
+		Map<String, Object> seat = new HashMap<String, Object>();
 		System.out.println(lists);
 		session.setAttribute("movie_play_no", movie_play_no);
 		seat.put("seat", lists);
+		seat.put("beforeseat", beforSeat.toString());
 		return seat;
 	}
 	//선택한 좌석의 가격 확인 및 예매 
@@ -555,9 +565,9 @@ public class LJHController {
 		return "selectMP";
 	}
 	@RequestMapping(value="/deleteMP.do", method=RequestMethod.GET)
-	public String deleteMP(String[] movie_play_no, Model model) {
+	public String deleteMP(String[] movie_play_chk, Model model) {
 		Map<String, String[]> map = new HashMap<String, String[]>();
-		map.put("seq", movie_play_no);
+		map.put("movie_play_no_", movie_play_chk);
 		int n = movieService.deleteMoviePlay(map);
 		System.out.println(n);
 		if(n >= 1) {
@@ -568,13 +578,44 @@ public class LJHController {
 			//errMsg, url
 			model.addAttribute("errMsg", "잘못된 접근입니다. \n 관리자에게 문의 하세요");
 			model.addAttribute("url", "/loginForm.do");
-			return "error_req";
+			return "error_pag";
 		}
+	}
+	@RequestMapping(value="/board.do", method=RequestMethod.GET)
+	public String selectBoard(Model model) {
+		List<BoardDto> lists = boardService.selectList();
+		model.addAttribute("lists", lists);
+		return "boardList";
+	}
+	
+	@RequestMapping(value="/oneBoard.do", method=RequestMethod.GET)
+	public String detailBoard(String seq, Model model) {
+		BoardDto bDto = boardService.selectOneList(seq);
+		model.addAttribute("bDto", bDto);
+		return "boardDetail";
+	}
+	
+	@RequestMapping(value="/updateBoardForm.do", method=RequestMethod.GET)
+	public String updateBoardForm(String seq, String id, String title, String content, Model model) {
+		model.addAttribute("seq", seq);
+		model.addAttribute("id", id);
+		model.addAttribute("title", title);
+		model.addAttribute("content", content);
+		return "updateBoardForm";
 	}
 
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
 	public String main() {
 		return "main";
+	}
+	
+	@RequestMapping(value="/beforSeat.do", method = RequestMethod.GET)
+	public String beforSeat(String movie_start_time, Model model) {
+		movie_start_time = "20190515 17:21";
+		List<MovieDto> lists = movieService.beforSeat(movie_start_time);
+		System.out.println(lists);
+		model.addAttribute("lists", lists);
+		return "asda";
 	}
 
 }
