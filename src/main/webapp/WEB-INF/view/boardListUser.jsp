@@ -19,9 +19,6 @@
 	function detailBoard(seq) {
 		location.href = "./oneBoard.do?seq="+seq;
 	}
-	function insertBoard() {
-		location.href = "./insertBoardForm.do" 
-	}
 	function main() {
 		location.href = "./main.do"
 	}
@@ -34,6 +31,7 @@
 		</div>
 	</div>
 	<input type="button" value="글 입력 " onclick="insertBoard()">
+	<div class="content">
 	<table>
 		<tr>
 			<td>글번호</td>
@@ -52,7 +50,7 @@
 			</tr>
 		</c:forEach>
 	</table>
-	
+	</div>
 		<div class="footer">
 			<div>
 				<table>

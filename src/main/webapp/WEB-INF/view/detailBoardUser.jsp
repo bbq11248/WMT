@@ -9,19 +9,12 @@
 <meta charset="UTF-8">
 
 <link rel="stylesheet" type="text/css" href="./css/header.css">
-<link rel="stylesheet" type="text/css" href="./css/content.css">
 <link rel="stylesheet" type="text/css" href="./css/footer.css">
 
-<title>공지사항 페이지</title>
+<title>Insert title here</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
 <script type="text/javascript">
-	function detailBoard(seq) {
-		location.href = "./oneBoard.do?seq="+seq;
-	}
-	function insertBoard() {
-		location.href = "./insertBoardForm.do" 
-	}
 	function main() {
 		location.href = "./main.do"
 	}
@@ -33,27 +26,25 @@
 			<h1><a><img onclick="main()" src="./image/logo.png"></a> WMT</h1>
 		</div>
 	</div>
-	<input type="button" value="글 입력 " onclick="insertBoard()">
+	<div class="content">
 	<table>
 		<tr>
 			<td>글번호</td>
-			<td>글제목</td>
+			<td>제목</td>
+			<td>내용</td>
 			<td>작성자</td>
 			<td>작성일</td>
 		</tr>
-		<c:forEach items="${lists}" var="lists">
-			<tr>
-				<td>${lists.seq}</td>
-				<td>
-					<input type="button" value="${lists.title}" onclick="detailBoard('${lists.seq}')">
-				</td>
-				<td>${lists.id}</td>
-				<td>${lists.regdate}</td>
-			</tr>
-		</c:forEach>
+		<tr>
+			<td>${bDto.seq}</td>
+			<td>${bDto.title}</td>
+			<td>${bDto.content}</td>
+			<td>${bDto.id}</td>
+			<td>${bDto.regdate}</td>
+		</tr>
 	</table>
-	
-		<div class="footer">
+	</div>
+	<div class="footer">
 			<div>
 				<table>
 					<tr>
@@ -69,6 +60,7 @@
 				</table>
 			</div>
 		</div>
-</div>
+	
+	</div>
 </body>
 </html>

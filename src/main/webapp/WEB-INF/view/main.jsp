@@ -33,6 +33,9 @@
 	function selMovieList() {
 		location.href = "./selMList.do"
 	}
+	function boardList() {
+		location.href = "./board.do";
+	}
 	function mileageCG() {
 		location.href="./mileageForm.do"
 	}
@@ -53,6 +56,7 @@
 			<input type="text" value="${mileage}" readonly="readonly"> 
 			<input type="button" value="마이 페이지" onclick="memberInfo()"> 
 			<input type="button" value="로그아웃" onclick="logoutForm()">
+			<input type="button" value="공지 사항" onclick="boardList()">
 		</div>
 		<div class="menu">
 			<div class="menu-bar">
