@@ -78,16 +78,18 @@
 			url:"./seatChk.do",
 			data : {"movie_play_no" : movie_play_no, "movie_start_time" : movie_start_time},
 			dataType : "json",
-			success: function(theater, befor){
+			success: function(theater){
 				alert("성공");
 				document.getElementById("seatList").innerHTML = "";
 				document.getElementById("sessionInfo3").innerHTML = "";
-				alert(theater.seat.length);
+				alert(theater.seat.length+"----");
 				document.getElementById("sessionInfo3").innerHTML += "<input id='movie_play_no' type='hidden' value='"+movie_play_no+"' name='movie_play_no'>";
-				for(var i = 0; i < theater.seat.length; i++){
-					if(dto.indexOf(theater.seat[i].rowcol) == -1){
-					document.getElementById("seatList").innerHTML += "<input type='button' onclick='seatprice(\""+theater.seat[i].rowcol+"\",\""+theater.seat[i].movie_theater_no+"\",\""+movie_play_no+"\")' value='"+theater.seat[i].rowcol+"'>"
-					}
+				theater.seat.length
+					for(var i = 0; i < theater.seat.length; i++){
+						if(theater.beforSeat.indexOf(theater.seat[i].rowcol+",") == -1){
+// 							alert(theater.beforSeat[j].seat_no);
+							document.getElementById("seatList").innerHTML += "<input type='button' onclick='seatprice(\""+theater.seat[i].rowcol+"\",\""+theater.seat[i].movie_theater_no+"\",\""+movie_play_no+"\")' value='"+theater.seat[i].rowcol+"'>"
+						}
 				}
 				
 			},

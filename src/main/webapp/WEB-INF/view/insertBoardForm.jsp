@@ -11,34 +11,32 @@
 </head>
 <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
 <body>
-	<form action="./updateBoard.do">
+	<form action="./insertBoard.do">
 		<table>
 			<tr>
-				<td>글제목</td>
-				<td>
-					<input type="text" readonly="readonly" value="${seq}" name="seq">
-				</td>
-			</tr>
-			<tr>
-				<td>작성자</td>
+				<th>작성자</th>
 				<td>
 					<input type="text" readonly="readonly" value="${id}" name="id">
 				</td>
 			</tr>
 			<tr>
-				<td>제목</td>
+				<th>제목</th>
 				<td>
-					<input type="text" value="${title}" name="title">
+					<input type="text" name="title">
 				</td>
 			</tr>
 			<tr>
-				<td>내용</td>
+				<th>내용</th>
 				<td>
-					<input type="text" value="${content}" name="content">
+					<textarea rows="10" cols="20" name="content"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="submit" value="완료">
 				</td>
 			</tr>
 		</table>
-		<input type="submit" value="완료">
 	</form>
 </body>
 </html>

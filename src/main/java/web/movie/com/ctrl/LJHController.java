@@ -38,11 +38,12 @@ public class LJHController {
 	
 	//마일리지 확인
 	@RequestMapping(value = "/mileageChk.do", method = RequestMethod.GET)
-	public String selectMileage(String id, Model model) {
+	public String selectMileage(String id, Model model, HttpSession session) {
 		logger.info("LJHController selectMileage 실행");
 		int mileage = movieService.selectMileage(id);
 		System.out.println(mileage);
 		model.addAttribute("mileage", mileage);
+		session.setAttribute("mileage", mileage);
 		return "mileage";
 	}
 	//마일리지 충전 화면 이동
@@ -158,10 +159,17 @@ public class LJHController {
 		List<MovieDto> beforSeat = movieService.beforSeat(movie_start_time);
 //		DTO dto = movieService.selBeforeSeat(movie_play_no); //Dto
 		Map<String, Object> seat = new HashMap<String, Object>();
-		System.out.println(lists);
+//		System.out.println(lists);
+//		System.out.println(beforSeat+"0000");
+		String reserveSeat = "";
+		for (int i = 0; i < beforSeat.size(); i++) {
+			reserveSeat += beforSeat.get(i).getSeat_no()+",";
+		}
+		System.out.println(reserveSeat);
 		session.setAttribute("movie_play_no", movie_play_no);
 		seat.put("seat", lists);
-		seat.put("beforeseat", beforSeat.toString());
+		seat.put("beforSeat", reserveSeat);
+//		seat.put("test", ((List<MovieDto>) seat.get("beforSeat")).get(0).getSeat_no());
 		return seat;
 	}
 	//선택한 좌석의 가격 확인 및 예매 
@@ -582,26 +590,84 @@ public class LJHController {
 		}
 	}
 	@RequestMapping(value="/board.do", method=RequestMethod.GET)
-	public String selectBoard(Model model) {
+	public String selectBoard(Model model, HttpSession session) {
+		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
+		String id = mbDto.getId();
 		List<BoardDto> lists = boardService.selectList();
 		model.addAttribute("lists", lists);
 		return "boardList";
 	}
 	
 	@RequestMapping(value="/oneBoard.do", method=RequestMethod.GET)
-	public String detailBoard(String seq, Model model) {
+	public String detailBoard(String seq, Model model, HttpSession session) {
+		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
+		String id = mbDto.getId();
 		BoardDto bDto = boardService.selectOneList(seq);
 		model.addAttribute("bDto", bDto);
 		return "boardDetail";
 	}
 	
 	@RequestMapping(value="/updateBoardForm.do", method=RequestMethod.GET)
-	public String updateBoardForm(String seq, String id, String title, String content, Model model) {
+	public String updateBoardForm(String seq, String id, String title, String content, Model model, HttpSession session) {
+		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
+		id = mbDto.getId();
 		model.addAttribute("seq", seq);
 		model.addAttribute("id", id);
 		model.addAttribute("title", title);
 		model.addAttribute("content", content);
 		return "updateBoardForm";
+	}
+	
+	@RequestMapping(value="/updateBoard.do", method=RequestMethod.GET)
+	public String updateBoard(String seq, String id, String title, String content, Model model, HttpSession session) {
+		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
+		id = mbDto.getId();
+		BoardDto bDto = new BoardDto();
+		bDto.setId(id);
+		bDto.setSeq(seq);
+		bDto.setContent(content);
+		bDto.setTitle(title);
+		boolean isc = boardService.updateBoard(bDto);
+		System.out.println(isc);
+		if(isc) {
+			bDto = boardService.selectOneList(seq);
+			model.addAttribute("bDto", bDto);
+			return "boardDetail";
+		}else {
+			return "err";
+		}
+	}
+	
+	@RequestMapping(value="/deleteBoard.do", method=RequestMethod.GET)
+	public String deleteBoard(String seq, Model model) {
+		boolean isc = boardService.deleteBoard(seq);
+		if(isc) {
+			List<BoardDto> lists = boardService.selectList();
+			model.addAttribute("lists", lists);
+			return "boardList";
+		}else {
+			return "err";
+		}
+	}
+	
+	@RequestMapping(value="/insertBoardForm.do", method=RequestMethod.GET)
+	public String insertBoardForm(HttpSession session, Model model) {
+		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
+		String id = mbDto.getId();
+		model.addAttribute("id", id);
+		return "insertBoardForm";
+	}
+	@RequestMapping(value="/insertBoard.do", method=RequestMethod.GET)
+	public String insertBoard(String id,String content, String title, HttpSession session, Model model) {
+		BoardDto bDto = new BoardDto();
+		bDto.setId(id);
+		bDto.setContent(content);
+		bDto.setTitle(title);
+		boardService.insertBoard(bDto);
+		System.out.println(bDto);
+		List<BoardDto> lists = boardService.selectList();
+		model.addAttribute("lists", lists);
+		return "boardList";
 	}
 
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)

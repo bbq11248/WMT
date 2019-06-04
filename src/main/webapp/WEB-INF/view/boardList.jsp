@@ -14,8 +14,12 @@
 	function detailBoard(seq) {
 		location.href = "./oneBoard.do?seq="+seq;
 	}
+	function insertBoard() {
+		location.href = "./insertBoardForm.do" 
+	}
 </script>
 <body>
+	<input type="button" value="글 입력 " onclick="insertBoard()">
 	<table>
 		<tr>
 			<td>글번호</td>
