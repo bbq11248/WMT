@@ -2,6 +2,7 @@ package web.movie.com.ctrl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -107,6 +109,28 @@ public class YJSController {
 			return "실패";
 		}
 	}
+	
+	@RequestMapping(value="/btdCheck.do", method=RequestMethod.POST, produces="application/text;charset=UTF-8")
+	@ResponseBody
+	public String btdCheck(String birthday) {
+		System.out.println(birthday +":btdCheck");
+		String regex =  "^[0-9]*$";
+		boolean isc = birthday.matches(regex);
+		System.out.println(isc+":btdCheck");
+		return (isc) ? "사용가능합니다." : "숫자만 입력해주세요.";
+	}
+	
+	@RequestMapping(value="/pnumCheck.do", method=RequestMethod.POST,  produces="application/text;charset=UTF-8")
+	@ResponseBody
+	public String pnumCheck(String phone) {
+		System.out.println(phone + ":pnumCheck");
+		String regex = "^[0-9]*$";
+		boolean isc = phone.matches(regex);
+		System.out.println(isc + ":pnumCheck");
+		return (isc)? "사용가능합니다." : "숫자만 입력해주세요.";
+	}
+	
+	
 	
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
 	public String memLogin(HttpSession session, Model model) {

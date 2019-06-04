@@ -23,7 +23,7 @@ function check() {
 	var frm = document.forms[0];
 	
 	var chk = document.getElementById("chaVal").value;
-	alert(chk);
+// 	alert(chk);
 	
 	if(pw != passOK){
 		alert("※회원가입 실패※ 비밀번호를 확인해 주세요.");
@@ -33,11 +33,13 @@ function check() {
 		alert("※회원가입 실패※ 아이디 중복 체크를 해주세요!");
 		return false;
 	}else{
-		alert("성공 이동");
+// 		alert("성공 이동");
 		return true;
 	}
 	
 }
+
+
 
 	// 아이디 중복, 요효값 검사
 	$(document).ready(function() {
@@ -73,7 +75,6 @@ function check() {
 						}else{
 							$("#chaVal").val(0);
 							$("#result").css("color","red");
-				
 						}
 					}
 				});
@@ -86,9 +87,102 @@ function check() {
 		});
 	});
 	
+	$(document).ready(function() {
+		$("#birthday").keyup(function() {
+			var inputLength = $(this).val().length;
+// 			alert("inputLength");
+			
+			var btd = $(this).val();
+			
+			if(inputLength == 6){
+// 				alert("실행됐습니까?");
+				jQuery.ajax({
+					url:"./btdCheck.do",
+					type: "post",
+					data:"birthday="+$(this).val(),
+					async: false,
+					success: function(msg) {
+// 						alert(msg);
+						$("#btdresult").html(msg);
+						var temp = msg;
+						if(temp == "사용가능합니다."){
+							$("#btdresult").css("color","blue");
+						}else{
+							$("#btdresult").css("color","red");
+						}
+					
+					}
+				});
+			}else if(inputLength < 6){
+				$("#btdresult").css("color","red");
+				$("#btdresult").html("6자리를 입력해주세요.")
+			}
+			
+			
+		});
+	});
+	
+	
+	$(document).ready(function() {
+		$("#phone").keyup(function() {
+			var inputLength = $(this).val().length;
+// 			alert("inputLength");
+
+			var pnum = $(this).val();
+			
+			if(inputLength == 11){
+// 				alert("실행됐니?");
+				jQuery.ajax({
+					url:"./pnumCheck.do",
+					type: "post",
+					data: "phone="+$(this).val(),
+					async: false,
+					success: function(msg) {
+// 						alert(msg);
+						$("#pnumresult").html(msg);
+						var temp = msg;
+						if(temp == "사용가능합니다."){
+							$("#pnumresult").css("color","blue");
+						}else{
+							$("#pnumresult").css("color","red");
+						}
+					}
+				});
+			}else if(inputLength < 11){
+				$("#pnumresult").css("color","red");
+				$("#pnumresult").html("11자리를 입력해주세요.");
+			}
+			
+		});
+	});
+	
+	function emailcheck() {
+		var email = document.getElementById("email").value;
+		var exptext = /^[A-Za-z\.\-]+@[A-Za-z\-]+\.[A-Za-z\-]+/;
+		
+		if(!exptext.test(email)){
+			alert("잘못작성했쨔나~ㅠ__ㅠ");
+		}	//맞으면 true아니면 false
+	}
+	
+	
+// function btdOK() {
+// 	var btd = document.getElementById("birthday").value;
+// 	var re = /^[0-9]+$/;
+	
+// 	if(!re.test(btd)){
+// 	alert("숫자만입력해주세요.");
+// 	return false;
+// 		}else{
+// 			return true;
+// 		}
+// 	}
+	
 	
 	
 </script>
+
+
 
 <body>
 <div id="container">
@@ -111,21 +205,25 @@ function check() {
 			<span id="result"></span>
 			<br>
 			
-			<input type="text" id="password" name="pw" placeholder="비밀번호" required="required">
+			<input type="password" id="password" name="pw" placeholder="10자리이하 비밀번호" required="required" maxlength="10">
 			<br>
-			<input type="text" id="passwordcheck" name="passOK" placeholder="비밀번호 확인" required="required">
+			<input type="password" id="passwordcheck" name="passOK" placeholder="비밀번호 확인" required="required" maxlength="10">
 			<br>
 			<input type="text" id="name" name="name" placeholder="이름" required="required">
 			<br>
 			<input type="text" id="nickname" name="nickname" placeholder="닉네임" required="required">
 			<br>
-			<input type="text" id="birthday" name="birthday" placeholder="생년월일 예) 951230" required="required">
+			<input type="text" id="birthday" name="birthday" placeholder="생년월일 예) 951230" required="required" maxlength="6">
 			<br>
-			<input type="text" id="phone" name="phone" placeholder="전화번호 예) 01012341234" required="required"> 
+			<span id="btdresult"></span>
+			<br>
+			<input type="text" id="phone" name="phone" placeholder="전화번호 예) 01012341234" required="required" maxlength="11"> 
+			<br>
+			<span id="pnumresult"></span>
 			<br>
 			<input type="text" id="address" name="address" placeholder="주소" required="required">
 			<br>
-			<input type="text" id="email" name="email" placeholder="이메일" required="required">
+			<input type="text" id="email" name="email" placeholder="이메일" required="required" onclick="emailcheck()">
 			
 		</div>	
 		<div id="rightInfo"></div>
