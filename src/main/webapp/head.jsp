@@ -69,5 +69,17 @@
 		<input class="headerBtn" type="button" value="공지 사항">
 		</div>
 	</div>
+	
+	<div>
+		<table>
+			<tr>
+				<td>영화 예매 하기</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+	</div>
 </body>
 </html>
