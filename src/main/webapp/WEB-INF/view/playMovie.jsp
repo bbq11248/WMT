@@ -128,10 +128,19 @@
 		location.href="./ticketing.do?movie_play_no="+movie_play_no+"&id=wlstnr7833&rowcol="+rowcol+"&price="+price;
 	}
 	
-	
+	function main() {
+		location.href = "./main.do"
+	}
 	
 </script>
 <body>
+	<div class="main">
+		<div class="main_header">
+			<h1><a><img onclick="main()" src="./image/logo.png"></a> WMT</h1>
+		</div>
+		<div class="main_info">
+		</div>
+	</div>
 ${movie_no}
 ${theater_no}
 ${movie_theater_no}

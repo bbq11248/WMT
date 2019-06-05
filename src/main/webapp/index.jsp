@@ -1,15 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <% request.setCharacterEncoding("UTF-8"); %>
+    <% response.setContentType("text/html; charset=UTF-8"); %>
+<link rel="stylesheet" type="text/css" href="./css/header.css">
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Spring Test page</title>
+<title>WMP main</title>
 </head>
 <body>
 <script type="text/javascript">
+function login() {
+	location.href = "./loginForm.do"
+}
+
+function signUp() {
+	location.href = "./signupForm.do"
+}
+
 function mileageChk() {
-	location.href="./mileageChk.do?id=wlstnr7833"
+	location.href="./mileageChk.do"
 }
 function mileageCG() {
 	location.href="./mileageForm.do"
@@ -49,12 +60,25 @@ function moviePlayManager() {
 }
 
 function boardList() {
-	location.href = "./board.do";
+	location.href = "./index.jsp";
 }
 
+function main() {
+	location.href = "./main.do"
+}
 
 </script>
 </body>
+	<div class="main">
+		<div class="main_header">
+			<h1><a><img onclick="main()" src="./image/logo.png"></a> WMT</h1>
+		</div>
+		<div class="main_info">
+			<input type="button" value="로그인" onclick="login()">
+			<input type="button" value="회원가입" onclick="signUp()">
+			<input type="button" value="공지 사항" onclick="boardList()">
+		</div>
+	</div>
 <a href="./loginForm.do">로그인</a>
 <a href="jin.jsp">진숙 테스트</a>
 <br>
@@ -64,9 +88,7 @@ function boardList() {
 
 
 <input type="button" value="예매 내역 보기" onclick="ticketChk()">
-<!-- <input type="button" value="예매 내역 상세 보기" onclick="ticketDitail()"> -->
 <input type="button" value="예매" onclick="ticketing()">
-<!-- <input type="button" value="예매 취소" onclick="ticketCancel()"> -->
 
 <input type="button" value="상영중인 영화 보기" onclick="playMovieList()">
 
@@ -75,7 +97,6 @@ function boardList() {
 <input type="button" value="영화 관리" onclick="movieManager()">
 <input type="button" value="상영중인 영화 관리" onclick="moviePlayManager()">
 
-<input type="button" value="전체글조회" onclick="boardList()">
 </html>
 
 

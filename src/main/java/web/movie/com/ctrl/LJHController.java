@@ -1,12 +1,9 @@
 package web.movie.com.ctrl;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import oracle.net.aso.o;
 import web.movie.com.dto.BoardDto;
 import web.movie.com.dto.MemberDto;
 import web.movie.com.dto.MovieDto;
@@ -38,8 +34,10 @@ public class LJHController {
 	
 	//마일리지 확인
 	@RequestMapping(value = "/mileageChk.do", method = RequestMethod.GET)
-	public String selectMileage(String id, Model model, HttpSession session) {
+	public String selectMileage(Model model, HttpSession session) {
 		logger.info("LJHController selectMileage 실행");
+		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
+		String id = mbDto.getId();
 		int mileage = movieService.selectMileage(id);
 		System.out.println(mileage);
 		model.addAttribute("mileage", mileage);
@@ -62,7 +60,7 @@ public class LJHController {
 		System.out.println(mileageCg);
 		String text = milageCG;
 		System.out.println(text);
-		return "main";
+		return "redirect:/main.do";
 	}
 	//결제 내역 보기
 	@RequestMapping(value = "/payList.do", method = RequestMethod.GET)
@@ -107,10 +105,9 @@ public class LJHController {
 		mvDto.setPrice(Integer.parseInt(price));
 		int n = movieService.cancel(mvDto, ticketing_no);
 		System.out.println(n);
-		model.addAttribute("mvDto", mvDto);
 		List<MovieDto> lists = movieService.selectTicket(id);
 		model.addAttribute("lists", lists);
-		return "ticketList";
+		return "redirect:/ticketList.do";
 	}
 	//상영중인 영화 선택
 	@RequestMapping(value = "/playMovie.do", method = RequestMethod.GET)
@@ -203,7 +200,7 @@ public class LJHController {
 		List<MovieDto> lists = movieService.selectTicket(id);
 		model.addAttribute("lists", lists);
 		System.out.println(n);
-		return "ticketList";
+		return "redirect:/ticketList.do";
 	}
 
 	// 영화관
@@ -227,7 +224,9 @@ public class LJHController {
 		map.put("theater_local", theater_local);
 		int n = movieService.insertTheater(map);
 		System.out.println(n);
-		return null;
+		List<MovieDto> lists = movieService.selectTheater();
+		System.out.println(lists);
+		return "redirect:/selT.do";
 	}
 
 	// 영화관 수정 폼
@@ -250,7 +249,7 @@ public class LJHController {
 		System.out.println(n);
 		List<MovieDto> lists = movieService.selectOneTheater(theater_no);
 		model.addAttribute("lists", lists);
-		return "theater_detail";
+		return "redirect:/selOneT.do";
 	}
 
 	// 영화관 목록 보기
@@ -302,7 +301,7 @@ public class LJHController {
 		System.out.println(n);
 		List<MovieDto> lists = movieService.selectOneTheater(theater_no);
 		model.addAttribute("lists", lists);
-		return "theater_detail";
+		return "redirect:/detailMT.do";
 	}
 
 	@RequestMapping(value = "/updateMTForm.do", method = RequestMethod.GET)
@@ -324,7 +323,7 @@ public class LJHController {
 		System.out.println(n);
 		List<MovieDto> lists = movieService.selectOneTheater(theater_no);
 		model.addAttribute("lists", lists);
-		return "theater_detail";
+		return "redirect:/detailMT.do";
 	}
 
 	@RequestMapping(value = "/listMT.do", method = RequestMethod.GET)
@@ -405,7 +404,7 @@ public class LJHController {
 		List<MovieDto> lists = movieService.detailMovieT(movie_theater_no);
 		model.addAttribute("lists", lists);
 		session.setAttribute("movie_theater_no", movie_theater_no);
-		return "movie_theater_detail";
+		return "redirect:/detailMT.do";
 	}
 	//좌석 보기
 	@RequestMapping(value = "/selSeat.do", method = RequestMethod.GET)
@@ -439,7 +438,7 @@ public class LJHController {
 		System.out.println(n);
 		List<MovieDto> lists = movieService.selSeat(seat);
 		model.addAttribute("lists", lists);
-		return "setList";
+		return "redirect:/selSeat.do";
 	}
 
 	// 영화
@@ -467,7 +466,7 @@ public class LJHController {
 		System.out.println(n);
 		List<MovieDto> lists = movieService.selectMovie();
 		model.addAttribute("lists", lists);
-		return "movie_list";
+		return "redirect:/listM.do";
 	}
 
 	@RequestMapping(value = "/updateMForm.do", method = RequestMethod.GET)
@@ -497,7 +496,7 @@ public class LJHController {
 		System.out.println(n);
 		List<MovieDto> lists = movieService.selOneMovie(movie_no);
 		model.addAttribute("lists", lists);
-		return "movie_detail";
+		return "redirect:/oneM.do";
 	}
 
 	@RequestMapping(value = "/listM.do", method = RequestMethod.GET)
@@ -538,7 +537,7 @@ public class LJHController {
 		System.out.println(n);
 		List<MovieDto> lists = movieService.selectMoviePlay();
 		model.addAttribute("lists", lists);
-		return "selectMP";
+		return "redirect:/selectMP.do";
 	}
 	@RequestMapping(value="/updateMPForm.do", method=RequestMethod.GET)
 	public String updateMPForm(String movie_name, String theater_name, String movie_theater_name, String movie_start_time, String times, String movie_play_no, Model model) {
@@ -563,7 +562,7 @@ public class LJHController {
 		System.out.println(n);
 		List<MovieDto> lists = movieService.selectMoviePlay();
 		model.addAttribute("lists", lists);
-		return "selectMP";
+		return "redirect:/selectMP.do";
 	}
 	@RequestMapping(value="/selectMP.do", method=RequestMethod.GET)
 	public String selectMP(Model model) {
@@ -581,7 +580,7 @@ public class LJHController {
 		if(n >= 1) {
 			List<MovieDto> lists = movieService.selectMoviePlay();
 			model.addAttribute("lists", lists);
-			return "selectMP";
+			return "redirect:/selectMP.do";
 		}else {
 			//errMsg, url
 			model.addAttribute("errMsg", "잘못된 접근입니다. \n 관리자에게 문의 하세요");
@@ -591,8 +590,6 @@ public class LJHController {
 	}
 	@RequestMapping(value="/board.do", method=RequestMethod.GET)
 	public String selectBoard(Model model, HttpSession session) {
-		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
-		String id = mbDto.getId();
 		List<BoardDto> lists = boardService.selectList();
 		model.addAttribute("lists", lists);
 		return "boardList";
@@ -632,7 +629,7 @@ public class LJHController {
 		if(isc) {
 			bDto = boardService.selectOneList(seq);
 			model.addAttribute("bDto", bDto);
-			return "boardDetail";
+			return "redirect:/oneBoard.do";
 		}else {
 			return "err";
 		}
@@ -644,7 +641,7 @@ public class LJHController {
 		if(isc) {
 			List<BoardDto> lists = boardService.selectList();
 			model.addAttribute("lists", lists);
-			return "boardList";
+			return "redirect:/board.do";
 		}else {
 			return "err";
 		}
@@ -667,12 +664,18 @@ public class LJHController {
 		System.out.println(bDto);
 		List<BoardDto> lists = boardService.selectList();
 		model.addAttribute("lists", lists);
-		return "boardList";
+		return "redirect:/board.do";
 	}
 
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
-	public String main() {
-		return "main";
+	public String main(HttpSession session) {
+		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
+		String id = mbDto.getId();
+		if (id != null || id != "") {
+			return "main";
+		}else {
+			return "";
+		}
 	}
 	
 	@RequestMapping(value="/beforSeat.do", method = RequestMethod.GET)

@@ -25,9 +25,11 @@ public class Interceptor extends HandlerInterceptorAdapter {
 		logger.debug("인터셉터 시작---{}", new Date());
 		HttpSession session =  request.getSession();
 //		session.getAttribute("loginDto");
-		if(session.getAttribute("loginDto") == null) {
+		if(session.getAttribute("memberLogin") == null) {
 			response.sendRedirect("./index.jsp");
 			return false;
+		}else {
+			response.sendRedirect("./main.do");
 		}
 		return super.preHandle(request, response, handler);
 	}

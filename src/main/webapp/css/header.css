@@ -1,6 +1,59 @@
-	h2{
+body{
+		width: 1080px;
+		height: 990px;
 		text-align: center;
+		margin-left: 411.5px; 
+	}
+	.main{
+		width: 1080px;
+		height: 70px;
+		background-color: yellow;
+		margin-bottom: 20px;
+	}
+	.main_header h1{
+		margin: 0px;
+	}
+	.main_info{
+		float: right;
+	}
+	.content{
+		width: 1080px;
+		height: 780px;
+		background-color: aqua;
+		margin-bottom: 20px;
+	}
+	.movie{
+		width: 600px;
+		height: 420px;
+		margin-left: 240px;
+	}
+	.premovie{
+		width: 280px;
+		height: 400px;
+		position: absolute;
+		margin-left: 20px;
+	}
+	.posterhead{
+ 		margin: 0px;
 	}
 	
-	
+	.playmovie{
+		width: 280px;
+		height: 400px;
+		float: right;
+		margin-right: 20px;
+	}
+	.playmovie .poster{
+		float: right;
+	}
+	.poster{
+		background-color: red;
+		width: 240px;
+		height: 388px;
+	}
+	.footer{
+		width: 1080px;
+		height: 100px;
+		background-color: orange; 
+	}
 	

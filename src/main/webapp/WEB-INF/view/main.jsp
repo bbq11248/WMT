@@ -58,6 +58,13 @@ function boardList() {
 </head>
 <body>
 	${milage}
+	<div class="main">
+		<div class="main_header">
+			<h1><a><img onclick="main()" src="./image/logo.png"></a> WMT</h1>
+		</div>
+		<div class="main_info">
+		</div>
+	</div>
 	<div>
 		<h2>WMT</h2>
 		<input type="button" value="마일리지 충전" onclick="mileageCG()">

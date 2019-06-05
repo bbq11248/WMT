@@ -19,11 +19,11 @@
 // 			dataType : "json",
 // 			success: function(mvDto) {
 // 				alert(movie_start_time);
-				var year = movie_start_time.substring(0, 2);
-				var month = movie_start_time.substring(2, 4);
-				var day = movie_start_time.substring(4, 6);
-				var hour = movie_start_time.substring(7, 9);
-				var min = movie_start_time.substring(10, 12);
+				var year = movie_start_time.substring(2, 4);
+				var month = movie_start_time.substring(4, 6);
+				var day = movie_start_time.substring(6, 8);
+				var hour = movie_start_time.substring(9, 11);
+				var min = movie_start_time.substring(12, 14);
 // 				alert("" + year + month + day + hour + min);
 				var date = new Date();
 				var nowYear = date.getFullYear();
@@ -31,23 +31,47 @@
 // 				alert(nowYear);
 				var nowMonth = date.getMonth();
 				nowMonth = nowMonth + 1 + "";
+				alert(nowMonth);
+				alert(nowMonth.length);
 				if(nowMonth.length == 1){
 					nowMonth = "0" + nowMonth;
 				}
+				alert(nowMonth)
 				var nowDay = date.getDate() + "";
-				var nowHour = date.getHours();
-				var nowMin = date.getMinutes();
+				alert(nowDay.length);
+				if (nowDay.length == 1) {
+					nowDay = "0" + nowDay;
+				}inter
+				alert(nowDay);
+				var nowHour = date.getHours() + "";
+				var nowMin = date.getMinutes() + "";
+				alert(nowHour.length);
+				if(nowHour.length == 1){
+					nowHour = "0" + nowHour;
+				}
+				alert(nowHour);
+				alert(nowMin.length);
+				if(nowMin.length == 1){
+					nowMin = "0" + nowMin;
+				}
+				alert(nowMin);
 				var strDate = "" + year + month + day + hour + min;
 				var nowDate = "" + nowYear + nowMonth + nowDay + nowHour + nowMin;
 // 				alert(strDate+":"+nowDate);
 				nowDate = Number(nowDate);
 				strDate = Number(strDate);
 				alert(strDate-nowDate);
+				alert(strDate);
+				alert(nowDate);
 // 					price = (Number(preci) * 0.8).toFixed(0);
 				if(strDate - nowDate < 30 && strDate - nowDate > 0){
-					price = Number(price);
-					price *= 0.8;
-					location.href = "./cancel.do?id="+id+"&price="+price+"&ticketing_no="+ticketing_no;
+					if(confirm("영화 시작 30분 전에 취소하시면 결제 금액의 80% 만 환불 받을수 있습니다. \n 정말 취소 하시겠습니까 ?") == true){
+						price = Number(price);
+						price *= 0.8;
+						location.href = "./cancel.do?id="+id+"&price="+price+"&ticketing_no="+ticketing_no;
+					}else{
+						return false;
+						}
 				} else if(strDate - nowDate <= 0){
 					if(confirm("지금 취소 하시면 금액을 환불 받으실수 없습니다 그래도 하시겠습니까 ?") == true){
 						alert(true);
@@ -55,13 +79,20 @@
 						price = 0;
 						location.href = "./cancel.do?id="+id+"&price="+price+"&ticketing_no="+ticketing_no;
 					}else{
-						alert(false);
+						return false;
+					}
+					}else if (strDate - nowDate >= 30){
+						if(confirm("정말 취소 하시겠습니까 ?") == true){
+							location.href = "./cancel.do?id="+id+"&price="+price+"&ticketing_no="+ticketing_no;
+						}else{
+							return false;
+						}
 					}
 				}
 // 			}
 			
 // 		});
-	}
+	
 </script>
 <body>
 	<table>

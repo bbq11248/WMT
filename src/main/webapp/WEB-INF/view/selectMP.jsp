@@ -44,6 +44,9 @@
 			return false;
 		}
 	}
+	function insertMP() {
+		location.href = "./insertMPForm.do"
+	}
 </script>
 <body>
 	<form action="#" method="get" id="deleteForm" onsubmit="return chkBox()">
@@ -77,9 +80,11 @@
 			<tr>
 				<td>
 					<input type="submit" value="삭제">
+					<input type="button" value="등록" onclick="insertMP()">
 				</td>
 			</tr>
 		</table>
 	</form>
+	
 </body>
 </html>

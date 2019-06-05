@@ -38,6 +38,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/interceptor.do" />
+			<mvc:mapping path="/main.do" />
 			<bean class="web.movie.com.interceptor.Interceptor" />
 		</mvc:interceptor>
 

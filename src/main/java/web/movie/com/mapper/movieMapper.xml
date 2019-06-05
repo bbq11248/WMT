@@ -246,7 +246,7 @@
 	<insert id="insertMoviePlay" parameterType="java.util.Map">
 		INSERT INTO MOVIE_PLAY
 			(MOVIE_PLAY_NO, MOVIE_NO, THEATER_NO, MOVIE_THEATER_NO, MOVIE_START_TIME, TIMES)
-				VALUES('MPN'||MOVIE_PLAY_NO_SEQ.NEXTVAL, (SELECT MOVIE_NO FROM MOVIE WHERE MOVIE_NAME = #{movie_name}), (SELECT THEATER_NO FROM MOVIE WHERE THEATER_NAME = #{theater_name}), (SELECT MOVIE_THEATER_NO FROM MOVIE_THEATER WHERE MOVIE_THEATER_NAME = #{movie_theater_name}), #{movie_start_time} ,#{times})
+				VALUES('MPN'||MOVIE_PLAY_NO_SEQ.NEXTVAL, (SELECT MOVIE_NO FROM MOVIE WHERE MOVIE_NAME = #{movie_name}), (SELECT THEATER_NO FROM THEATER WHERE THEATER_NAME = #{theater_name}), (SELECT MOVIE_THEATER_NO FROM MOVIE_THEATER WHERE MOVIE_THEATER_NAME = #{movie_theater_name} AND THEATER_NO = (SELECT THEATER_NO FROM THEATER WHERE THEATER_NAME = #{theater_name})), #{movie_start_time} ,#{times})
 	</insert>
 	<!-- 수정 -->
 	<update id="updateMoviePlay" parameterType="java.util.Map">
