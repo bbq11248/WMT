@@ -38,11 +38,11 @@
 	}
 	
 	function idSearch(){
-// 		location.href = "./idSearch.do"
+		location.href = "./idSearchForm.do";
 	}
 	
 	function pwSearch(){
-// 		location.href = "./pwSearch.do"
+		location.href = "./idSearchForm.do";
 	} 
 	
 </script>

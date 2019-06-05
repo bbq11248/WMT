@@ -59,7 +59,7 @@
 
 	<!-- a아이디 찾기 -->
 	<!-- SELECT ID FROM MOVIEMEMBER WHERE NAME = '양진숙' AND PHONE = '01080702906'; -->
-	<select id="selectId" parameterType="mbDto" resultType="java.lang.String">
+	<select id="selectId" parameterType="java.util.Map" resultType="java.lang.String">
 		SELECT ID FROM MOVIEMEMBER WHERE NAME = #{name} AND BIRTHDAY = #{birthday}
 	</select>
 
@@ -73,8 +73,8 @@
 		UPDATE MOVIEMEMBER SET PW = #{pw} WHERE ID = #{id}
 	</update>
 	
-	<select id="selectPw" parameterType="java.lang.String" resultType="java.lang.String">
-		SELECT PW FROM MOVIEMEMBER WHERE ID = #{id}
+	<select id="selectPw" parameterType="java.util.Map" resultType="java.lang.String">
+		SELECT PW FROM MOVIEMEMBER WHERE ID = #{id} AND BIRTHDAY = #{birthday}
 	</select>
 
 

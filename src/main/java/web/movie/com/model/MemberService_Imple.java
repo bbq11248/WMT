@@ -1,6 +1,7 @@
 package web.movie.com.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,15 +49,15 @@ public class MemberService_Imple implements IMemberService {
 	}
 
 	@Override
-	public String selectId(MemberDto mbDto) {
+	public String selectId(Map<String, Object> map) {
 		logger.info("seletId 실행");
-		return mbDao.selectId(mbDto);
+		return mbDao.selectId(map);
 	}
 
 	@Override
-	public String sendPw(MemberDto mbDto) {
+	public String sendPw(MemberDto mbDto, int birthday) {
 		logger.info("sendPw 실행");
-		return mbDao.sendPw(mbDto);
+		return mbDao.sendPw(mbDto, birthday);
 	}
 
 	@Override

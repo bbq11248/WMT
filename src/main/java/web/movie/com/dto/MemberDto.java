@@ -102,6 +102,7 @@ public class MemberDto {
 	}
 
 
+
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -203,6 +204,8 @@ public class MemberDto {
 				+ ", birthday=" + birthday + ", phone=" + phone + ", address=" + address + ", email=" + email
 				+ ", auth=" + auth + ", regdate=" + regdate + "]";
 	}
-	
+
+
+
 	
 }

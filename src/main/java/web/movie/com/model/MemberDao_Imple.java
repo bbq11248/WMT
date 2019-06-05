@@ -1,6 +1,7 @@
 package web.movie.com.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -66,17 +67,17 @@ public class MemberDao_Imple implements IMemberDao {
 	}
 
 	@Override
-	public String selectId(MemberDto mbDto) {
+	public String selectId(Map<String, Object> map) {
 		logger.info("아이디찾기");
-		String n = sqlSession.selectOne(NS+"selectId", mbDto);
+		String n = sqlSession.selectOne(NS+"selectId", map);
 		return n;
 	}
 
 	@Override
-	public String sendPw(MemberDto mbDto) {
+	public String sendPw(MemberDto mbDto, int birthday) {
 		logger.info("비밀번호 재발송");
 		int i = sqlSession.update(NS+"updatePw", mbDto);
-		String n = sqlSession.selectOne(NS+"selectPw", mbDto);
+		String n = sqlSession.selectOne(NS+"selectPw", birthday);
 		return (i>0)?n:"실패";
 	}
 

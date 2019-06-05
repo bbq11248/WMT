@@ -156,27 +156,6 @@ function check() {
 		});
 	});
 	
-	function emailcheck() {
-		var email = document.getElementById("email").value;
-		var exptext = /^[A-Za-z\.\-]+@[A-Za-z\-]+\.[A-Za-z\-]+/;
-		
-		if(!exptext.test(email)){
-			alert("잘못작성했쨔나~ㅠ__ㅠ");
-		}	//맞으면 true아니면 false
-	}
-	
-	
-// function btdOK() {
-// 	var btd = document.getElementById("birthday").value;
-// 	var re = /^[0-9]+$/;
-	
-// 	if(!re.test(btd)){
-// 	alert("숫자만입력해주세요.");
-// 	return false;
-// 		}else{
-// 			return true;
-// 		}
-// 	}
 	
 	
 	
@@ -223,7 +202,7 @@ function check() {
 			<br>
 			<input type="text" id="address" name="address" placeholder="주소" required="required">
 			<br>
-			<input type="text" id="email" name="email" placeholder="이메일" required="required" onclick="emailcheck()">
+			<input type="text" id="email" name="email" placeholder="이메일" required="required">
 			
 		</div>	
 		<div id="rightInfo"></div>

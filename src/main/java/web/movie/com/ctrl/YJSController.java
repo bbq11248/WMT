@@ -1,7 +1,9 @@
 package web.movie.com.ctrl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
@@ -139,67 +141,101 @@ public class YJSController {
 		return "main";
 	}
 	
+	@RequestMapping(value="/idSearchForm.do", method=RequestMethod.GET)
+	public String idSearchForm() {
+		return "idSearchForm";
+	}
+	
 	@RequestMapping(value="/idSearch.do", method=RequestMethod.POST)
-	public String idSearch() {
-		return "idSearch";
+	@ResponseBody
+	public Map<String, String> idSearch(String name, String birthday, Model model) {
+		Integer.parseInt(birthday);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("name", name);
+		map.put("birthday", birthday);
+		String idSear = memberService.selectId(map);
+		model.addAttribute("id", idSear);
+		Map<String, String> id = new HashMap<String, String>();
+		id.put("id", idSear);
+		return id;
 	}
 	
+//	@RequestMapping(value="/pwSearch.do", method=RequestMethod.POST)
+//	@ResponseBody
+//	public String pwSearch(String id, String birthday, Model model) {
+//		Integer.parseInt(birthday);
+//		MemberDto mbDto = new MemberDto();
+//		mbDto.setId(id);
+//		mbDto.setBirthday(birthday);
+//		String pwSear = memberService.sendPw(mbDto, birthday);
+//		Map<String, Object> pw = new HashMap<String, Object>();
+//		pw.put("pw", pwSear);
+//		return pw;
+//	}
+
 	
 	
-	@RequestMapping(value="/memupdate.do", method=RequestMethod.GET)
-	public String updateMem(MemberDto mbDto) {
-		int modifyMem = memberService.updateMem(mbDto);
-		System.out.println(modifyMem);
-		return null;
-	}
-	
-	
-	
-	@RequestMapping(value="/memberList.do", method=RequestMethod.GET)
-	public String selectMem(MemberDto mbDto) {
-		List<MemberDto> lists = memberService.selectMem(mbDto);
-		System.out.println(lists);
-		return null;
-	}
-	
-	
-	
-	@RequestMapping(value="/memberInfo.do", method=RequestMethod.GET)
-	public String checkMem(String id) {
-		boolean checkId = memberService.checkMem(id);
-		System.out.println(checkId);
-		return null;
-	}
-	
-	
-	
-	@RequestMapping(value="/memberId.do", method=RequestMethod.GET)
-	public String selectId(MemberDto mbDto) {
-		String findId = memberService.selectId(mbDto);
-		System.out.println(findId);
-		return null;
-	}
+	//비밀번호 찾기 하는중 ... ☆
+//	@RequestMapping(value="/pwSearch.do", method=RequestMethod.POST)
+//	@ResponseBody
+//	public String pwSearch(String id, int birthday) {
+//		MemberDto mbDto = new MemberDto();
+//		mbDto.setId(id);
+//		mbDto.setBirthday(birthday);
+//		String pwSear = memberService.sendPw(mbDto, birthday);
+//		Map<String, String> pw = new HashMap<String, String>();
+//		pw.put("pw", pwSear);
+//		return pw;
+//	}
 	
 	
 	
-	@RequestMapping(value="/password.do", method=RequestMethod.GET)
-	public String sendPw(MemberDto mbDto) {
-		String updatePw = memberService.sendPw(mbDto);
-		System.out.println(updatePw);
-		return null;
-		
-	}
-	
-	
-	
-	@RequestMapping(value="/info.do", method=RequestMethod.GET)
-	public String selectMemOne(String id) {
-		MemberDto selectOne = memberService.selectMemOne(id);
-		System.out.println(selectOne);
-		return null;
-	}
-	
-	
+//	@RequestMapping(value="/memupdate.do", method=RequestMethod.GET)
+//	public String updateMem(MemberDto mbDto) {
+//		int modifyMem = memberService.updateMem(mbDto);
+//		System.out.println(modifyMem);
+//		return null;
+//	}
+//	
+//	
+//	
+//	@RequestMapping(value="/memberList.do", method=RequestMethod.GET)
+//	public String selectMem(MemberDto mbDto) {
+//		List<MemberDto> lists = memberService.selectMem(mbDto);
+//		System.out.println(lists);
+//		return null;
+//	}
+//	
+//
+//	
+//	
+//	@RequestMapping(value="/memberId.do", method=RequestMethod.GET)
+//	public String selectId(MemberDto mbDto) {
+//		String findId = memberService.selectId(mbDto);
+//		System.out.println(findId);
+//		return null;
+//	}
+//	
+//	
+//	
+//	@RequestMapping(value="/password.do", method=RequestMethod.GET)
+//	public String sendPw(MemberDto mbDto) {
+//		String updatePw = memberService.sendPw(mbDto);
+//		System.out.println(updatePw);
+//		return null;
+//		
+//	}
+//	
+//	
+//	
+//	@RequestMapping(value="/info.do", method=RequestMethod.GET)
+//	public String selectMemOne(String id) {
+//		MemberDto selectOne = memberService.selectMemOne(id);
+//		System.out.println(selectOne);
+//		return null;
+//	}
+//	
+//	
 	
 //	==================================================================
 //	==================================================================

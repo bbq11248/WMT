@@ -1,6 +1,7 @@
 package web.movie.com.model;
 
 import java.util.List;
+import java.util.Map;
 
 import web.movie.com.dto.MemberDto;
 import web.movie.com.dto.MovieDto;
@@ -27,10 +28,10 @@ public interface IMemberDao {
 		public boolean checkMem(String id);
 		
 		//a아이디 찾기
-		public String selectId(MemberDto mbDto);
+		public String selectId(Map<String, Object> map);
 		
 		//a비밀번호 재발송 
-		public String sendPw(MemberDto mbDto);
+		public String sendPw(MemberDto mbDto, int birthday);
 //		public boolean updatePw(MemberDto mbDdto);
 //		public boolean selectPw(MemberDto mbDdto);
 		
