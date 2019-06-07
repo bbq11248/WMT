@@ -143,9 +143,10 @@ public class YJSController {
 	   public String memLogin(HttpSession session, Model model) {
 	      MemberDto memberLogin = (MemberDto)session.getAttribute("memberLogin");
 	      model.addAttribute("memberlogin", memberLogin);
-	      if(memberLogin.getAuth() == "A") {
+	      System.out.println("#######"+memberLogin);
+	      if(memberLogin.getAuth().equalsIgnoreCase("A")) {
 	         return "aMain";
-	      }else if(memberLogin.getAuth() == "U") {
+	      }else if(memberLogin.getAuth().equalsIgnoreCase("U")) {
 	         return "main";
 	      }else {
 	         return "error";

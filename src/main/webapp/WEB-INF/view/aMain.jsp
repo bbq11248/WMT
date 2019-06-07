@@ -8,11 +8,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>어드민 페이지</title>
 </head>
 <script type="text/javascript">
 	function movie_play_manager() {
 		location.href = "./moviePlayManager.do"
+	}
+	
+	function logoutForm() {
+		location.href = "./logoutForm.do"
+		
 	}
 </script>
 <body>
@@ -21,7 +26,7 @@
 			<h1><a><img onclick="main()" src="./image/logo.png"></a> WMT</h1>
 		</div>
 		<div class="main_info">
-			<input type="button" value="로그아웃" onclick="login()">
+			<input type="button" value="로그아웃" onclick="logoutForm()">
 		</div>
 	</div>
 	<div id="menu">
