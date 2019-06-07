@@ -60,7 +60,7 @@ function moviePlayManager() {
 }
 
 function boardList() {
-	location.href = "./index.jsp";
+	location.href = "./board.do";
 }
 
 function main() {
