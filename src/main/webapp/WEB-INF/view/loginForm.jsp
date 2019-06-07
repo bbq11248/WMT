@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
+<link rel="stylesheet" type="text/css" href="./css/Login.css">
 </head>
 <script type="text/javascript" src="./js/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="./js/sweetalert.min.js"></script>
@@ -25,7 +26,7 @@
 			jQuery.ajax({
 				url : "./loginCheck.do",
 				type : "post",
-				data : "id="+id+"&pw="+pw,
+				data : {"id" : id, "pw" : pw},
 				success : function(msg){
 					if(msg == "성공"){
 						frm.submit();

@@ -10,6 +10,10 @@
 <title>Insert title here</title>
 <style type="text/css"></style>
 <script type="text/javascript">
+function logOut() {
+	location.href="./logoutForm.do"
+}
+
 function mileageChk() {
 	location.href="./mileageChk.do?id=wlstnr7833"
 }
@@ -63,6 +67,9 @@ function boardList() {
 			<h1><a><img onclick="main()" src="./image/logo.png"></a> WMT</h1>
 		</div>
 		<div class="main_info">
+		</div>
+		<div>
+			<input type="button" value="로그아웃" onclick="logOut()">
 		</div>
 	</div>
 	<div>

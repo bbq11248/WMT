@@ -46,17 +46,20 @@
 		});
 	}
 	
-	function pwCcheck() {
-		var id = document.getElementByID("id").value;
-		var birthday = document.getElementById("birthday").value;
+// 	function pwCcheck() {
+// 		var id = document.getElementByID("id").value;
+// 		var birthday = document.getElementById("birthday").value;
 	
-		$.ajax({
-			type : "POST",
-			url : "./pwSearch.do",
-			data: 
+// 		$.ajax({
+// 			type : "POST",
+// 			url : "./pwSearch.do",
+// 			data: {"id" : id, "birthday" : birthday},
+// 			success: function () {
+				
+// 			}
 			
-		})
-	}
+// 		})
+// 	}
 </script>
 
 

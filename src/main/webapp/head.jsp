@@ -61,7 +61,7 @@
 			<h1>WMT</h1>
 		</div>
 		<div class="main_info">
-		<input class="headerBtn" type="button" value="로그 아웃">
+		<input class="headerBtn" type="button" value="로그아웃">
 		<input class="headerBtn" type="button" value="영화관 관리">
 		<input class="headerBtn" type="button" value="상영관 관리">
 		<input class="headerBtn" type="button" value="영화 관리">

@@ -86,6 +86,7 @@ public class YJSController {
 			return "redirect:/loginForm.do";
 		}
 	
+
 	
 //	@requestmapping(value = "/signup.do", method = requestmethod.post)
 //	public string signup(member_dto dto) {zd
@@ -97,6 +98,11 @@ public class YJSController {
 	@RequestMapping(value="/loginForm.do", method=RequestMethod.GET)
 	public String loginForm() {
 		return "loginForm";
+	}
+	
+	@RequestMapping(value="/logoutForm.do", method=RequestMethod.GET)
+	public String logoutForm() {
+		return "logoutForm";
 	}
 	
 	@RequestMapping(value="/loginCheck.do", method=RequestMethod.POST, produces="application/text;charset=UTF-8")
@@ -133,13 +139,18 @@ public class YJSController {
 	}
 	
 	
-	
-	@RequestMapping(value="/login.do", method=RequestMethod.POST)
-	public String memLogin(HttpSession session, Model model) {
-		MemberDto memberLogin = (MemberDto)session.getAttribute("memberLogin");
-		model.addAttribute("memberlogin", memberLogin);
-		return "main";
-	}
+	   @RequestMapping(value="/login.do", method=RequestMethod.POST)
+	   public String memLogin(HttpSession session, Model model) {
+	      MemberDto memberLogin = (MemberDto)session.getAttribute("memberLogin");
+	      model.addAttribute("memberlogin", memberLogin);
+	      if(memberLogin.getAuth() == "A") {
+	         return "aMain";
+	      }else if(memberLogin.getAuth() == "U") {
+	         return "main";
+	      }else {
+	         return "error";
+	      }
+	   }
 	
 	@RequestMapping(value="/idSearchForm.do", method=RequestMethod.GET)
 	public String idSearchForm() {
@@ -160,6 +171,16 @@ public class YJSController {
 		return id;
 	}
 	
+//	@RequestMapping(value="/pwSearch.do", method=RequestMethod.POST)
+//	public String pwSearch(String id, int birthday, Model model) {
+//		MemberDto mbDto = new MemberDto();
+//		mbDto.setId(id);
+//		mbDto.setBirthday(birthday);
+//		
+//		String pwSear = memberService.sendPw(mbDto, birthday);
+//		return null;
+//	}
+//	
 //	@RequestMapping(value="/pwSearch.do", method=RequestMethod.POST)
 //	@ResponseBody
 //	public String pwSearch(String id, String birthday, Model model) {
