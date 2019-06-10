@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="./css/header.css">
 <title>회원가입 페이지</title>
 
 <script type="text/javascript" src="./js/jquery-3.3.1.js"></script>
