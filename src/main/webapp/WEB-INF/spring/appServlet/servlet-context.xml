@@ -39,7 +39,6 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/interceptor.do" />
 			<mvc:mapping path="/main.do" />
-			<mvc:mapping path="/logoutForm.do"/>
 			<bean class="web.movie.com.interceptor.Interceptor" />
 		</mvc:interceptor>
 

@@ -1,0 +1,10 @@
+	.menu{
+		background: green;
+		height: 30px;
+	}
+	.menu-bar{
+		position: absolute;
+		left: 47%;
+		margin-left: auto; 
+		margin-right: auto; 
+	}

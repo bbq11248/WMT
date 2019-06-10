@@ -111,7 +111,11 @@ public class LJHController {
 	}
 	//상영중인 영화 선택
 	@RequestMapping(value = "/playMovie.do", method = RequestMethod.GET)
-	public String selPlayMovie(Model model) {
+	public String selPlayMovie(Model model, HttpSession session) {
+		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
+		if(mbDto == null) {
+			return "redirect:/loginForm.do";
+		}
 		List<MovieDto> lists = movieService.selPlayMovie();
 		model.addAttribute("movielist", lists);
 		System.out.println(lists);
@@ -188,6 +192,9 @@ public class LJHController {
 	@RequestMapping(value = "/ticketing.do", method = RequestMethod.GET)
 	public String ticketing(MovieDto mvDto, String movie_play_no, String id, String rowcol, String price, Model model,  HttpSession session) {
 		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
+		if(mbDto == null) {
+			return "redirect:/loginForm.do";
+		}
 		id = mbDto.getId();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("movie_play_no", movie_play_no);
@@ -273,7 +280,11 @@ public class LJHController {
 	
 	//유저 영화관 보기
 	@RequestMapping(value="/selTList.do", method=RequestMethod.GET)
-	public String selectUserTheater(Model model) {
+	public String selectUserTheater(Model model, HttpSession session) {
+		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
+		if(mbDto == null) {
+			return "redirect:/loginForm.do";
+		}
 		List<MovieDto> lists = movieService.selectTheater();
 		model.addAttribute("lists", lists);
 		System.out.println(lists);
@@ -525,7 +536,11 @@ public class LJHController {
 	}
 	
 	@RequestMapping(value="/selMList.do", method=RequestMethod.GET)
-	public String selMovieList(Model model) {
+	public String selMovieList(Model model, HttpSession session) {
+		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
+		if(mbDto == null) {
+			return "redirect:/loginForm.do";
+		}
 		List<MovieDto> lists = movieService.selectMovie();
 		System.out.println(lists);
 		model.addAttribute("lists", lists);
@@ -582,7 +597,11 @@ public class LJHController {
 		return "redirect:/selectMP.do";
 	}
 	@RequestMapping(value="/selectMP.do", method=RequestMethod.GET)
-	public String selectMP(Model model) {
+	public String selectMP(Model model, HttpSession session) {
+		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
+		if(mbDto == null) {
+			return "redirect:/loginForm.do";
+		}
 		List<MovieDto> lists = movieService.selectMoviePlay();
 		model.addAttribute("lists", lists);
 		System.out.println(lists);
@@ -686,22 +705,7 @@ public class LJHController {
 
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
 	public String main(HttpSession session) {
-		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
-		String id = mbDto.getId();
-		if (id != null || id != "") {
 			return "main";
-		}else {
-			return "";
-		}
-	}
-	
-	@RequestMapping(value="/beforSeat.do", method = RequestMethod.GET)
-	public String beforSeat(String movie_start_time, Model model) {
-		movie_start_time = "20190515 17:21";
-		List<MovieDto> lists = movieService.beforSeat(movie_start_time);
-		System.out.println(lists);
-		model.addAttribute("lists", lists);
-		return "asda";
 	}
 
 }

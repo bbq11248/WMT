@@ -1,7 +1,7 @@
-.html{
+html{
 	background-color: white;
 }
-.body{
+body{
 		width: 1080px;
 		height: 776px;
 		text-align: center;
@@ -13,7 +13,6 @@
 		width: 1080px;
 		height: 93px;
 		background-color: yellow;
-		margin-bottom: 20px;
 	}
 	.main_header h1{
 		margin: 0px;
@@ -22,6 +21,7 @@
 		float: right;
 	}
 	.main_info{
-		margin-top: 30px;
+		margin-top: 20px;
 		margin-left: 690px; 
+		
 	}
