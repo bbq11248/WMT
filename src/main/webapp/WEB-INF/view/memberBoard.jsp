@@ -11,6 +11,7 @@
 </head>
 <body>
 
+
 <div>
 		<table>
 			<tr>
@@ -21,15 +22,17 @@
 				<td>전화번호</td>
 				<td>주소</td>
 				<td>이메일</td>
+				<td>등급</td>
 			</tr>
 			<tr>
 				<td>${mbDto.id}</td>
 				<td>${mbDto.name}</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td>${mbDto.nickname}</td>
+				<td>${mbDto.birthday}</td>
+				<td>${mbDto.phone}</td>
+				<td>${mbDto.address}</td>
+				<td>${mbDto.email}</td>
+				<td>${mbDto.auth}</td>
 			</tr>
 		</table>
 </div>

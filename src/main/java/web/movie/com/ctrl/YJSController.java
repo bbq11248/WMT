@@ -191,42 +191,17 @@ public class YJSController {
 	@RequestMapping(value="/myBoard.do", method=RequestMethod.GET)
 	public String memberBoard(MemberDto mbDto,HttpSession session, Model model){
 		mbDto = (MemberDto) session.getAttribute("memBoard");
-		mbDto.getSeq();
-		mbDto.getId();
-		mbDto.getName();
-		mbDto.getNickname();
-		mbDto.getBirthday();
-		mbDto.getPhone();
-		mbDto.getAddress();
-		mbDto.getEmail();
-		
+		String id = mbDto.getId();
+		String pw = mbDto.getPw();
+		MemberDto mbDto1 = new MemberDto();
+		mbDto1.setId(id);
+		mbDto1.setPw(pw);
+		mbDto = memberService.memLogin(mbDto1);
 		model.addAttribute("mbDto", mbDto);
 		return "memberBoard";
 	}
 	
 	
-//	@RequestMapping(value="/pwSearch.do", method=RequestMethod.POST)
-//	public String pwSearch(String id, int birthday, Model model) {
-//		MemberDto mbDto = new MemberDto();
-//		mbDto.setId(id);
-//		mbDto.setBirthday(birthday);
-//		
-//		String pwSear = memberService.sendPw(mbDto, birthday);
-//		return null;
-//	}
-//	
-//	@RequestMapping(value="/pwSearch.do", method=RequestMethod.POST)
-//	@ResponseBody
-//	public String pwSearch(String id, String birthday, Model model) {
-//		Integer.parseInt(birthday);
-//		MemberDto mbDto = new MemberDto();
-//		mbDto.setId(id);
-//		mbDto.setBirthday(birthday);
-//		String pwSear = memberService.sendPw(mbDto, birthday);
-//		Map<String, Object> pw = new HashMap<String, Object>();
-//		pw.put("pw", pwSear);
-//		return pw;
-//	}
 
 	
 	

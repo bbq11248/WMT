@@ -20,7 +20,7 @@ function signup() {
 	
 }
 function myboard() {
-	location.href = "./myBoard.do"
+	location.href = "./myBoard.do?"
 }
 
 </script>
