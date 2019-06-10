@@ -1,8 +1,13 @@
-body{
+.html{
+	background-color: white;
+}
+.body{
 		width: 1080px;
-		height: 990px;
+		height: 776px;
 		text-align: center;
-		margin-left: 411.5px; 
+		margin-left: auto; 
+		margin-right: auto; 
+		background-color: black;
 	}
 	.main{
 		width: 1080px;
@@ -18,5 +23,5 @@ body{
 	}
 	.main_info{
 		margin-top: 30px;
-		margin-left: 740px; 
+		margin-left: 690px; 
 	}
