@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+
+#container{
+	position: relative;
+	width : 20rem; 
+	border-radius : 20px;
+	left : 600px;
+}
+
+
+h2{
+	 color:#113366;
+}
+
+#SearchId{
+	margin-left: 58px;
+}
+
+.main{
+	left: 100px;
+}

@@ -172,6 +172,29 @@ public class YJSController {
 		return id;
 	}
 	
+	
+//	@requestmapping(value="/myboard.do", method=RequestMethod.GET)
+//	public string myboard() {
+//		return "memberboard";
+//	}
+	
+	@RequestMapping(value="/myBoard.do", method=RequestMethod.GET)
+	public String memberBoard(MemberDto mbDto,HttpSession session, Model model){
+		mbDto = (MemberDto) session.getAttribute("memBoard");
+		mbDto.getSeq();
+		mbDto.getId();
+		mbDto.getName();
+		mbDto.getNickname();
+		mbDto.getBirthday();
+		mbDto.getPhone();
+		mbDto.getAddress();
+		mbDto.getEmail();
+		
+		model.addAttribute("mbDto", mbDto);
+		return "memberBoard";
+	}
+	
+	
 //	@RequestMapping(value="/pwSearch.do", method=RequestMethod.POST)
 //	public String pwSearch(String id, int birthday, Model model) {
 //		MemberDto mbDto = new MemberDto();
@@ -212,61 +235,7 @@ public class YJSController {
 	
 	
 	
-//	@RequestMapping(value="/memupdate.do", method=RequestMethod.GET)
-//	public String updateMem(MemberDto mbDto) {
-//		int modifyMem = memberService.updateMem(mbDto);
-//		System.out.println(modifyMem);
-//		return null;
-//	}
-//	
-//	
-//	
-//	@RequestMapping(value="/memberList.do", method=RequestMethod.GET)
-//	public String selectMem(MemberDto mbDto) {
-//		List<MemberDto> lists = memberService.selectMem(mbDto);
-//		System.out.println(lists);
-//		return null;
-//	}
-//	
-//
-//	
-//	
-//	@RequestMapping(value="/memberId.do", method=RequestMethod.GET)
-//	public String selectId(MemberDto mbDto) {
-//		String findId = memberService.selectId(mbDto);
-//		System.out.println(findId);
-//		return null;
-//	}
-//	
-//	
-//	
-//	@RequestMapping(value="/password.do", method=RequestMethod.GET)
-//	public String sendPw(MemberDto mbDto) {
-//		String updatePw = memberService.sendPw(mbDto);
-//		System.out.println(updatePw);
-//		return null;
-//		
-//	}
-//	
-//	
-//	
-//	@RequestMapping(value="/info.do", method=RequestMethod.GET)
-//	public String selectMemOne(String id) {
-//		MemberDto selectOne = memberService.selectMemOne(id);
-//		System.out.println(selectOne);
-//		return null;
-//	}
-//	
-//	
-	
-//	==================================================================
-//	==================================================================
-	
-//	@REQUESTMAPPING(VALUE="/LOGINFORM.DO", METHOD=REQUESTMETHOD.GET)
-//	PUBLIC STRING LOGIN(MEMBERDTO MBDTO) {
-//		RETURN "LOGINFORM";
-//	}
-	
+
 	
 	
 	@RequestMapping(value="/TopMeun.do", method=RequestMethod.GET)
