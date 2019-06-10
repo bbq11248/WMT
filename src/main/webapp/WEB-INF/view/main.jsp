@@ -4,6 +4,7 @@
     <% response.setContentType("text/html; charset=UTF-8"); %>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" type="text/css" href="./css/header.css">
+<link rel="stylesheet" type="text/css" href="./css/footer.css">
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +14,9 @@
 <script type="text/javascript">
 	function logoutForm() {
 		location.href = "./logoutForm.do"
+	}
+	function memberInfo() {
+		location.href="./myBoard.do"
 	}
 	function playMovieList() {
 		location.href="./playMovie.do"
@@ -55,6 +59,22 @@
 		<div class="content">
 			
 		</div>
+		<div class="footer">
+		<div>
+			<table>
+				<tr>
+					<td>서울특별시 강남구 역삼동 역삼역 3번 출구 신한은행 건물 4층 C Class</td>
+				</tr>
+				<tr>
+					<td>개발자 : 양진숙, 이정휴</td>
+					<td>대표 번호 : 010-1234-1234</td>
+				</tr>
+				<tr>
+					<td>개발자 e-mail: WMT001@movie.com</td>
+				</tr>
+			</table>
+		</div>
+	</div>
 	</div>
 </body>
 </html>
