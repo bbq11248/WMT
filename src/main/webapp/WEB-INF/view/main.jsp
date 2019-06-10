@@ -14,20 +14,46 @@
 	function logoutForm() {
 		location.href = "./logoutForm.do"
 	}
-	function myBoard() {
-		location.href = "./myBoard.do"
+	function playMovieList() {
+		location.href="./playMovie.do"
 	}
-
+	function selTheaterList() {
+		location.href="./selTList.do"
+	}
+	function selMovieList() {
+		location.href="./selMList.do"
+	}
 </script>
 
 <body>
 	<div class="main">
 		<div class="main_header">
 			<h1><a><img onclick="main()" src="./image/logo.png"></a>WMT</h1>
+			<div class="welcome">${id} 님 환영합니다.</div>
 		</div>
 		<div class="main_info">
+			<input type="text" value="${mileage}" readonly="readonly">
+			<input type="button" value="마이 페이지" onclick="memberInfo()">
 			<input type="button" value="로그아웃" onclick="logoutForm()">
-			<input type="button" value="마이페이지" onclick="myBoard()">
+		</div>
+		<div class="menu">
+			<div class="menu-bar">
+				<table>
+					<tr>
+						<td>
+							<input type="button" value="예매" onclick="playMovieList()">
+						</td>
+						<td>
+							<input type="button" value="극장" onclick="selTheaterList()">
+						</td>
+						<td>
+							<input type="button" value="영화" onclick="selMovieList()">
+						</td>
+				</table>
+			</div>
+		</div>
+		<div class="content">
+			
 		</div>
 	</div>
 </body>

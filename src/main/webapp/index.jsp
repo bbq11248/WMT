@@ -19,9 +19,6 @@ function signUp() {
 	location.href = "./signupForm.do"
 }
 
-function mileageChk() {
-	location.href="./mileageChk.do"
-}
 function mileageCG() {
 	location.href="./mileageForm.do"
 }
