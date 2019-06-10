@@ -6,54 +6,25 @@ body{
 	}
 	.main{
 		width: 1080px;
-		height: 70px;
+		height: 93px;
 		background-color: yellow;
 		margin-bottom: 20px;
 	}
 	.main_header h1{
 		margin: 0px;
 	}
+	.welcome{
+		float: right;
+	}
 	.main_info{
-		float: right;
+		margin-top: 30px;
+		margin-left: 740px; 
 	}
-	.content{
-		width: 1080px;
-		height: 780px;
-		background-color: aqua;
-		margin-bottom: 20px;
+	.menu{
+		background: green;
+		height: 30px;
 	}
-	.movie{
-		width: 600px;
-		height: 420px;
-		margin-left: 240px;
-	}
-	.premovie{
-		width: 280px;
-		height: 400px;
+	.menu-bar{
 		position: absolute;
-		margin-left: 20px;
+		left: 47%;
 	}
-	.posterhead{
- 		margin: 0px;
-	}
-	
-	.playmovie{
-		width: 280px;
-		height: 400px;
-		float: right;
-		margin-right: 20px;
-	}
-	.playmovie .poster{
-		float: right;
-	}
-	.poster{
-		background-color: red;
-		width: 240px;
-		height: 388px;
-	}
-	.footer{
-		width: 1080px;
-		height: 100px;
-		background-color: orange; 
-	}
-	

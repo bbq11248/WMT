@@ -14,6 +14,9 @@
 	function logoutForm() {
 		location.href = "./logoutForm.do"
 	}
+	function myBoard() {
+		location.href = "./myBoard.do"
+	}
 
 </script>
 
@@ -24,6 +27,7 @@
 		</div>
 		<div class="main_info">
 			<input type="button" value="로그아웃" onclick="logoutForm()">
+			<input type="button" value="마이페이지" onclick="myBoard()">
 		</div>
 	</div>
 </body>

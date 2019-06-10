@@ -34,19 +34,19 @@ public class LJHController {
 	
 	//마일리지 확인
 	@RequestMapping(value = "/mileageChk.do", method = RequestMethod.GET)
-	public String selectMileage(Model model, HttpSession session) {
+	public String selectMileage(HttpSession session) {
 		logger.info("LJHController selectMileage 실행");
 		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
 		String id = mbDto.getId();
 		int mileage = movieService.selectMileage(id);
 		System.out.println(mileage);
-		model.addAttribute("mileage", mileage);
 		session.setAttribute("mileage", mileage);
 		return "mileage";
 	}
 	//마일리지 충전 화면 이동
 	@RequestMapping(value = "/mileageForm.do", method = RequestMethod.GET)
-	public String chargeMileageForm() {
+	public String chargeMileageForm(HttpSession session) {
+		int mileage = (int)session.getAttribute("mileage");
 		return "milagerCG";
 	}
 	//마일리지 충전
@@ -269,6 +269,15 @@ public class LJHController {
 		model.addAttribute("lists", lists);
 		session.setAttribute("theater_no", theater_no);
 		return "theater_detail";
+	}
+	
+	//유저 영화관 보기
+	@RequestMapping(value="/selTList.do", method=RequestMethod.GET)
+	public String selectUserTheater(Model model) {
+		List<MovieDto> lists = movieService.selectTheater();
+		model.addAttribute("lists", lists);
+		System.out.println(lists);
+		return "selTList";
 	}
 
 	//상영관 관리
@@ -513,6 +522,14 @@ public class LJHController {
 		System.out.println(lists);
 		model.addAttribute("lists", lists);
 		return "movie_detail";
+	}
+	
+	@RequestMapping(value="/selMList.do", method=RequestMethod.GET)
+	public String selMovieList(Model model) {
+		List<MovieDto> lists = movieService.selectMovie();
+		System.out.println(lists);
+		model.addAttribute("lists", lists);
+		return "selMList";
 	}
 	
 	//상영중인 영화 
