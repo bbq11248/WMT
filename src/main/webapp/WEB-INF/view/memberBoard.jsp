@@ -9,11 +9,21 @@
 <meta charset="UTF-8">
 <title>마이페이지</title>
 </head>
+<script type="text/javascript">
+	function ticketChk() {
+		location.href="./ticketList.do"
+	}
+	function paymentList() {
+		location.href="./payList.do"
+	}
+
+</script>
 <body>
 
 
 <div>
-		<table>
+		<form action="./modifyBoard.do" method="get">
+			<table>
 			<tr>
 				<td>아이디</td>
 				<td>이름</td>
@@ -25,16 +35,36 @@
 				<td>등급</td>
 			</tr>
 			<tr>
-				<td>${mbDto.id}</td>
-				<td>${mbDto.name}</td>
-				<td>${mbDto.nickname}</td>
-				<td>${mbDto.birthday}</td>
-				<td>${mbDto.phone}</td>
-				<td>${mbDto.address}</td>
-				<td>${mbDto.email}</td>
-				<td>${mbDto.auth}</td>
+				<td>
+					<input type="text" name="id" value="${mbDto.id}" readonly="readonly">
+				</td>
+				<td>
+					<input type="text" name="name" value="${mbDto.name}" readonly="readonly">
+				</td>
+				<td>
+					<input type="text" name="nickname" value="${mbDto.nickname}" readonly="readonly">
+				</td>
+				<td>
+					<input type="text" name="birthday" value="${mbDto.birthday}" readonly="readonly">
+				</td>
+				<td>
+					<input type="text" name="phone" value="${mbDto.phone}" readonly="readonly">
+				</td>
+				<td>
+					<input type="text" name="address" value="${mbDto.address}" readonly="readonly">
+				</td>
+				<td>
+					<input type="text" name="email" value="${mbDto.email}" readonly="readonly">
+				</td>
 			</tr>
-		</table>
+			</table>
+			<input type="submit" value="수정하기">
+			<input type="button" value="결제 내역 확인" onclick="paymentList()">
+			<input type="button" value="예매 내역 보기" onclick="ticketChk()">
+			<input type="button" value="뒤로가기" onclick="backWard()">
+		</form>
+
+	
 </div>
 
 

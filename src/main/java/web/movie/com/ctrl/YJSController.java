@@ -183,10 +183,12 @@ public class YJSController {
 	}
 	
 	
-//	@requestmapping(value="/myboard.do", method=RequestMethod.GET)
-//	public string myboard() {
-//		return "memberboard";
-//	}
+	
+//	UPDATE MOVIEMEMBER SET 
+//	NAME = #{name}, NICKNAME = #{nickname}, BIRTHDAY = #{birthday},
+//	PHONE = #{phone}, ADDRESS = #{address}
+//	WHERE ID = #{id} AND PW = #{pw}
+	
 	
 	@RequestMapping(value="/myBoard.do", method=RequestMethod.GET)
 	public String memberBoard(MemberDto mbDto, HttpSession session, Model model){
@@ -202,6 +204,25 @@ public class YJSController {
 		return "memberBoard";
 	}
 	
+	
+	
+	@RequestMapping(value="/modifyBoard.do", method=RequestMethod.GET)
+	public String modifyBoard(String name,String nickname, String birthday, String phone,
+			String address,String email, HttpSession session, Model model) {
+		MemberDto mbDto = (MemberDto) session.getAttribute("memberLogin");
+		String id = mbDto.getId();
+		String pw = mbDto.getPw();
+
+		model.addAttribute("id", id);
+		model.addAttribute("name", name);
+		model.addAttribute("nickname", nickname);
+		model.addAttribute("birthday", birthday);
+		model.addAttribute("phone", phone);
+		model.addAttribute("address", address);
+		model.addAttribute("email", email);
+		
+		return "modifyBoardForm";
+	}
 	
 
 	

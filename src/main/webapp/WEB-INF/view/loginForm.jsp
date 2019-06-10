@@ -9,7 +9,7 @@
 
  
 <!DOCTYPE html>
-<html>
+<html class="html">
 <head>
 <meta charset="UTF-8">
 
@@ -51,10 +51,14 @@
 		location.href = "./idSearchForm.do";
 	}
 	
+	function main() {
+		location.href = "./main.do"
+	}
+	
 </script>
 
 
-<body>
+<body class="boay">
 
 
 <div class="main">

@@ -23,18 +23,16 @@
 
 	<!-- 로그인 -->
 	<select id="memLogin" parameterType="mbDto" resultType="mbDto">
-	SELECT ID,PW,NICKNAME,PHONE,ADDRESS,BIRTHDAY,AUTH,EMAIL FROM MOVIEMEMBER WHERE ID = #{id} AND PW = #{pw}
+	SELECT ID,PW,NAME,NICKNAME,PHONE,ADDRESS,BIRTHDAY,AUTH,EMAIL FROM MOVIEMEMBER WHERE ID = #{id} AND PW = #{pw}
 	</select>
 
 
-	<!-- a정보수정 -->
-	<!-- UPDATE MOVIEMEMBER SET PW = 1234, NICKNAME = '진숙짱', PHONE = '01012341234', 
-		ADDRESS = '역삼역삼' -->
-	<!-- WHERE ID = 'JINSOOK' AND BIRTHDAY = '951230'; -->
+	<!-- 회원수정 -->
 	<update id="updateMem" parameterType="mbDto">
-		UPDATE MOVIEMEMBER SET PW =
-		#{pw}, NICKNAME = #{nickname}, PHONE = #{phone}, ADDRESS = #{address}
-		WHERE ID = #{id} AND BIRTHDAY = #{birthday}
+		UPDATE MOVIEMEMBER SET 
+		NAME = #{name}, NICKNAME = #{nickname}, BIRTHDAY = #{birthday},
+		PHONE = #{phone}, ADDRESS = #{address}
+		WHERE ID = #{id} AND PW = #{pw}
 	</update>
 
 
