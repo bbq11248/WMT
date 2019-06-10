@@ -23,6 +23,7 @@ import web.movie.com.dto.MemberDto;
 import web.movie.com.dto.MovieDto;
 import web.movie.com.model.IBoardService;
 import web.movie.com.model.IMemberService;
+import web.movie.com.model.IMovieService;
 @Controller
 public class YJSController {
 	
@@ -33,7 +34,7 @@ public class YJSController {
 	private IMemberService memberService;
 	
 	@Autowired
-	private IBoardService boardService;
+	IMovieService movieService;
 	
 //	=================================================================
 //	=================================================================
@@ -112,6 +113,10 @@ public class YJSController {
 		String chk = (memberLogin == null) ? "실패":"성공"; 
 		if(chk=="성공") {
 			session.setAttribute("memberLogin", memberLogin);
+			String id = memberLogin.getId();
+			int mileage = movieService.selectMileage(id);
+			System.out.println(mileage);
+			session.setAttribute("mileage", mileage);
 			return "성공";
 		} else {
 			return "실패";
@@ -147,6 +152,11 @@ public class YJSController {
 	      if(memberLogin.getAuth().equalsIgnoreCase("A")) {
 	         return "aMain";
 	      }else if(memberLogin.getAuth().equalsIgnoreCase("U")) {
+	    	  int mileage = (int) session.getAttribute("mileage");
+	    	  model.addAttribute("mileage", mileage);
+	    	  MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
+	    	  String id = mbDto.getId();
+	    	  model.addAttribute("id", id);
 	         return "main";
 	      }else {
 	         return "error";
