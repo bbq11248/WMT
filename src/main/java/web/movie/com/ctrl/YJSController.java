@@ -189,13 +189,14 @@ public class YJSController {
 //	}
 	
 	@RequestMapping(value="/myBoard.do", method=RequestMethod.GET)
-	public String memberBoard(MemberDto mbDto,HttpSession session, Model model){
-		mbDto = (MemberDto) session.getAttribute("memBoard");
+	public String memberBoard(MemberDto mbDto, HttpSession session, Model model){
+		mbDto = (MemberDto) session.getAttribute("memberLogin");
 		String id = mbDto.getId();
 		String pw = mbDto.getPw();
 		MemberDto mbDto1 = new MemberDto();
 		mbDto1.setId(id);
 		mbDto1.setPw(pw);
+		System.out.println("======================="+id+":"+pw);
 		mbDto = memberService.memLogin(mbDto1);
 		model.addAttribute("mbDto", mbDto);
 		return "memberBoard";
