@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="./css/header.css">
 <link rel="stylesheet" type="text/css" href="./css/footer.css">
+<link rel="stylesheet" type="text/css" href="./css/content.css">
 <title>Insert title here</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
@@ -29,7 +30,10 @@
 			<h1><a><img onclick="main()" src="./image/logo.png"></a> WMT</h1>
 		</div>
 	</div>
+	
 <h1>상영관을 등록할 영화관을 선택해 주세여</h1>
+
+<div class="content">
 <table border="1">
 <tr>
 	<td>영화관 번호</td>
@@ -62,6 +66,7 @@
 						<td>개발자 e-mail: WMT001@movie.com</td>
 					</tr>
 				</table>
+				</div>
 			</div>
 		</div>
 </div>

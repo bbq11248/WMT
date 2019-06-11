@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 
 <link rel="stylesheet" type="text/css" href="./css/header.css">
+<link rel="stylesheet" type="text/css" href="./css/content.css">
 <link rel="stylesheet" type="text/css" href="./css/footer.css">
 
 <title>공지사항 페이지</title>

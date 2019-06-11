@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="./css/header.css">
 <link rel="stylesheet" type="text/css" href="./css/footer.css">
+<link rel="stylesheet" type="text/css" href="./css/content.css">
 <title>회원가입</title>
 </head>
 <script type="text/javascript">
@@ -23,6 +24,8 @@ function main() {
 			<h1><a><img onclick="main()" src="./image/logo.png"></a> WMT</h1>
 		</div>
 	</div>
+	
+	<div class="content">
 <div id="CenterInfo">
 	<input type="text" id="id" name="id" placeholder="아이디" required="required">
 	<br>
@@ -38,6 +41,7 @@ function main() {
 	<br>
 	<input type="text" id="address" name="address" placeholder="이메일" required="required">
 </div>
+	</div>
 		<div class="footer">
 			<div>
 				<table>

@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="./css/header.css">
 <link rel="stylesheet" type="text/css" href="./css/footer.css">
+<link rel="stylesheet" type="text/css" href="./css/content.css">
 
 <title>Insert title here</title>
 </head>
@@ -32,6 +33,8 @@
 			<h1><a><img onclick="main()" src="./image/logo.png"></a> WMT</h1>
 		</div>
 	</div>
+	
+	<div class="content">
 	<table>
 		<tr>
 			<td>글번호</td>
@@ -56,7 +59,7 @@
 			</td>
 		</tr>
 	</table>
-	${bDto}
+	</div>
 	
 	<div class="footer">
 			<div>

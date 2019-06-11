@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="./css/header.css">
 <link rel="stylesheet" type="text/css" href="./css/footer.css">
+<link rel="stylesheet" type="text/css" href="./css/content.css">
 <title>Insert title here</title>
 </head>
 <script type="text/javascript">
@@ -23,6 +24,8 @@ function main() {
 		</div>
 	</div>
 <h1>상영관 등록 폼</h1>
+
+<div class="content">
 <form action="./insertMT.do">
 	<input type="hidden">
 	<div>
@@ -47,6 +50,7 @@ function main() {
 		</table>
 	</div>
 </form>
+</div>
 		<div class="footer">
 			<div>
 				<table>

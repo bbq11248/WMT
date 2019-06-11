@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="./css/header.css">
 <link rel="stylesheet" type="text/css" href="./css/footer.css">
+<link rel="stylesheet" type="text/css" href="./css/content.css">
 <title>Insert title here</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
@@ -24,6 +25,8 @@ function main() {
 			<h1><a><img onclick="main()" src="./image/logo.png"></a> WMT</h1>
 		</div>
 	</div>
+	
+	<div class="content">
 	<form action="./insertSeat.do" method="get">
 		<table>
 			<tr>
@@ -57,7 +60,8 @@ function main() {
 			</tr>
 		</table>
 	</form>
-	${movie_theater_no}
+	</div>
+	
 			<div class="footer">
 			<div>
 				<table>

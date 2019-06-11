@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="./css/header.css">
 <link rel="stylesheet" type="text/css" href="./css/footer.css">
+<link rel="stylesheet" type="text/css" href="./css/content.css">
 <title>마이페이지</title>
 </head>
 <script type="text/javascript">
@@ -31,7 +32,7 @@
 		</div>
 	</div>
 
-<div>
+<div class="content">
 		<form action="./modifyBoard.do" method="get">
 			<table>
 			<tr>
@@ -89,7 +90,6 @@
 			<input type="button" value="예매 내역 보기" onclick="ticketChk()">
 			<input type="button" value="뒤로가기" onclick="backWard()">
 		</form>
-
 	
 </div>
 

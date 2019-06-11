@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="./css/header.css">
 <link rel="stylesheet" type="text/css" href="./css/footer.css">
+<link rel="stylesheet" type="text/css" href="./css/content.css">
 <title>Insert title here</title>
 </head>
 <script type="text/javascript">
@@ -23,6 +24,7 @@ function main() {
 		</div>
 	</div>
 	<form action="./insertM.do">
+	<div class="content">
 		<table>
 			<tr>
 				<td>영화 이름</td>
@@ -58,6 +60,7 @@ function main() {
 				</td>
 			</tr>
 		</table>
+		</div>
 	</form>
 			<div class="footer">
 			<div>
