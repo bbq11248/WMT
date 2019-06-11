@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="./css/loginForm.css">
 <link rel="stylesheet" type="text/css" href="./css/footer.css">
+<link rel="stylesheet" type="text/css" href="./css/content.css">
 
  
 <!DOCTYPE html>
@@ -68,6 +69,7 @@
 		</div>
 </div>
 
+<div class="content">
 <div id="div"></div>
 <div class="card align-middle" id=container>
 	
@@ -86,6 +88,7 @@
 	</form>
 	
 		</div>
+	</div>
 	</div>
 	
 <div id="div2"></div>

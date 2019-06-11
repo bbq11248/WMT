@@ -7,10 +7,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
 <link rel="stylesheet" type="text/css" href="./css/header.css">
-<link rel="stylesheet" type="text/css" href="./css/content.css">
 <link rel="stylesheet" type="text/css" href="./css/footer.css">
+<link rel="stylesheet" type="text/css" href="./css/content.css">
+
 
 <title>공지사항 페이지</title>
 </head>
@@ -33,6 +33,9 @@
 			<h1><a><img onclick="main()" src="./image/logo.png"></a> WMT</h1>
 		</div>
 	</div>
+	
+	<div class="content">
+	<input type="button" value="글 입력 " onclick="insertBoard()">
 	<table>
 		<tr>
 			<td>글번호</td>
@@ -51,6 +54,7 @@
 			</tr>
 		</c:forEach>
 	</table>
+	</div>
 	
 		<div class="footer">
 			<div>

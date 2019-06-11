@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="./css/header.css">
 <link rel="stylesheet" type="text/css" href="./css/footer.css">
+<link rel="stylesheet" type="text/css" href="./css/content.css">
 <title>Insert title here</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
@@ -27,6 +28,8 @@
 			<h1><a><img onclick="main()" src="./image/logo.png"></a> WMT</h1>
 		</div>
 	</div>
+	
+	<div class="content">
 	<table>
 		<tr>
 			<td>티켓 번호</td>
@@ -47,6 +50,7 @@
 		</tr>
 		</c:forEach>
 	</table>
+	</div>
 			<div class="footer">
 			<div>
 				<table>

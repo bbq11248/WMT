@@ -23,9 +23,9 @@ function main() {
 			<h1><a><img onclick="main()" src="./image/logo.png"></a> WMT</h1>
 		</div>
 	</div>
-<h1>상영관 등록 폼</h1>
 
 <div class="content">
+<h1>상영관 등록 폼</h1>
 <form action="./insertMT.do">
 	<input type="hidden">
 	<div>

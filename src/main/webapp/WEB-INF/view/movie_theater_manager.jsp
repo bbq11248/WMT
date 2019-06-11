@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="./css/header.css">
 <link rel="stylesheet" type="text/css" href="./css/footer.css">
+<link rel="stylesheet" type="text/css" href="./css/content.css">
 <title>Insert title here</title>
 </head>
 <script type="text/javascript">
@@ -30,9 +31,11 @@
 		</div>
 	</div>
 
+<div class="content">
 <h1>상영관 관리 페이지</h1>
 <input type="button" value="상영관 전체 보기" onclick="selMovieTheater()">
 <input type="button" value="상영관 등록" onclick="selTheater()">
+</div>
 
 		<div class="footer">
 			<div>

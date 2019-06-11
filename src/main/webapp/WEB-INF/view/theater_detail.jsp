@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="./css/header.css">
 <link rel="stylesheet" type="text/css" href="./css/footer.css">
+<link rel="stylesheet" type="text/css" href="./css/content.css">
 <title>Insert title here</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
@@ -38,6 +39,7 @@
 		</div>
 	</div>
 
+<div class="content">
 <input type="button" value="영화관 수정" onclick="updateTheater('${lists[0].theater_no}','${lists[0].theater_name}','${lists[0].theater_local}')">
 <input type="button" value="상영관 등록" onclick="insertMovieTheater('${theater_no}')">
 	<table border="1">
@@ -60,6 +62,7 @@
 			</tr>
 		</c:forEach>
 	</table>
+	</div>
 
 		<div class="footer">
 			<div>

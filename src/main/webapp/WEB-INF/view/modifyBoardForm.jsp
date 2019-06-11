@@ -28,12 +28,12 @@ function main() {
 			<h1><a><img onclick="main()" src="./image/logo.png"></a> WMT</h1>
 		</div>
 </div>
+
+<div class="content">
 <div>
 	<h3>회원정보수정</h3>
 	<h5>변경 가능한 정보 : 닉네임, 생년월일, 핸드폰, 주소</h5>
 </div>
-
-
 	<form action="./updateMyBoard.do">
 		<table>
 			<tr>
@@ -82,6 +82,7 @@ function main() {
 		</table>
 		<input type="submit" value="수정완료">
 	</form>
+	</div>
 
 		<div class="footer">
 			<div>

@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="./css/header.css">
 <link rel="stylesheet" type="text/css" href="./css/footer.css">
+<link rel="stylesheet" type="text/css" href="./css/content.css">
 <title>Insert title here</title>
 </head>
 <script type="text/javascript">
@@ -25,6 +26,7 @@
 			<h1><a><img onclick="main()" src="./image/logo.png"></a> WMT</h1>
 		</div>
 	</div>
+
 <h1>상영중인 영화 관리</h1>
 <input type="button" value="상영중인 영화 리스트 보기" onclick="selMoviePlay()">
 		<div class="footer">

@@ -31,9 +31,9 @@
 		</div>
 	</div>
 	
-<h1>상영관을 등록할 영화관을 선택해 주세여</h1>
 
 <div class="content">
+<h1>상영관을 등록할 영화관을 선택해 주세여</h1>
 <table border="1">
 <tr>
 	<td>영화관 번호</td>

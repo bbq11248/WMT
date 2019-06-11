@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="./css/header.css">
 <link rel="stylesheet" type="text/css" href="./css/footer.css">
+<link rel="stylesheet" type="text/css" href="./css/content.css">
 <title>Insert title here</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
@@ -61,6 +62,7 @@
 		</div>
 	</div>
 
+<div class="content">
 	<form action="#" method="get" id="deleteForm" onsubmit="return chkBox()">
 		<table>
 			<tr>
@@ -97,6 +99,7 @@
 			</tr>
 		</table>
 	</form>
+	</div>
 			<div class="footer">
 			<div>
 				<table>

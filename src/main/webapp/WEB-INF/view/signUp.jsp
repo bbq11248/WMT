@@ -14,6 +14,7 @@
 <link  rel="stylesheet" type="text/css" href="./css/signUp.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="./css/footer.css">
+<link rel="stylesheet" type="text/css" href="./css/content.css">
 
 <title>회원가입 페이지</title>
 
@@ -184,6 +185,7 @@ function check() {
 		</div>
 </div>
 
+<div class="content">
 <div id="container" class="card align-middle">
 	
 	<input type="hidden" value="0" id="chaVal">
@@ -267,6 +269,7 @@ function check() {
 		
 	</form>
 	</div>
+</div>
 </div>
 
 </div>

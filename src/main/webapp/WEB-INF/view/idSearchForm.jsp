@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="./css/header.css">
 <link rel="stylesheet" type="text/css" href="./css/footer.css">
+<link rel="stylesheet" type="text/css" href="./css/content.css">
 <title>아이디 찾기</title>
 
 <script type="text/javascript" src="./js/jquery-3.3.1.js"></script>
@@ -77,7 +78,8 @@ function main() {
 			<h1><a><img onclick="main()" src="./image/logo.png"></a> WMT</h1>
 		</div>
 	</div>
-
+	
+	<div class="content">
 	<table>
 		<tr>
 			<td>아이디 찾기</td>
@@ -137,7 +139,7 @@ function main() {
 			</td>
 		</tr>
 	</table>
-	
+	</div>
 	<div id="pwdInfo"></div>
 	
 	<div class="footer">

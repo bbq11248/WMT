@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="./css/header.css">
 <link rel="stylesheet" type="text/css" href="./css/footer.css">
+<link rel="stylesheet" type="text/css" href="./css/content.css">
 <title>Insert title here</title>
 </head>
 <script type="text/javascript">
@@ -22,6 +23,7 @@ function main() {
 			<h1><a><img onclick="main()" src="./image/logo.png"></a> WMT</h1>
 		</div>
 	</div>
+	<div class="content">
 	<form action="./updateSeat.do">
 		<input type="hidden" value="${seat}" name="seat">
 		<table>
@@ -53,6 +55,7 @@ function main() {
 			</tr>
 		</table>
 	</form>
+	</div>
 			<div class="footer">
 			<div>
 				<table>

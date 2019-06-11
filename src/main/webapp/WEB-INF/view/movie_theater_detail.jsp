@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="./css/header.css">
 <link rel="stylesheet" type="text/css" href="./css/footer.css">
+<link rel="stylesheet" type="text/css" href="./css/content.css">
 
 <title>Insert title here</title>
 </head>
@@ -35,6 +36,8 @@
 		</div>
 	</div>
 	<input type="button" value="좌석 등록" onclick="insertSeat('${movie_theater_no}')">
+	
+	<div class="content">
 	<table border="1">
 		<tr>
 			<td>영화관 이름</td>
@@ -64,6 +67,7 @@
 			</tr>
 		</c:forEach>
 	</table>
+	</div>
 	
 			<div class="footer">
 			<div>

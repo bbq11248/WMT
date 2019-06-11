@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="./css/header.css">
 <link rel="stylesheet" type="text/css" href="./css/footer.css">
+<link rel="stylesheet" type="text/css" href="./css/content.css">
 <title>Insert title here</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
@@ -29,6 +30,7 @@
 		</div>
 	</div>
 	<input type="button" value="수정" onclick="updateMovie('${lists[0].movie_no}','${lists[0].movie_name}','${lists[0].movie_foreman}','${lists[0].movie_genre}','${lists[0].movie_openday}','${lists[0].movie_country}','${lists[0].movie_time}')">
+	<div class="content">
 	<table>
 		<tr>
 			<td>영화 이름</td>
@@ -61,6 +63,7 @@
 		</tr>
 		</c:forEach>
 	</table>
+	</div>
 		<div class="footer">
 			<div>
 				<table>
