@@ -58,8 +58,8 @@
 </script>
 
 
-<body class="boay">
-
+<body>
+<div class="body">
 
 <div class="main">
 		<div class="main_header">
@@ -85,5 +85,6 @@
 	
 		</div>
 	</div>
+</div>
 </body>
 </html>
