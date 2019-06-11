@@ -10,6 +10,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="./css/header.css">
 <link rel="stylesheet" type="text/css" href="./css/footer.css">
+<link rel="stylesheet" type="text/css" href="./css/content.css">
 <title>내정보 수정 페이지</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
