@@ -36,7 +36,8 @@ function main() {
 	location.href = "./main.do"
 }
 </script>
-</body>
+<body>
+<div class="body">
 	<div class="main">
 		<div class="main_header">
 			<h1><a><img onclick="main()" src="./image/logo.png"></a> WMT</h1>
@@ -95,7 +96,8 @@ function main() {
 				</table>
 			</div>
 		</div>
-
+</div>
+</body>
 </html>
 
 

@@ -35,6 +35,7 @@
 	}
 </script>
 <body>
+<div class="body">
 	<div class="main">
 		<div class="main_header">
 			<h1>
@@ -56,5 +57,6 @@
 			<input type="button" value="영화 관리" onclick="movie_manager()">
 		</div>
 	</div>
+</div>
 </body>
 </html>

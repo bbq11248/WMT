@@ -38,7 +38,8 @@
 	}
 </script>
 
-<body class="body">
+<body>
+<div class="body">
 	<div class="main">
 		<div class="main_header">
 			<h1>
@@ -101,5 +102,6 @@
 				</table>
 			</div>
 		</div>
+</div>
 </body>
 </html>
