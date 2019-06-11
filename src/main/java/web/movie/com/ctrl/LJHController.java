@@ -126,7 +126,7 @@ public class LJHController {
 	}
 	//선택영화가 상영하는 영화관선택
 	@ResponseBody
-	@RequestMapping(value = "/theaterChk.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/theaterChk.do", method = RequestMethod.POST)
 	public Map<String, List<MovieDto>> selAllTheater(String movie_no, Model model, HttpSession session) {
 		logger.info("selAllTheater {}" + movie_no);
 		List<MovieDto> lists = movieService.selAllTheater(movie_no);
@@ -141,7 +141,7 @@ public class LJHController {
 	}
 	//영화관 에 선택한 영화가 있는 상영관 선택
 	@ResponseBody
-	@RequestMapping(value = "/movieTheaterChk.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/movieTheaterChk.do", method = RequestMethod.POST)
 	public Map<String, List<MovieDto>> selAllMTheater(String theater_no, String movie_no, Model model,
 			HttpSession session) {
 		Map<String, String> map = new HashMap<String, String>();
@@ -157,7 +157,7 @@ public class LJHController {
 	}
 	//선택한 상영관의 좌석 선택
 	@ResponseBody
-	@RequestMapping(value = "/seatChk.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/seatChk.do", method = RequestMethod.POST)
 	public Map<String, Object> selAllSeat(String movie_play_no, String movie_start_time, Model model, HttpSession session) {
 		List<MovieDto> lists = movieService.selAllSeat(movie_play_no);
 		List<MovieDto> beforSeat = movieService.beforSeat(movie_start_time);
@@ -178,7 +178,7 @@ public class LJHController {
 	}
 	//선택한 좌석의 가격 확인 및 예매 
 	@ResponseBody
-	@RequestMapping(value = "/seatMoneyChk.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/seatMoneyChk.do", method = RequestMethod.POST)
 	public Map<String, Integer> selSeatMoney(String rowcol, String movie_theater_no, Model model, HttpSession session) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("rowcol", rowcol);
@@ -650,7 +650,7 @@ public class LJHController {
 		if(mbDto.getAuth().equals("A")) {
 			return "boardDetail";
 		} else {
-			return "boardDetailUser";
+			return "detailBoardUser";
 		}
 	}
 	

@@ -20,7 +20,7 @@
 <script type="text/javascript">
 	function theater(movie_no) {
 		$.ajax({
-			type:"GET",
+			type:"POST",
 			url:"./theaterChk.do",
 			data : {"movie_no" : movie_no},
 			dataType : "json",
@@ -49,7 +49,7 @@
 		//var theater = theater_no;
 		//var movie = movie_no;
 		$.ajax({
-			type:"GET",
+			type:"POST",
 			url:"./movieTheaterChk.do",
 			data : {"movie_no" : movie_no , "theater_no":theater_no },
 			dataType : "json",
@@ -107,7 +107,7 @@
 	}
 	
 	function seatChk(movie_play_no, movie_start_time) {
-		$.ajax({type:"GET",
+		$.ajax({type:"POST",
 			url:"./seatChk.do",
 			data : {"movie_play_no" : movie_play_no, "movie_start_time" : movie_start_time},
 			dataType : "json",
@@ -133,7 +133,7 @@
 	}
 	
 	function seatprice(rowcol, movie_theater_no) {
-		$.ajax({type:"GET",
+		$.ajax({type:"POST",
 			url:"./seatMoneyChk.do",
 			data : {"rowcol" : rowcol, "movie_theater_no" : movie_theater_no},
 			dataType : "json",

@@ -30,7 +30,6 @@
 			<h1><a><img onclick="main()" src="./image/logo.png"></a> WMT</h1>
 		</div>
 	</div>
-	<input type="button" value="글 입력 " onclick="insertBoard()">
 	<div class="content">
 	<table>
 		<tr>
