@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="./css/header.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="./css/loginForm.css">
+<link rel="stylesheet" type="text/css" href="./css/footer.css">
 
  
 <!DOCTYPE html>
@@ -67,9 +68,10 @@
 		</div>
 </div>
 
-
+<div id="div"></div>
 <div class="card align-middle" id=container>
-	<div class="card-title" style="margin-top:30px;">
+	
+	<div class="card-title" id="loginForm">
 		<h2 class="card-title text-center">로그인</h2>
 	</div>
 	<div class="card-body">
@@ -85,6 +87,24 @@
 	
 		</div>
 	</div>
-</div>
+	
+<div id="div2"></div>
+	<div class="footer">
+			<div>
+				<table>
+					<tr>
+						<td>서울특별시 강남구 역삼동 역삼역 3번 출구 신한은행 건물 4층 C Class</td>
+					</tr>
+					<tr>
+						<td>개발자 : 양진숙, 이정휴</td>
+						<td>대표 번호 : 010-1234-1234</td>
+					</tr>
+					<tr>
+						<td>개발자 e-mail: WMT001@movie.com</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

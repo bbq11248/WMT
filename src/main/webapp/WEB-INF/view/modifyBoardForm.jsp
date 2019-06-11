@@ -8,13 +8,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="./css/header.css">
+<link rel="stylesheet" type="text/css" href="./css/footer.css">
 <title>내정보 수정 페이지</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+<script type="text/javascript">
+function main() {
+	location.href = "./main.do"
+}
+</script>
 <body>
 
+<div class="body">
+
+<div class="main">
+		<div class="main_header">
+			<h1><a><img onclick="main()" src="./image/logo.png"></a> WMT</h1>
+		</div>
+</div>
 <div>
 	<h3>회원정보수정</h3>
+	<h5>변경 가능한 정보 : 닉네임, 생년월일, 핸드폰, 주소</h5>
 </div>
 
 
@@ -64,9 +79,26 @@
 			</tr>
 		
 		</table>
-		<input type="text" >
+		<input type="submit" value="수정완료">
 	</form>
 
+		<div class="footer">
+			<div>
+				<table>
+					<tr>
+						<td>서울특별시 강남구 역삼동 역삼역 3번 출구 신한은행 건물 4층 C Class</td>
+					</tr>
+					<tr>
+						<td>개발자 : 양진숙, 이정휴</td>
+						<td>대표 번호 : 010-1234-1234</td>
+					</tr>
+					<tr>
+						<td>개발자 e-mail: WMT001@movie.com</td>
+					</tr>
+				</table>
+			</div>
+		</div>
 
+</div>
 </body>
 </html>

@@ -1,1 +1,36 @@
 @charset "UTF-8";
+
+#container{
+	width : 50rem; 
+	height : 60rem;
+	border-radius : 20px;
+	left : 300px;
+	top : 30px;
+}
+
+#leftInfo{
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 30px;
+}
+
+#conterInfo{
+	font-size: 16px;
+}
+
+#bottomStrong{
+	top: 15px;
+	position: relative;
+	font-size: 15px;
+	color: tomato;
+	
+}
+
+#buttom{
+	margin-top: 30px;
+}
+
+#div2{
+	margin-bottom: 60px;
+}
+

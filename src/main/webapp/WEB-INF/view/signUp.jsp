@@ -8,6 +8,13 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="./css/header.css">
+<link rel="stylesheet" type="text/css" href="./css/sweetalert.css">
+<link  rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+<link  rel="stylesheet" type="text/css" href="./css/bootstrap-theme.min.css">
+<link  rel="stylesheet" type="text/css" href="./css/signUp.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="./css/footer.css">
+
 <title>회원가입 페이지</title>
 
 <script type="text/javascript" src="./js/jquery-3.3.1.js"></script>
@@ -157,6 +164,9 @@ function check() {
 		});
 	});
 	
+	function main() {
+		location.href = "./main.do"
+	}
 	
 	
 	
@@ -165,18 +175,25 @@ function check() {
 
 
 <body>
-<div id="container">
-	<div id= "title">
-		<img src="#">	
-	</div>
+
+<div class="body">
+
+<div class="main">
+		<div class="main_header">
+			<h1><a><img onclick="main()" src="./image/logo.png"></a> WMT</h1>
+		</div>
+</div>
+
+<div id="container" class="card align-middle">
 	
 	<input type="hidden" value="0" id="chaVal">
 	
-	<form action="./regist.do" method="post" id="frm" onsubmit="return check()">
+	<div id="leftInfo">정보입력</div>
+	
+	<div class="card-body" id="Content">
+	<form class="form-signin" action="./regist.do" method="post" id="frm" onsubmit="return check()">
+		
 		<div id="info">
-		
-		
-		<div id="leftInfo">정보입력</div>
 		
 		<div id="conterInfo">
 			<input type="text" id="id" name="id" placeholder="아이디" required="required">
@@ -187,28 +204,41 @@ function check() {
 			
 			<input type="password" id="password" name="pw" placeholder="10자리이하 비밀번호" required="required" maxlength="10">
 			<br>
+			
 			<input type="password" id="passwordcheck" name="passOK" placeholder="비밀번호 확인" required="required" maxlength="10">
 			<br>
+			
 			<input type="text" id="name" name="name" placeholder="이름" required="required">
 			<br>
+			
 			<input type="text" id="nickname" name="nickname" placeholder="닉네임" required="required">
 			<br>
+			
 			<input type="text" id="birthday" name="birthday" placeholder="생년월일 예) 951230" required="required" maxlength="6">
 			<br>
+			
 			<span id="btdresult"></span>
 			<br>
+			
 			<input type="text" id="phone" name="phone" placeholder="전화번호 예) 01012341234" required="required" maxlength="11"> 
 			<br>
+			
 			<span id="pnumresult"></span>
 			<br>
+			
 			<input type="text" id="address" name="address" placeholder="주소" required="required">
 			<br>
+			
 			<input type="text" id="email" name="email" placeholder="이메일" required="required">
 			
 		</div>	
+		
 		<div id="rightInfo"></div>
+		
 		</div>
+		
 		<div id=line></div>
+		
 		<div id="bottom">
 		<br>
 		* 만 14세 미만은 법정대리인 동의 후 회원서비스를 이용 가능합니다.
@@ -219,19 +249,43 @@ function check() {
 		<br>
 		* 선택 약관의 동의하지 않아도 회원가입은 가능합니다.
 		<br>
+		</div>
+		
+		<div>
 		<strong id="bottomStrong">
 		약관과 개인정보 수집 및 이용을 확인하였으며 이에 동의 하십니까?
 		</strong>
 		<br>
 		
+		</div>
+		
+		
 		<div id="buttom">
-			<input type="submit" value="동의하고  회원가입" >
-			<input type="button" value="뒤로가기" onclick="javascript:history.back(-1)">
+			<input class="btn btn-success" type="submit" value="동의하고  회원가입" >
+			<input class="btn btn-sm btn-primary" type="button" value="뒤로가기" onclick="javascript:history.back(-1)">
 		</div>
-		</div>
+		
 	</form>
+	</div>
 </div>
 
-
+</div>
+<div id="div2"></div>
+	<div class="footer">
+			<div>
+				<table>
+					<tr>
+						<td>서울특별시 강남구 역삼동 역삼역 3번 출구 신한은행 건물 4층 C Class</td>
+					</tr>
+					<tr>
+						<td>개발자 : 양진숙, 이정휴</td>
+						<td>대표 번호 : 010-1234-1234</td>
+					</tr>
+					<tr>
+						<td>개발자 e-mail: WMT001@movie.com</td>
+					</tr>
+				</table>
+			</div>
+		</div>
 </body>
 </html>

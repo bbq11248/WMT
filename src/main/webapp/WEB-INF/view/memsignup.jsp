@@ -7,11 +7,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="./css/header.css">
+<link rel="stylesheet" type="text/css" href="./css/footer.css">
 <title>회원가입</title>
 </head>
+<script type="text/javascript">
+function main() {
+	location.href = "./main.do"
+}
+</script>
 <body>
-
-<!--  ID, PW, NAME, NICKNAME, BIRTHDAY, PHONE, ADDRESS, EMAIL, AUTH, REGDATE -->
+<div class="body">
+	<div class="main">
+		<div class="main_header">
+			<h1><a><img onclick="main()" src="./image/logo.png"></a> WMT</h1>
+		</div>
+	</div>
 <div id="CenterInfo">
 	<input type="text" id="id" name="id" placeholder="아이디" required="required">
 	<br>
@@ -27,6 +38,22 @@
 	<br>
 	<input type="text" id="address" name="address" placeholder="이메일" required="required">
 </div>
-
+		<div class="footer">
+			<div>
+				<table>
+					<tr>
+						<td>서울특별시 강남구 역삼동 역삼역 3번 출구 신한은행 건물 4층 C Class</td>
+					</tr>
+					<tr>
+						<td>개발자 : 양진숙, 이정휴</td>
+						<td>대표 번호 : 010-1234-1234</td>
+					</tr>
+					<tr>
+						<td>개발자 e-mail: WMT001@movie.com</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+</div>
 </body>
 </html>

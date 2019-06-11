@@ -224,6 +224,31 @@ public class YJSController {
 		return "modifyBoardForm";
 	}
 	
+	@RequestMapping(value="/updateMyBoard.do", method=RequestMethod.GET)
+	public String updateMyBoard(String name,String nickname, int birthday, int phone,
+			String address,String email, HttpSession session, Model model) {
+		MemberDto mbDto = (MemberDto) session.getAttribute("memberLogin");
+		String id = mbDto.getId();
+		String pw = mbDto.getPw();
+		
+		mbDto.setId(id);
+		mbDto.setName(name);
+		mbDto.setNickname(nickname);
+		mbDto.setBirthday(birthday);
+		mbDto.setPhone(phone);
+		mbDto.setAddress(address);
+		mbDto.setEmail(email);
+		
+		int n = memberService.updateMem(mbDto);
+		System.out.println(n);
+		MemberDto mbDto1 = new MemberDto();
+		mbDto1.setId(id);
+		mbDto1.setPw(pw);
+		mbDto = memberService.memLogin(mbDto1);
+		model.addAttribute("mbDto", mbDto);
+		
+		return "memberBoard";
+	}
 
 	
 	
