@@ -41,7 +41,7 @@
 				alert(nowDay.length);
 				if (nowDay.length == 1) {
 					nowDay = "0" + nowDay;
-				}inter
+				}
 				alert(nowDay);
 				var nowHour = date.getHours() + "";
 				var nowMin = date.getMinutes() + "";
