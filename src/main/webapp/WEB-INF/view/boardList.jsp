@@ -33,7 +33,6 @@
 			<h1><a><img onclick="main()" src="./image/logo.png"></a> WMT</h1>
 		</div>
 	</div>
-	<input type="button" value="글 입력 " onclick="insertBoard()">
 	<table>
 		<tr>
 			<td>글번호</td>
