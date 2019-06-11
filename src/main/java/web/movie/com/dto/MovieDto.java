@@ -294,31 +294,11 @@ public class MovieDto {
 
 	@Override
 	public String toString() {
-		return "MovieDto [ticketing_no=" + ticketing_no + ", movie_play_no=" + movie_play_no + ", id=" + id
-				+ ", seat_no=" + seat_no + ", ticketing_time=" + ticketing_time + ", movie_no=" + movie_no
-				+ ", movie_name=" + movie_name + ", movie_foreman=" + movie_foreman + ", movie_genre=" + movie_genre
-				+ ", movie_openday=" + movie_openday + ", movie_country=" + movie_country + ", movie_time=" + movie_time
-				+ ", theater_no=" + theater_no + ", theater_name=" + theater_name + ", theater_local=" + theater_local
-				+ ", movie_theater_no=" + movie_theater_no + ", movie_theater_name=" + movie_theater_name
-				+ ", movie_start_time=" + movie_start_time + ", times=" + times + ", seat_money=" + seat_money
-				+ ", rowseat=" + rowseat + ", colseat=" + colseat + ", seat=" + seat + ", mileage_seq=" + mileage_seq
-				+ ", mileage=" + mileage + ", payment_no=" + payment_no + ", price=" + price + ", mileage_time="
-				+ mileage_time + ", rowcol=" + rowcol + ", getRowcol()=" + getRowcol() + ", getTicketing_no()="
-				+ getTicketing_no() + ", getMovie_play_no()=" + getMovie_play_no() + ", getId()=" + getId()
-				+ ", getSeat_no()=" + getSeat_no() + ", getTicketing_time()=" + getTicketing_time() + ", getMovie_no()="
-				+ getMovie_no() + ", getMovie_name()=" + getMovie_name() + ", getMovie_foreman()=" + getMovie_foreman()
-				+ ", getMovie_genre()=" + getMovie_genre() + ", getMovie_openday()=" + getMovie_openday()
-				+ ", getMovie_country()=" + getMovie_country() + ", getMovie_time()=" + getMovie_time()
-				+ ", getTheater_no()=" + getTheater_no() + ", getTheater_name()=" + getTheater_name()
-				+ ", getTheater_local()=" + getTheater_local() + ", getMovie_theater_no()=" + getMovie_theater_no()
-				+ ", getMovie_theater_name()=" + getMovie_theater_name() + ", getMovie_start_time()="
-				+ getMovie_start_time() + ", getTimes()=" + getTimes() + ", getSeat_money()=" + getSeat_money()
-				+ ", getRowseat()=" + getRowseat() + ", getColseat()=" + getColseat() + ", getSeat()=" + getSeat()
-				+ ", getMileage_seq()=" + getMileage_seq() + ", getMileage()=" + getMileage() + ", getPayment_no()="
-				+ getPayment_no() + ", getPrice()=" + getPrice() + ", getMileage_time()=" + getMileage_time()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
+		return "MovieDto [movie_no=" + movie_no + ", movie_name=" + movie_name + ", movie_theater_no="
+				+ movie_theater_no + ", movie_start_time=" + movie_start_time + "]";
 	}
+
+	
 
 
 

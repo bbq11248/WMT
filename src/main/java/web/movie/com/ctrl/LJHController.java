@@ -46,7 +46,10 @@ public class LJHController {
 	//마일리지 충전 화면 이동
 	@RequestMapping(value = "/mileageForm.do", method = RequestMethod.GET)
 	public String chargeMileageForm(HttpSession session) {
-		int mileage = (int)session.getAttribute("mileage");
+		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
+		if(mbDto == null) {
+			return "redirect:/loginForm.do";
+		}
 		return "milagerCG";
 	}
 	//마일리지 충전
@@ -626,23 +629,37 @@ public class LJHController {
 	}
 	@RequestMapping(value="/board.do", method=RequestMethod.GET)
 	public String selectBoard(Model model, HttpSession session) {
+		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
+		if(mbDto == null) {
+			return "redirect:/loginForm.do";
+		}
 		List<BoardDto> lists = boardService.selectList();
 		model.addAttribute("lists", lists);
-		return "boardList";
+		if(mbDto.getAuth().equals("A")) {
+			return "boardList";
+		} else {
+			return "boardListUser";
+		}
 	}
 	
 	@RequestMapping(value="/oneBoard.do", method=RequestMethod.GET)
 	public String detailBoard(String seq, Model model, HttpSession session) {
 		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
-		String id = mbDto.getId();
 		BoardDto bDto = boardService.selectOneList(seq);
 		model.addAttribute("bDto", bDto);
-		return "boardDetail";
+		if(mbDto.getAuth().equals("A")) {
+			return "boardDetail";
+		} else {
+			return "boardDetailUser";
+		}
 	}
 	
 	@RequestMapping(value="/updateBoardForm.do", method=RequestMethod.GET)
 	public String updateBoardForm(String seq, String id, String title, String content, Model model, HttpSession session) {
 		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
+		if(mbDto == null) {
+			return "redirect:/loginForm.do";
+		}
 		id = mbDto.getId();
 		model.addAttribute("seq", seq);
 		model.addAttribute("id", id);
@@ -672,7 +689,11 @@ public class LJHController {
 	}
 	
 	@RequestMapping(value="/deleteBoard.do", method=RequestMethod.GET)
-	public String deleteBoard(String seq, Model model) {
+	public String deleteBoard(String seq, Model model, HttpSession session) {
+		MemberDto mbDto = (MemberDto)session.getAttribute("memberLogin");
+		if(mbDto == null) {
+			return "redirect:/loginForm.do";
+		}
 		boolean isc = boardService.deleteBoard(seq);
 		if(isc) {
 			List<BoardDto> lists = boardService.selectList();
