@@ -2,15 +2,15 @@
     pageEncoding="UTF-8"%>
     <% request.setCharacterEncoding("UTF-8"); %>
     <% response.setContentType("text/html; charset=UTF-8"); %>
-<link rel="stylesheet" type="text/css" href="./css/header.css">
-<link rel="stylesheet" type="text/css" href="./css/menu.css">
-<link rel="stylesheet" type="text/css" href="./css/content.css">
-<link rel="stylesheet" type="text/css" href="./css/footer.css">
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>WMP main</title>
+<link rel="stylesheet" type="text/css" href="./css/header.css">
+<link rel="stylesheet" type="text/css" href="./css/menu.css">
+<link rel="stylesheet" type="text/css" href="./css/content.css">
+<link rel="stylesheet" type="text/css" href="./css/footer.css">
 </head>
 <body>
 <script type="text/javascript">
