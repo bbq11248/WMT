@@ -64,6 +64,7 @@
 			<input type="button" value="영화 관리" onclick="movie_manager()">
 		</div>
 	</div>
+	<div class="content"></div>
 	<div class="footer">
 			<div>
 				<table>
