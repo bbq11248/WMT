@@ -40,7 +40,7 @@
 			<td>작성자</td>
 			<td>작성일</td>
 		</tr>
-		<c:forEach items="${lists}" var="lists">
+		<c:forEach items="${lists}" var="lists
 			<tr>
 				<td>${lists.seq}</td>
 				<td>
