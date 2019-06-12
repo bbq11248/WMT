@@ -10,7 +10,7 @@
 </head>
 <body>
 <form action="./mileage.do">
-	<input type="text" name="milageCG">
+	<input type="text" name="milageCG" maxlength="6">
 	<input type="submit">
 </form>
 </body>

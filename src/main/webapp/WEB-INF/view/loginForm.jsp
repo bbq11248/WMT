@@ -47,6 +47,7 @@
 				}
 			});
 		}
+		
 	}
 	
 	function idSearch(){
@@ -55,6 +56,11 @@
 	
 	function main() {
 		location.href = "./main.do"
+	}
+	function enterKey() {
+		if(window.event.keyCode == 13){
+			loginCheck();
+		}
 	}
 	
 </script>
@@ -80,8 +86,9 @@
 	<form class="form-signin" method="post" id="frm">
 		<h5 class="form-signin-heading">로그인 정보를 입력하세요</h5>
 			<input type="text" class="form-control" name="inputId" id="id" placeholder="아이디" required="required">
-			<input  type="password" class="form-control" name="inputPw" id="pw" placeholder="비밀번호" required="required">
+			<input  type="password" class="form-control" name="inputPw" id="pw" placeholder="비밀번호" required="required" onkeyup="enterKey();">
 			<br>
+			
 			<input type="button" class="btn btn-lg btn-primary btn-block" id="login" name="login" value="로그인" onclick="loginCheck()">
 			<br>
 			<input type="button" class="btn btn-secondary btn-sm" id="SearchId" value="아이디 / 비밀번호 찾기" onclick="idSearch()">
