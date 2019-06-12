@@ -5,7 +5,8 @@
 	position: relative;
 	width : 20rem; 
 	border-radius : 20px;
-	left : 150px;
+	left : auto;
+	right: auto;
 }
 
 
@@ -18,7 +19,7 @@ h2{
 }
 
 .main{
-	left: 100px;
+/* 	left: 100px; */
 }
 
 #loginForm{

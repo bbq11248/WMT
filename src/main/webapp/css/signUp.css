@@ -4,7 +4,8 @@
 	width : 50rem; 
 	height : 60rem;
 	border-radius : 20px;
-	left : 50px;
+	left : auto;
+	right: auto;
 	top : 30px;
 }
 

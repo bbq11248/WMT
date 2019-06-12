@@ -2,4 +2,6 @@
 		width: 1080px;
 		height: 100px;
 		background-color: orange; 
+		left: auto;
+		right: auto;
 	}
