@@ -242,6 +242,7 @@ public class MovieDao_Imple implements IMovieDao {
 	@Override
 	public int deleteMoviePlay(Map<String, String[]> map) {
 		logger.info("상영중인 영화 삭제");
+		int m = sqlSession.update(NS+"delUpMoviePlay", map);
 		int n = sqlSession.delete(NS+"deleteMoviePlay", map);
 		return n;
 	}

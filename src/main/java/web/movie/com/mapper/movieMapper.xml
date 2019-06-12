@@ -273,11 +273,17 @@
 	<delete id="deleteMoviePlay" parameterType="java.util.Map">
 		DELETE FROM MOVIE.MOVIE_PLAY
 			WHERE MOVIE_PLAY_NO IN
-			<foreach collection="movie_play_no_" item="movie_play_no" open="(" close=")"
-			separator=",">
-			#{movie_play_no}
+			<foreach collection="movie_play_no_" item="movie_play_no" open="(" separator="," close=")">
+				#{movie_play_no}
 			</foreach>
 	</delete>
+	<update id="delUpMoviePlay" parameterType="java.util.Map">
+		UPDATE TICKETING_NO SET MOVIE_PLAY_NO = NULL 
+			WHERE MOVIE_PLAY_NO IN
+			<foreach collection="movie_play_no_" item="movie_play_no" open="(" separator="," close=")">
+				#{movie_play_no}
+			</foreach>
+	</update>
 	<!-- 영화 관리 end -->
 	
 	<select id="beforSeat" resultType="mvDto" parameterType="java.lang.String">

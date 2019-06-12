@@ -1,5 +1,6 @@
 package web.movie.com.ctrl;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -612,13 +613,12 @@ public class LJHController {
 	}
 	@RequestMapping(value="/deleteMP.do", method=RequestMethod.GET)
 	public String deleteMP(String[] movie_play_chk, Model model) {
+		logger.info("deleteMP {}", Arrays.toString(movie_play_chk));
 		Map<String, String[]> map = new HashMap<String, String[]>();
 		map.put("movie_play_no_", movie_play_chk);
 		int n = movieService.deleteMoviePlay(map);
 		System.out.println(n);
 		if(n >= 1) {
-			List<MovieDto> lists = movieService.selectMoviePlay();
-			model.addAttribute("lists", lists);
 			return "redirect:/selectMP.do";
 		}else {
 			//errMsg, url

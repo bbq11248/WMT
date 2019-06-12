@@ -64,7 +64,7 @@
 
 <div class="content">
 	<form action="#" method="get" id="deleteForm" onsubmit="return chkBox()">
-		<table>
+		<table border="1">
 			<tr>
 				<td>
 				<input type="checkbox" onclick="checkAllDel(this.checked)">
@@ -99,7 +99,7 @@
 			</tr>
 		</table>
 	</form>
-	</div>
+</div>
 			<div class="footer">
 			<div>
 				<table>
